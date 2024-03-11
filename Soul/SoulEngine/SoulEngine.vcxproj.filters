@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="src">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="src\00.Default">
+      <UniqueIdentifier>{be795eef-624c-47e7-b796-3ff36ea2fffe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="inc">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="inc\00.Default">
+      <UniqueIdentifier>{efdbd60a-90d8-4cab-9623-b3a674168ba7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="inc\01.SoulEngine">
+      <UniqueIdentifier>{0298a8e6-1995-4128-bf06-a2e27eabb077}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\01.SoulEngine">
+      <UniqueIdentifier>{1e779a55-cf5a-4235-8fbb-145f8900baec}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="pch.h">
+      <Filter>inc\00.Default</Filter>
+    </ClInclude>
+    <ClInclude Include="IEngine.h">
+      <Filter>inc\01.SoulEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngine.h">
+      <Filter>inc\01.SoulEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="ToolEngine.h">
+      <Filter>inc\01.SoulEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="ExportSoul.h">
+      <Filter>inc\00.Default</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="dllmain.cpp">
+      <Filter>src\00.Default</Filter>
+    </ClCompile>
+    <ClCompile Include="pch.cpp">
+      <Filter>src\00.Default</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngine.cpp">
+      <Filter>src\01.SoulEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="ToolEngine.cpp">
+      <Filter>src\01.SoulEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="IEngine.cpp">
+      <Filter>src\01.SoulEngine</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
