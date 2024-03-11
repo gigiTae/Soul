@@ -156,6 +156,9 @@
     <ProjectReference Include="..\SoulEngine\SoulEngine.vcxproj">
       <Project>{d74a64a0-5891-4bb8-9535-315cd46080c5}</Project>
     </ProjectReference>
+    <ProjectReference Include="..\SoulGraphics\SoulGraphics.vcxproj">
+      <Project>{64532780-61f4-4e04-a1d3-5c245ac6f7de}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

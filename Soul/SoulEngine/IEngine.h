@@ -26,8 +26,11 @@ namespace Soul
 
 		static SOUL_ENGNIE_API void DestroyEngine();
 
+		static SOUL_ENGNIE_API LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
+
+		static SOUL_ENGNIE_API LRESULT CALLBACK ToolWndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
+
 	private:
 		static IEngine* _engine;
 	};
-
 }

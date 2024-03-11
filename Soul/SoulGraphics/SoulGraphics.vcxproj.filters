@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="src">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="inc">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="inc\00.Default">
+      <UniqueIdentifier>{b9e07999-e01f-403e-aaf0-41ab3ab30c4b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\00.Default">
+      <UniqueIdentifier>{459aaea0-e757-4935-84a9-1a1783edba9d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="inc\01.GraphicsEngine">
+      <UniqueIdentifier>{00a734ed-0076-4279-9e80-b5ae0571523e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\01.GraphcisEngine">
+      <UniqueIdentifier>{5e299edf-a442-488d-a9f5-f50badcf2dd1}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="SoulGraphicsPCH.h">
+      <Filter>inc\00.Default</Filter>
+    </ClInclude>
+    <ClInclude Include="IGraphicsEngine.h">
+      <Filter>inc\01.GraphicsEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicsEngine.h">
+      <Filter>inc\01.GraphicsEngine</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="SoulGraphicsPCH.cpp">
+      <Filter>src\00.Default</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicsEngine.cpp">
+      <Filter>src\01.GraphcisEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="IGraphicsEngine.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

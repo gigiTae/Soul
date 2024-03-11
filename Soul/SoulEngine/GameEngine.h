@@ -1,6 +1,6 @@
 #pragma once
 #include "IEngine.h"
-
+#include "../SoulGraphics/IGraphicsEngine.h"
 
 namespace Soul
 {
@@ -17,7 +17,7 @@ namespace Soul
 		void Finalize() override;
 
 	private:
-		
+		SoulGraphics::IGraphicsEngine* _graphicsEngine;
 
 	};
 
