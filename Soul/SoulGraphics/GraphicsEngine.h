@@ -4,6 +4,10 @@
 
 namespace SoulGraphics
 {
+	class Device;
+	class RenderTarget;
+	class Camera;
+
 	class GraphicsEngine : public IGraphicsEngine
 	{
 	public: 
@@ -16,12 +20,13 @@ namespace SoulGraphics
 
 		void Finalize() override;
 
-	private:
-		ID3D11Device* _device = nullptr;
-		ID3D11DeviceContext* _deviceContext = nullptr;
-		IDXGISwapChain* _swapChain = nullptr;
-		ID3D11RenderTargetView* _renderTargetView = nullptr;
+		ID3D11Device* GetDevice() override;
+		ID3D11DeviceContext* GetDeviceContext() override;
 
+	private:
+		std::shared_ptr<Device> _device;
+		std::shared_ptr<RenderTarget> _renderTarget;
+		std::unique_ptr<Camera> _camera;
 	};
 
 

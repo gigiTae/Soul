@@ -11,4 +11,7 @@
 #include <DirectXMath.h>
 #include <directxtk/simplemath.h>
 
+#include <array>
+
+
 #endif //SOUL_GRAPHICS_PCH_H

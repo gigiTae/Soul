@@ -9,6 +9,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SoulEngine", "SoulEngine\So
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SoulGraphics", "SoulGraphics\SoulGraphics.vcxproj", "{64532780-61F4-4E04-A1D3-5C245AC6F7DE}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SoulTool", "SoulTool\SoulTool.vcxproj", "{B0128B3A-04B5-4FF5-8BC5-95AAC7DE5992}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -41,6 +43,14 @@ Global
 		{64532780-61F4-4E04-A1D3-5C245AC6F7DE}.Release|x64.Build.0 = Release|x64
 		{64532780-61F4-4E04-A1D3-5C245AC6F7DE}.Release|x86.ActiveCfg = Release|Win32
 		{64532780-61F4-4E04-A1D3-5C245AC6F7DE}.Release|x86.Build.0 = Release|Win32
+		{B0128B3A-04B5-4FF5-8BC5-95AAC7DE5992}.Debug|x64.ActiveCfg = Debug|x64
+		{B0128B3A-04B5-4FF5-8BC5-95AAC7DE5992}.Debug|x64.Build.0 = Debug|x64
+		{B0128B3A-04B5-4FF5-8BC5-95AAC7DE5992}.Debug|x86.ActiveCfg = Debug|Win32
+		{B0128B3A-04B5-4FF5-8BC5-95AAC7DE5992}.Debug|x86.Build.0 = Debug|Win32
+		{B0128B3A-04B5-4FF5-8BC5-95AAC7DE5992}.Release|x64.ActiveCfg = Release|x64
+		{B0128B3A-04B5-4FF5-8BC5-95AAC7DE5992}.Release|x64.Build.0 = Release|x64
+		{B0128B3A-04B5-4FF5-8BC5-95AAC7DE5992}.Release|x86.ActiveCfg = Release|Win32
+		{B0128B3A-04B5-4FF5-8BC5-95AAC7DE5992}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

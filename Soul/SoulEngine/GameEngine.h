@@ -18,7 +18,6 @@ namespace Soul
 
 	private:
 		SoulGraphics::IGraphicsEngine* _graphicsEngine;
-
 	};
 
 

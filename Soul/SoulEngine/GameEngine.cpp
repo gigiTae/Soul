@@ -40,13 +40,12 @@ void Soul::GameEngine::Process()
 		else
 		{
 			_graphicsEngine->Render();
-
 		}
 	}
 }
 
 void Soul::GameEngine::Finalize()
 {
-
-
+	_graphicsEngine->Finalize();
+	SoulGraphics::Exporter::DestroyGrapicsEngnie();
 }

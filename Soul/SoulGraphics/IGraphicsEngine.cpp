@@ -15,3 +15,4 @@ void SoulGraphics::Exporter::DestroyGrapicsEngnie()
 	delete _graphicsEngnie;
 	_graphicsEngnie = nullptr;
 }
+

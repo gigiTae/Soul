@@ -21,6 +21,18 @@
     <Filter Include="src\01.GraphcisEngine">
       <UniqueIdentifier>{5e299edf-a442-488d-a9f5-f50badcf2dd1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="inc\02.Camera">
+      <UniqueIdentifier>{e6078725-0a4e-4c1f-a4d1-764444d138e3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\02.Camera">
+      <UniqueIdentifier>{a76af382-c5ba-4996-bd96-88c2b9d8c640}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="inc\03.DirectX11">
+      <UniqueIdentifier>{4dd78ced-c4cd-4863-acea-2a17eb56a308}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\03.DirectX11">
+      <UniqueIdentifier>{46049048-de88-45bb-8777-1de082c37095}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SoulGraphicsPCH.h">
@@ -35,6 +47,15 @@
     <ClInclude Include="Helper.h">
       <Filter>inc\00.Default</Filter>
     </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>inc\02.Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="Device.h">
+      <Filter>inc\03.DirectX11</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderTarget.h">
+      <Filter>inc\03.DirectX11</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SoulGraphicsPCH.cpp">
@@ -45,6 +66,15 @@
     </ClCompile>
     <ClCompile Include="IGraphicsEngine.cpp">
       <Filter>src\01.GraphcisEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>src\02.Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="Device.cpp">
+      <Filter>src\03.DirectX11</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderTarget.cpp">
+      <Filter>src\03.DirectX11</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

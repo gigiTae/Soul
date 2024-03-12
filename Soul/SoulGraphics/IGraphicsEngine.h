@@ -23,6 +23,10 @@ namespace SoulGraphics
 		virtual void Render() abstract;
 
 		virtual void Finalize() abstract;
+
+		virtual struct ID3D11Device* GetDevice() abstract;
+		virtual struct ID3D11DeviceContext* GetDeviceContext() abstract;
+
 	};
 
 	class Exporter
