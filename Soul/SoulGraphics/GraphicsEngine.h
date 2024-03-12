@@ -6,6 +6,7 @@ namespace SoulGraphics
 {
 	class Device;
 	class RenderTarget;
+	class RenderState;
 	class Camera;
 
 	class GraphicsEngine : public IGraphicsEngine
@@ -26,6 +27,7 @@ namespace SoulGraphics
 	private:
 		std::shared_ptr<Device> _device;
 		std::shared_ptr<RenderTarget> _renderTarget;
+		std::shared_ptr<RenderState> _renderState;
 		std::unique_ptr<Camera> _camera;
 	};
 

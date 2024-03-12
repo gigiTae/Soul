@@ -13,5 +13,6 @@
 
 #include <array>
 
+#include "Helper.h"
 
 #endif //SOUL_GRAPHICS_PCH_H

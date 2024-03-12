@@ -1,6 +1,5 @@
 #include "SoulGraphicsPCH.h"
 #include "RenderTarget.h"
-#include "Helper.h"
 #include "Device.h"
 
 SoulGraphics::RenderTarget::RenderTarget()

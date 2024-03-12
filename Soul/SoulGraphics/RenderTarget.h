@@ -12,7 +12,7 @@ namespace SoulGraphics
 			First,
 			Second,
 
-			EndCount,
+			End,
 		}; 
 
 	public:
@@ -30,8 +30,7 @@ namespace SoulGraphics
 	private:
 		std::shared_ptr<Device> _device;
 
-		std::array<ID3D11RenderTargetView*, static_cast<size_t>(Type::EndCount)> _renderTargetViews;	// ·£´õ Å¸°Ù ºä
-
+		std::array<ID3D11RenderTargetView*, static_cast<size_t>(Type::End)> _renderTargetViews;	// ·£´õ Å¸°Ù ºä
 	};
 
 }

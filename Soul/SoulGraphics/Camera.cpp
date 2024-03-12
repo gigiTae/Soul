@@ -10,7 +10,7 @@ SoulGraphics::Camera::Camera()
 	_nearPlain(0.f),
 	_fieldofView(0.f),
 	_projectionType(ProjectionType::Perspective)
-{}
+{} 
 
 
 void SoulGraphics::Camera::MakeProjectionMatrix()

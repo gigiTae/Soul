@@ -33,6 +33,12 @@
     <Filter Include="src\03.DirectX11">
       <UniqueIdentifier>{46049048-de88-45bb-8777-1de082c37095}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\04.Mesh">
+      <UniqueIdentifier>{25ebe586-b6a8-42a9-be11-f638967fbef5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="inc\04.Mesh">
+      <UniqueIdentifier>{6df22733-0c0d-48eb-96da-7d98d0bda2cf}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SoulGraphicsPCH.h">
@@ -56,6 +62,12 @@
     <ClInclude Include="RenderTarget.h">
       <Filter>inc\03.DirectX11</Filter>
     </ClInclude>
+    <ClInclude Include="RenderState.h">
+      <Filter>inc\03.DirectX11</Filter>
+    </ClInclude>
+    <ClInclude Include="Vertex.h">
+      <Filter>inc\04.Mesh</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SoulGraphicsPCH.cpp">
@@ -75,6 +87,12 @@
     </ClCompile>
     <ClCompile Include="RenderTarget.cpp">
       <Filter>src\03.DirectX11</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderState.cpp">
+      <Filter>src\03.DirectX11</Filter>
+    </ClCompile>
+    <ClCompile Include="Vertex.cpp">
+      <Filter>src\04.Mesh</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
