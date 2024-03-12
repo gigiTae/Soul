@@ -32,6 +32,9 @@
     <ClInclude Include="GraphicsEngine.h">
       <Filter>inc\01.GraphicsEngine</Filter>
     </ClInclude>
+    <ClInclude Include="Helper.h">
+      <Filter>inc\00.Default</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SoulGraphicsPCH.cpp">
@@ -41,7 +44,7 @@
       <Filter>src\01.GraphcisEngine</Filter>
     </ClCompile>
     <ClCompile Include="IGraphicsEngine.cpp">
-      <Filter>src</Filter>
+      <Filter>src\01.GraphcisEngine</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

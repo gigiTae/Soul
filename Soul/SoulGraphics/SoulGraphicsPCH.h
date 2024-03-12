@@ -9,6 +9,6 @@
 
 #include <d3d11.h>
 #include <DirectXMath.h>
-
+#include <directxtk/simplemath.h>
 
 #endif //SOUL_GRAPHICS_PCH_H

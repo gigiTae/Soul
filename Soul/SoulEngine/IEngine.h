@@ -5,12 +5,19 @@
 
 namespace Soul
 {
+	struct SOUL_ENGNIE_API WindowInfomation
+	{
+		HINSTANCE hInstance;
+		HWND hwnd;
+		RECT rect;
+	};
+
 	class IEngine
 	{
 	public:
 		virtual ~IEngine() {}
 
-		virtual SOUL_ENGNIE_API void Initialize(HWND hwnd) abstract;
+		virtual SOUL_ENGNIE_API void Initialize(WindowInfomation info) abstract;
 
 		virtual SOUL_ENGNIE_API void Process() abstract;
 

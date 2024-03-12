@@ -12,8 +12,10 @@ Soul::GameEngine::~GameEngine()
 
 }
 
-void Soul::GameEngine::Initialize(HWND hwnd)
+void Soul::GameEngine::Initialize(WindowInfomation info)
 {
+	SoulGraphics::InitalizeInfomation initInfo{ info.hInstance,info.hwnd, info.rect };
+	_graphicsEngine->Initialize(initInfo);
 
 }
 
@@ -37,6 +39,7 @@ void Soul::GameEngine::Process()
 		}
 		else
 		{
+			_graphicsEngine->Render();
 
 		}
 	}

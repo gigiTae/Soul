@@ -10,7 +10,7 @@ namespace Soul
 		GameEngine();
 		~GameEngine();
 
-		void Initialize(HWND hwnd) override;
+		void Initialize(WindowInfomation info) override;
 
 		void Process() override;
 

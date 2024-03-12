@@ -32,6 +32,7 @@ private:
 	Soul::IEngine* _engine;
 	EngineType _type;
 	HWND _hwnd;
-
+	HINSTANCE _hInstance;
+	RECT _rect;
 };
 

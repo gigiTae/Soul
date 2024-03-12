@@ -11,7 +11,7 @@ Soul::ToolEngine::~ToolEngine()
 
 }
 
-void Soul::ToolEngine::Initialize(HWND hwnd)
+void Soul::ToolEngine::Initialize(WindowInfomation info)
 {
 
 }

@@ -10,6 +10,7 @@ namespace SoulGraphics
 	{
 		HINSTANCE hInstance;
 		HWND hwnd;
+		RECT rect;
 	};
 
 	class IGraphicsEngine
@@ -18,6 +19,8 @@ namespace SoulGraphics
 		virtual ~IGraphicsEngine(){}
 
 		virtual void Initialize(InitalizeInfomation info) abstract;
+
+		virtual void Render() abstract;
 
 		virtual void Finalize() abstract;
 	};

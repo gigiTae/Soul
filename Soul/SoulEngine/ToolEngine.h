@@ -10,7 +10,7 @@ namespace Soul
 		~ToolEngine();
 
 
-		void Initialize(HWND hwnd) override;
+		void Initialize(WindowInfomation info) override;
 
 		void Process() override;
 

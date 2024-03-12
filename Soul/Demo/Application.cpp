@@ -5,6 +5,8 @@ Application::Application()
 	:_engine(nullptr)
 	, _type()
 	, _hwnd()
+	,_hInstance()
+	, _rect{}
 {}
 
 Application::~Application()
@@ -26,7 +28,9 @@ void Application::Initialize(HINSTANCE hInstance, EngineType type)
 
 	InitializeWindow(hInstance);
 
-	_engine->Initialize(_hwnd);
+	Soul::WindowInfomation info{ hInstance, _hwnd, _rect };
+
+	_engine->Initialize(info);
 }
 
 void Application::Process()
@@ -44,8 +48,8 @@ void Application::Finalize()
 
 void Application::InitializeWindow(HINSTANCE hInstance)
 {
-	const wchar_t* title = L"title";
-	
+	const wchar_t* title = L"Soul";
+
 	WNDCLASS wndClass{};
 	wndClass.style = CS_HREDRAW | CS_VREDRAW;
 
@@ -69,16 +73,16 @@ void Application::InitializeWindow(HINSTANCE hInstance)
 
 	RegisterClass(&wndClass);
 
-	RECT rc{ 100,100,1920,1080 };
-	
-	AdjustWindowRect(&rc, WS_OVERLAPPEDWINDOW, false);
+	_rect = { 100,100,1920,1080 };
+
+	AdjustWindowRect(&_rect, WS_OVERLAPPEDWINDOW, false);
 
 
 	_hwnd = CreateWindow(title, title, WS_OVERLAPPEDWINDOW,
-		rc.left, rc.top, rc.right-rc.left, rc.bottom-rc.top,
+		_rect.left, _rect.top, _rect.right - _rect.left, _rect.bottom - _rect.top,
 		NULL, NULL, hInstance, NULL);
 
-	auto error =GetLastError();
+	auto error = GetLastError();
 
 	assert(_hwnd);
 
