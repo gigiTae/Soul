@@ -9,17 +9,19 @@ namespace SoulGraphics
 	public:
 		enum class Type
 		{
-			Default,
+			First,
 			Second,
 
 			EndCount,
-		};
+		}; 
 
 	public:
 		RenderTarget();
 		~RenderTarget();
 
 		void Initialize(const std::shared_ptr<Device>& device, UINT width, UINT height);
+
+		void Finalize();
 
 		void ClearRenderTargetView(Type type);
 

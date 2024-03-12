@@ -23,15 +23,23 @@ void SoulGraphics::RenderTarget::Initialize(const std::shared_ptr<Device>& devic
 
 	HR_T(swapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), (void**)&backBufferTexture));
 	HR_T(dxDevice->CreateRenderTargetView(backBufferTexture, NULL,
-		&_renderTargetViews[static_cast<int>(Type::Default)]));  // 텍스처는 내부 참조 증가
+		&_renderTargetViews[static_cast<int>(Type::First)]));  // 텍스처는 내부 참조 증가
 	SAFE_RELEASE(backBufferTexture);	//외부 
 
 #if USE_FLIPMODE==0
 	//	// 렌더 타겟을 최종 출력 파이프라인에 바인딩합니다.
 	//	// FlipMode가 아닐때는 최초 한번만 설정하면 된다.
-	dxDeviceContext->OMSetRenderTargets(1, &_renderTargetViews[static_cast<int>(Type::Default)], NULL);
+	dxDeviceContext->OMSetRenderTargets(1, &_renderTargetViews[static_cast<int>(Type::First)], NULL);
 #endif
 
+}
+
+void SoulGraphics::RenderTarget::Finalize()
+{
+	for (auto renderTarget : _renderTargetViews)
+	{
+		SAFE_RELEASE(renderTarget);
+	}
 }
 
 void SoulGraphics::RenderTarget::ClearRenderTargetView(Type type)

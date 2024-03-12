@@ -29,11 +29,8 @@ void SoulGraphics::GraphicsEngine::Initialize(InitalizeInfomation info)
 
 void SoulGraphics::GraphicsEngine::Render()
 {
-#if USE_FLIPMODE==1
-	_renderTarget->SetRenderTargetView(RenderTarget::Type::Default);
-#endif
-
-	_renderTarget->ClearRenderTargetView(RenderTarget::Type::Default);
+	_renderTarget->SetRenderTargetView(RenderTarget::Type::First);
+	_renderTarget->ClearRenderTargetView(RenderTarget::Type::First);
 
 
 	// 스왑체인 교체.
@@ -42,6 +39,7 @@ void SoulGraphics::GraphicsEngine::Render()
 
 void SoulGraphics::GraphicsEngine::Finalize()
 {
+	_device->Finalize();
 }
 
 ID3D11Device* SoulGraphics::GraphicsEngine::GetDevice()
