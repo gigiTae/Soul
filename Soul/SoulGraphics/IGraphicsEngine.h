@@ -26,7 +26,6 @@ namespace SoulGraphics
 
 		virtual struct ID3D11Device* GetDevice() abstract;
 		virtual struct ID3D11DeviceContext* GetDeviceContext() abstract;
-
 	};
 
 	class Exporter

@@ -143,21 +143,32 @@
   <ItemGroup>
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Device.h" />
+    <ClInclude Include="GeometryBuffer.h" />
     <ClInclude Include="GraphicsEngine.h" />
     <ClInclude Include="Helper.h" />
     <ClInclude Include="IGraphicsEngine.h" />
+    <ClInclude Include="IObject.h" />
+    <ClInclude Include="MeshObject.h" />
     <ClInclude Include="RenderState.h" />
     <ClInclude Include="RenderTarget.h" />
+    <ClInclude Include="Resource.h" />
+    <ClInclude Include="ResourceManager.h" />
+    <ClInclude Include="Shader.h" />
     <ClInclude Include="SoulGraphicsPCH.h" />
     <ClInclude Include="Vertex.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Device.cpp" />
+    <ClCompile Include="GeometryBuffer.cpp" />
     <ClCompile Include="GraphicsEngine.cpp" />
     <ClCompile Include="IGraphicsEngine.cpp" />
+    <ClCompile Include="MeshObject.cpp" />
     <ClCompile Include="RenderState.cpp" />
     <ClCompile Include="RenderTarget.cpp" />
+    <ClCompile Include="Resource.cpp" />
+    <ClCompile Include="ResourceManager.cpp" />
+    <ClCompile Include="Shader.cpp" />
     <ClCompile Include="SoulGraphicsPCH.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

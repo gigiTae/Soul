@@ -12,7 +12,6 @@ SoulGraphics::Camera::Camera()
 	_projectionType(ProjectionType::Perspective)
 {} 
 
-
 void SoulGraphics::Camera::MakeProjectionMatrix()
 {
 	if (_projectionType == ProjectionType::Perspective)

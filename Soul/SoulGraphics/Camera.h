@@ -16,7 +16,6 @@ namespace SoulGraphics
 		Camera();
 
 		void Update(DirectX::SimpleMath::Matrix mat);
-
 		void SetScreenSize(UINT width, UINT height);
 
 		DirectX::SimpleMath::Vector3 GetPosition()const { return _position; }

@@ -33,11 +33,17 @@
     <Filter Include="src\03.DirectX11">
       <UniqueIdentifier>{46049048-de88-45bb-8777-1de082c37095}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\04.Mesh">
-      <UniqueIdentifier>{25ebe586-b6a8-42a9-be11-f638967fbef5}</UniqueIdentifier>
+    <Filter Include="inc\05.Resource">
+      <UniqueIdentifier>{c20177dc-3bf7-43f8-843d-4c92d6a82270}</UniqueIdentifier>
     </Filter>
-    <Filter Include="inc\04.Mesh">
+    <Filter Include="src\05.Resource">
+      <UniqueIdentifier>{3e73ff67-346b-427a-95ce-e1641306de2c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="inc\04.Object">
       <UniqueIdentifier>{6df22733-0c0d-48eb-96da-7d98d0bda2cf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\04.Object">
+      <UniqueIdentifier>{25ebe586-b6a8-42a9-be11-f638967fbef5}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -65,8 +71,26 @@
     <ClInclude Include="RenderState.h">
       <Filter>inc\03.DirectX11</Filter>
     </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>inc\05.Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="ResourceManager.h">
+      <Filter>inc\05.Resource</Filter>
+    </ClInclude>
     <ClInclude Include="Vertex.h">
-      <Filter>inc\04.Mesh</Filter>
+      <Filter>inc\03.DirectX11</Filter>
+    </ClInclude>
+    <ClInclude Include="IObject.h">
+      <Filter>inc\04.Object</Filter>
+    </ClInclude>
+    <ClInclude Include="GeometryBuffer.h">
+      <Filter>inc\05.Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="MeshObject.h">
+      <Filter>inc\04.Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Shader.h">
+      <Filter>inc\05.Resource</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -91,8 +115,23 @@
     <ClCompile Include="RenderState.cpp">
       <Filter>src\03.DirectX11</Filter>
     </ClCompile>
+    <ClCompile Include="Resource.cpp">
+      <Filter>src\05.Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="ResourceManager.cpp">
+      <Filter>src\05.Resource</Filter>
+    </ClCompile>
     <ClCompile Include="Vertex.cpp">
-      <Filter>src\04.Mesh</Filter>
+      <Filter>src\03.DirectX11</Filter>
+    </ClCompile>
+    <ClCompile Include="GeometryBuffer.cpp">
+      <Filter>src\05.Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="MeshObject.cpp">
+      <Filter>src\04.Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Shader.cpp">
+      <Filter>src\05.Resource</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

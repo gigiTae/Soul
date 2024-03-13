@@ -4,6 +4,7 @@
 
 namespace SoulGraphics
 {
+	class ResourceManager;
 	class Device;
 	class RenderTarget;
 	class RenderState;
@@ -25,10 +26,13 @@ namespace SoulGraphics
 		ID3D11DeviceContext* GetDeviceContext() override;
 
 	private:
+		std::unique_ptr<ResourceManager> _resourceManager;
+		std::unique_ptr<Camera> _camera;
+
 		std::shared_ptr<Device> _device;
 		std::shared_ptr<RenderTarget> _renderTarget;
 		std::shared_ptr<RenderState> _renderState;
-		std::unique_ptr<Camera> _camera;
+
 	};
 
 

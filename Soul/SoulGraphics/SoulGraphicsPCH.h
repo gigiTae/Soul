@@ -12,6 +12,8 @@
 #include <directxtk/simplemath.h>
 
 #include <array>
+#include <vector>
+
 
 #include "Helper.h"
 
