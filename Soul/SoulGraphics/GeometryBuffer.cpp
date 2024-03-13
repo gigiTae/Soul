@@ -11,3 +11,8 @@ SoulGraphics::GeometryBuffer::~GeometryBuffer()
 {
 
 }
+
+void SoulGraphics::GeometryBuffer::Load(const std::wstring& path)
+{
+
+}

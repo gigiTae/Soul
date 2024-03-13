@@ -13,11 +13,11 @@ SoulGraphics::Shader::~Shader()
 
 void SoulGraphics::Shader::Load(const std::wstring& vertex, const std::wstring& pixel, Vertex::Type type)
 {
-	
 	switch (type)
 	{
 	case SoulGraphics::Vertex::Type::PosColor:
 	{
+
 	}
 		break;
 	case SoulGraphics::Vertex::Type::MeshVertex:
