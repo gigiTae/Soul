@@ -14,6 +14,9 @@
 #include <array>
 #include <vector>
 
+#include <typeinfo>
+#include <typeindex>
+#include <tuple>
 
 #include "Helper.h"
 

@@ -45,6 +45,15 @@
     <Filter Include="src\04.Object">
       <UniqueIdentifier>{25ebe586-b6a8-42a9-be11-f638967fbef5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="inc\06.Scene">
+      <UniqueIdentifier>{ec018aa7-02a9-42a9-9d7e-a2a777acba7d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\06.Scene">
+      <UniqueIdentifier>{93ca1f08-5e84-494f-acf9-838a4d4c8517}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".hlsl">
+      <UniqueIdentifier>{7434c16b-eb88-4977-a873-76a2c716379e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SoulGraphicsPCH.h">
@@ -92,6 +101,12 @@
     <ClInclude Include="Shader.h">
       <Filter>inc\05.Resource</Filter>
     </ClInclude>
+    <ClInclude Include="Box.h">
+      <Filter>inc\04.Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene.h">
+      <Filter>inc\06.Scene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SoulGraphicsPCH.cpp">
@@ -133,5 +148,19 @@
     <ClCompile Include="Shader.cpp">
       <Filter>src\05.Resource</Filter>
     </ClCompile>
+    <ClCompile Include="Box.cpp">
+      <Filter>src\04.Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene.cpp">
+      <Filter>src\06.Scene</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="BasicVS.hlsl">
+      <Filter>.hlsl</Filter>
+    </FxCompile>
+    <FxCompile Include="BasicPS.hlsl">
+      <Filter>.hlsl</Filter>
+    </FxCompile>
   </ItemGroup>
 </Project>

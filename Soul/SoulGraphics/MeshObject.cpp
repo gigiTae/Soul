@@ -11,7 +11,7 @@ SoulGraphics::MeshObject::MeshObject()
 }
 
 SoulGraphics::MeshObject::~MeshObject()
-{
+{ 
 
 }
 

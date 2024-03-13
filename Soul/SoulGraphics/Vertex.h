@@ -3,6 +3,13 @@
 
 namespace SoulGraphics::Vertex
 {
+	enum class Type
+	{
+		PosColor,
+		MeshVertex,
+		SkinnedVertex,
+	};
+
 	struct PosColor
 	{
 		DirectX::XMFLOAT3 pos;

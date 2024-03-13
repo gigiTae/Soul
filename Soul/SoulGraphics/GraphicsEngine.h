@@ -9,6 +9,7 @@ namespace SoulGraphics
 	class RenderTarget;
 	class RenderState;
 	class Camera;
+	class Scene;
 
 	class GraphicsEngine : public IGraphicsEngine
 	{
@@ -25,7 +26,9 @@ namespace SoulGraphics
 		ID3D11Device* GetDevice() override;
 		ID3D11DeviceContext* GetDeviceContext() override;
 
+
 	private:
+		std::unique_ptr<Scene> _scene;
 		std::unique_ptr<ResourceManager> _resourceManager;
 		std::unique_ptr<Camera> _camera;
 

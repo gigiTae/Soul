@@ -15,6 +15,8 @@ namespace SoulGraphics
 
 		void Finalize();
 
+		std::shared_ptr<Device> GetDevice()const { return _device; }
+
 	private:
 		std::shared_ptr<Device> _device;
 

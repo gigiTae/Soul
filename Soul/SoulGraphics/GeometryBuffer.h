@@ -6,11 +6,19 @@ namespace SoulGraphics
 	class GeometryBuffer : public Resource
 	{
 	public:
+		struct Mesh
+		{
+
+		};
+
+	public:
 		GeometryBuffer(ResourceManager* resMgr);
 		~GeometryBuffer();
 
+
 	private:
 
 	private:
+
 	};
 }
