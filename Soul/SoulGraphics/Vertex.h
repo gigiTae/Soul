@@ -12,8 +12,8 @@ namespace SoulGraphics::Vertex
 
 	struct PosColor
 	{
-		DirectX::XMFLOAT3 pos;
-		DirectX::XMFLOAT4 color;
+		DirectX::SimpleMath::Vector3 pos;
+		DirectX::SimpleMath::Vector4 color;
 	};
 
 	struct MeshVertex

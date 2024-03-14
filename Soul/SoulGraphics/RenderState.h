@@ -22,7 +22,7 @@ namespace SoulGraphics
 
 		void Finalize();
 
-		ID3D11RasterizerState* GetRasterizerState(Rasterizer state)const;
+		ID3D11RasterizerState* GetRasterizerState(Rasterizer state);
 
 	private:
 		std::array<ID3D11RasterizerState*, static_cast<size_t>(Rasterizer::End)> _rasterizerStates;

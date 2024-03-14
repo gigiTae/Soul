@@ -165,6 +165,7 @@
     <ClCompile Include="Device.cpp" />
     <ClCompile Include="GeometryBuffer.cpp" />
     <ClCompile Include="GraphicsEngine.cpp" />
+    <ClCompile Include="Helpercpp.cpp" />
     <ClCompile Include="IGraphicsEngine.cpp" />
     <ClCompile Include="MeshObject.cpp" />
     <ClCompile Include="RenderState.cpp" />
@@ -194,6 +195,9 @@
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
     </FxCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Shared.fxh" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

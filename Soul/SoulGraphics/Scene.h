@@ -15,11 +15,10 @@ namespace SoulGraphics
 		Scene() {}
 		~Scene() {}
 
-		virtual void Initialize() abstract;
+		virtual void Initialize() {};
 
 		template<typename T>
 		void AddObject(const std::shared_ptr<T>& object);
-
 
 	private:
 		std::vector<RederingObject> _renderingObjects;

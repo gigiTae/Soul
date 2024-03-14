@@ -15,7 +15,7 @@ void SoulGraphics::RenderState::Initialize(const std::shared_ptr<Device>& device
 	D3D11_RASTERIZER_DESC solidDesc;
 	ZeroMemory(&solidDesc, sizeof(D3D11_RASTERIZER_DESC));
 	solidDesc.FillMode = D3D11_FILL_SOLID;
-	solidDesc.CullMode = D3D11_CULL_NONE;
+	solidDesc.CullMode = D3D11_CULL_BACK;
 	solidDesc.FrontCounterClockwise = false;
 	solidDesc.DepthClipEnable = true;
 	HR_T(device->GetDevice()->CreateRasterizerState(&solidDesc,
@@ -30,6 +30,7 @@ void SoulGraphics::RenderState::Initialize(const std::shared_ptr<Device>& device
 	wireframeDesc.DepthClipEnable = true;
 	HR_T(device->GetDevice()->CreateRasterizerState(&wireframeDesc,
 		&_rasterizerStates[static_cast<size_t>(Rasterizer::Wireframe)]));
+
 }
 
 void SoulGraphics::RenderState::Finalize()
@@ -40,7 +41,8 @@ void SoulGraphics::RenderState::Finalize()
 	}
 }
 
-ID3D11RasterizerState* SoulGraphics::RenderState::GetRasterizerState(Rasterizer state) const
+ID3D11RasterizerState* SoulGraphics::RenderState::GetRasterizerState(Rasterizer state)
 {
 	return _rasterizerStates[static_cast<size_t>(state)];
 }
+   

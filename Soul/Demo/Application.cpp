@@ -6,7 +6,7 @@ Application::Application()
 	, _type()
 	, _hwnd()
 	,_hInstance()
-	, _rect{}
+	, _rect{100,100, 1920,1080}
 {}
 
 Application::~Application()
@@ -73,21 +73,17 @@ void Application::InitializeWindow(HINSTANCE hInstance)
 
 	RegisterClass(&wndClass);
 
-	_rect = { 100,100,1920,1080 };
+
 
 	AdjustWindowRect(&_rect, WS_OVERLAPPEDWINDOW, false);
-
 
 	_hwnd = CreateWindow(title, title, WS_OVERLAPPEDWINDOW,
 		_rect.left, _rect.top, _rect.right - _rect.left, _rect.bottom - _rect.top,
 		NULL, NULL, hInstance, NULL);
 
-	auto error = GetLastError();
-
 	assert(_hwnd);
 
 	ShowWindow(_hwnd, SW_SHOWNORMAL);
 	UpdateWindow(_hwnd);
-
 }
 

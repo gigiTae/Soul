@@ -15,6 +15,7 @@ namespace SoulGraphics
 	public:
 		Camera();
 
+		void Initialize(UINT width, UINT height);
 		void Update(DirectX::SimpleMath::Matrix mat);
 		void SetScreenSize(UINT width, UINT height);
 

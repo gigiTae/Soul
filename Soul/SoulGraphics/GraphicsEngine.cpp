@@ -15,6 +15,7 @@ SoulGraphics::GraphicsEngine::GraphicsEngine()
 	, _camera(std::make_unique<Camera>())
 	, _resourceManager(std::make_unique<ResourceManager>())
 	, _scene(nullptr)
+	, box(new Box())
 {}
 
 SoulGraphics::GraphicsEngine::~GraphicsEngine()
@@ -22,8 +23,8 @@ SoulGraphics::GraphicsEngine::~GraphicsEngine()
 
 void SoulGraphics::GraphicsEngine::Initialize(InitalizeInfomation info)
 {
-	UINT height = info.rect.right - info.rect.left;
-	UINT width = info.rect.bottom - info.rect.top;
+	UINT width = info.rect.right- info.rect.left;
+	UINT height = info.rect.bottom - info.rect.top;
 
 	// 결과값.
 	HRESULT hr = 0;
@@ -32,8 +33,12 @@ void SoulGraphics::GraphicsEngine::Initialize(InitalizeInfomation info)
 	_renderTarget->Initialize(_device, width, height);
 	_renderState->Initialize(_device);
 	_resourceManager->Initialize(_device);
-	//_scene->Initialize();
 
+	_camera->Initialize(width, height);
+
+	box->Initialize(_device.get());
+	box->SetHeight(height);
+	box->SetWidth(width);
 }
 
 void SoulGraphics::GraphicsEngine::Render()
@@ -41,6 +46,19 @@ void SoulGraphics::GraphicsEngine::Render()
 	_renderTarget->SetRenderTargetView(RenderTarget::Type::First);
 	_renderTarget->ClearRenderTargetView(RenderTarget::Type::First);
 
+	using namespace DirectX::SimpleMath;
+
+	static float r = 0.f;
+	r += 0.0001f;
+	Matrix m_World = DirectX::XMMatrixRotationX(r);
+
+	box->SetWorldTM(m_World);
+	box->SetViewProjTM(_camera.get());
+	box->Render(_device.get(), _renderState.get(), _renderTarget.get());
+}
+
+void SoulGraphics::GraphicsEngine::EndRender()
+{
 	// 스왑체인 교체.
 	_device->GetSwapChain()->Present(0, 0);
 }
@@ -52,6 +70,11 @@ void SoulGraphics::GraphicsEngine::Finalize()
 	_renderTarget->Finalize();
 	_renderState->Finalize();
 	_device->Finalize();
+}
+
+void SoulGraphics::GraphicsEngine::UpdateCamera(DirectX::SimpleMath::Matrix tm)
+{
+	_camera->Update(tm);
 }
 
 ID3D11Device* SoulGraphics::GraphicsEngine::GetDevice()

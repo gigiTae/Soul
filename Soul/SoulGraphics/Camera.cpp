@@ -6,18 +6,35 @@ SoulGraphics::Camera::Camera()
 	_screenWidth(0),
 	_viewTM{},
 	_projTM{},
-	_farPlain(0.f),
-	_nearPlain(0.f),
-	_fieldofView(0.f),
+	_farPlain(1000.f),
+	_nearPlain(0.1f),
+	_fieldofView(14.f),
 	_projectionType(ProjectionType::Perspective)
-{} 
+{}
+
+void SoulGraphics::Camera::Initialize(UINT width, UINT height)
+{
+	using namespace DirectX;
+
+	_screenWidth = width;
+	_screenHeight = height;
+
+	// Initialize the view matrix
+	XMVECTOR Eye = XMVectorSet(0.0f, 1.0f, -5.0f, 0.0f);
+	XMVECTOR At = XMVectorSet(0.0f, 1.0f, 0.0f, 0.0f);
+	XMVECTOR Up = XMVectorSet(0.0f, 1.0f, 0.0f, 0.0f);
+
+	_viewTM = XMMatrixLookAtLH(Eye, At, Up);
+	_projTM = XMMatrixPerspectiveFovLH(XM_PIDIV2, width / (FLOAT)height, _nearPlain, _farPlain);
+}
 
 void SoulGraphics::Camera::MakeProjectionMatrix()
 {
 	if (_projectionType == ProjectionType::Perspective)
 	{
-		_projTM = DirectX::SimpleMath::Matrix::CreatePerspective(static_cast<float>(_screenWidth),
-			static_cast<float>(_screenHeight), _nearPlain, _farPlain);
+		_projTM =DirectX::XMMatrixPerspectiveFovLH(DirectX::XM_PIDIV2, _screenWidth / (FLOAT)_screenHeight, _nearPlain, _farPlain);
+		/*	_projTM = DirectX::SimpleMath::Matrix::CreatePerspective(static_cast<float>(_screenWidth),
+				static_cast<float>(_screenHeight), _nearPlain, _farPlain)*/;
 	}
 	else
 	{

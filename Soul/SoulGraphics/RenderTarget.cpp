@@ -31,6 +31,17 @@ void SoulGraphics::RenderTarget::Initialize(const std::shared_ptr<Device>& devic
 	dxDeviceContext->OMSetRenderTargets(1, &_renderTargetViews[static_cast<int>(Type::First)], NULL);
 #endif
 
+	//4. ºäÆ÷Æ® ¼³Á¤.	
+	D3D11_VIEWPORT viewport = {};
+	viewport.TopLeftX = 0;
+	viewport.TopLeftY = 0;
+	viewport.Width = static_cast<float>(width);
+	viewport.Height = static_cast<float>(height);
+	viewport.MinDepth = 0.0f;
+	viewport.MaxDepth = 1.0f;
+
+	// ºäÆ÷Æ® ¼³Á¤.
+	dxDeviceContext->RSSetViewports(1, &viewport);
 }
 
 void SoulGraphics::RenderTarget::Finalize()
@@ -43,7 +54,7 @@ void SoulGraphics::RenderTarget::Finalize()
 
 void SoulGraphics::RenderTarget::ClearRenderTargetView(Type type)
 {
-	constexpr DirectX::SimpleMath::Color color{ 0.2f,0.4f,0.2f,1.f };
+	constexpr DirectX::SimpleMath::Color color{ 0.f,0.f,0.f,1.f };
 
 	_device->GetDeviceContext()->ClearRenderTargetView(_renderTargetViews[(size_t)type], color);
 }

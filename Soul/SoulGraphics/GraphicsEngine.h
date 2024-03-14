@@ -11,6 +11,9 @@ namespace SoulGraphics
 	class Camera;
 	class Scene;
 
+	// tmp
+	class Box;
+
 	class GraphicsEngine : public IGraphicsEngine
 	{
 	public: 
@@ -20,12 +23,15 @@ namespace SoulGraphics
 		void Initialize(InitalizeInfomation info) override;
 
 		void Render() override;
+		
+		void EndRender() override;
 
 		void Finalize() override;
 
+		void UpdateCamera(DirectX::SimpleMath::Matrix tm) override;
+
 		ID3D11Device* GetDevice() override;
 		ID3D11DeviceContext* GetDeviceContext() override;
-
 
 	private:
 		std::unique_ptr<Scene> _scene;
@@ -36,6 +42,7 @@ namespace SoulGraphics
 		std::shared_ptr<RenderTarget> _renderTarget;
 		std::shared_ptr<RenderState> _renderState;
 
+		Box* box;
 	};
 
 

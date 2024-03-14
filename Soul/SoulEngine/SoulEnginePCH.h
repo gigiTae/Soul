@@ -8,4 +8,6 @@
 
 #include <memory>
 
+#include "InputEnum.h"
+
 #endif //PCH_H

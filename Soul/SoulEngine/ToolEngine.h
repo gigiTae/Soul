@@ -1,5 +1,7 @@
 #pragma once
 #include "IEngine.h"
+#include "../SoulGraphics/IGraphicsEngine.h"
+
 
 namespace Soul
 {
@@ -9,7 +11,6 @@ namespace Soul
 		ToolEngine();
 		~ToolEngine();
 
-
 		void Initialize(WindowInfomation info) override;
 
 		void Process() override;
@@ -17,8 +18,7 @@ namespace Soul
 		void Finalize() override;
 
 	private:
-
-
+		SoulGraphics::IGraphicsEngine* _graphicsEngine;
 	};
 
 }
