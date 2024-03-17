@@ -109,9 +109,6 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="SoulGraphicsPCH.cpp">
-      <Filter>src\00.Default</Filter>
-    </ClCompile>
     <ClCompile Include="GraphicsEngine.cpp">
       <Filter>src\01.GraphcisEngine</Filter>
     </ClCompile>
@@ -156,6 +153,9 @@
     </ClCompile>
     <ClCompile Include="Helpercpp.cpp">
       <Filter>src\00.Default</Filter>
+    </ClCompile>
+    <ClCompile Include="SoulGraphicsPCH.cpp">
+      <Filter>src\01.GraphcisEngine</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

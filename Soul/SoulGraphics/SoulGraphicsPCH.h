@@ -10,6 +10,7 @@
 #include <d3d11.h>
 #include <DirectXMath.h>
 #include <directxtk/simplemath.h>
+#include <Directxtk/DDSTextureLoader.h>
 
 #include <array>
 #include <vector>

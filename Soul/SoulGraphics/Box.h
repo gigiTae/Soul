@@ -36,6 +36,9 @@ namespace SoulGraphics
 		UINT _vertexBufferStride;
 		UINT _vertexBufferOffset;
 
+		ID3D11ShaderResourceView* _textureRV;
+		ID3D11SamplerState* _samepleState;
+
 		ID3D11Buffer* _vertexBuffer;
 		ID3D11Buffer* _indexBuffer;
 		UINT _indices;
