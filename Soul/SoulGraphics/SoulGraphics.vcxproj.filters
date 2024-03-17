@@ -107,6 +107,9 @@
     <ClInclude Include="Scene.h">
       <Filter>inc\06.Scene</Filter>
     </ClInclude>
+    <ClInclude Include="ContantBuffer.h">
+      <Filter>inc\00.Default</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GraphicsEngine.cpp">
@@ -156,6 +159,9 @@
     </ClCompile>
     <ClCompile Include="SoulGraphicsPCH.cpp">
       <Filter>src\01.GraphcisEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="ContantBuffer.cpp">
+      <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

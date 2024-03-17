@@ -48,11 +48,4 @@ namespace SoulGraphics
 		FLOAT _height;
 	};
 
-	struct ContantBuffer
-	{
-		DirectX::SimpleMath::Matrix world;
-		DirectX::SimpleMath::Matrix view;
-		DirectX::SimpleMath::Matrix projection;
-	};
-
 }

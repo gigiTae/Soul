@@ -143,6 +143,7 @@
   <ItemGroup>
     <ClInclude Include="Box.h" />
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="ContantBuffer.h" />
     <ClInclude Include="Device.h" />
     <ClInclude Include="GeometryBuffer.h" />
     <ClInclude Include="GraphicsEngine.h" />
@@ -162,6 +163,7 @@
   <ItemGroup>
     <ClCompile Include="Box.cpp" />
     <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="ContantBuffer.cpp" />
     <ClCompile Include="Device.cpp" />
     <ClCompile Include="GeometryBuffer.cpp" />
     <ClCompile Include="GraphicsEngine.cpp" />

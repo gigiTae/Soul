@@ -22,6 +22,12 @@ namespace SoulGraphics::Vertex
 		DirectX::SimpleMath::Vector2 tex;
 	};
 
+	struct PosNormal
+	{
+		DirectX::SimpleMath::Vector3 pos;
+		DirectX::SimpleMath::Vector3 normal;
+	};
+
 	struct MeshVertex
 	{
 		DirectX::XMFLOAT3 pos;

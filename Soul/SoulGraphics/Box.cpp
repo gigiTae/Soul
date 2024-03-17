@@ -4,6 +4,7 @@
 #include "Vertex.h"
 #include "RenderState.h"
 #include "Device.h"
+#include "ContantBuffer.h"
 
 SoulGraphics::Box::Box()
 	:_worldTM(DirectX::SimpleMath::Matrix::Identity)
@@ -29,7 +30,7 @@ void SoulGraphics::Box::Render(Device* device, RenderState* state, RenderTarget*
 {
 	auto deviceContext = device->GetDeviceContext();
 	// 상수버퍼 
-	ContantBuffer cb;
+	ContantBuffer::Matrix cb;
 	cb.world = DirectX::XMMatrixTranspose(_worldTM);
 	cb.view = DirectX::XMMatrixTranspose(_viewTM);
 	cb.projection = DirectX::XMMatrixTranspose(_projTM);
@@ -143,7 +144,7 @@ void SoulGraphics::Box::Initialize(Device* device)
 	// 6. Render() 에서 파이프라인에 바인딩할 상수 버퍼 생성
 	// Create the constant buffer
 	bd.Usage = D3D11_USAGE_DEFAULT;
-	bd.ByteWidth = sizeof(ContantBuffer);
+	bd.ByteWidth = sizeof(ContantBuffer::Matrix);
 	bd.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
 	bd.CPUAccessFlags = 0;
 	HR_T(device->GetDevice()->CreateBuffer(&bd, nullptr, &_constantBuffer));
