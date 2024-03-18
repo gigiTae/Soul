@@ -14,7 +14,6 @@ void SoulGraphics::RenderState::Initialize(const std::shared_ptr<Device>& device
 {
 	// RasterizerState 
 
-
 	// ¼Ö¸®µå
 	D3D11_RASTERIZER_DESC solidDesc;
 	ZeroMemory(&solidDesc, sizeof(D3D11_RASTERIZER_DESC));
