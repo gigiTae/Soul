@@ -6,6 +6,8 @@ namespace SoulGraphics::Vertex
 	enum class Type
 	{
 		PosColor,
+		PosTex,
+		PosNormal,
 		MeshVertex,
 		SkinnedVertex,
 	};
@@ -32,7 +34,7 @@ namespace SoulGraphics::Vertex
 	{
 		DirectX::XMFLOAT3 pos;
 		DirectX::XMFLOAT3 normal;
-		DirectX::XMFLOAT2 uv;
+		DirectX::XMFLOAT2 tex;
 		DirectX::XMFLOAT3 tangent;
 	};
 
@@ -40,7 +42,7 @@ namespace SoulGraphics::Vertex
 	{
 		DirectX::XMFLOAT3 pos;
 		DirectX::XMFLOAT3 normal;
-		DirectX::XMFLOAT2 uv;
+		DirectX::XMFLOAT2 tex;
 		DirectX::XMFLOAT3 tangent;
 
 		DirectX::XMFLOAT3 weight;

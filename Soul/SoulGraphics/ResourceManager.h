@@ -20,12 +20,11 @@ namespace SoulGraphics
 		~ResourceManager();
 
 		void Initialize(const std::shared_ptr<Device>& device);
-
 		void Finalize();
 
 		std::shared_ptr<Texture> LoadTexture(const std::wstring& path);
-
 		std::shared_ptr<GeometryBuffer> LoadFBX(const std::wstring& path);
+		std::shared_ptr<Shader> LoadShader(const std::wstring& vs, const std::wstring& ps);
 
 		std::shared_ptr<Device> GetDevice()const { return _device; }
 
@@ -33,7 +32,7 @@ namespace SoulGraphics
 		std::shared_ptr<Device> _device;
 		std::unique_ptr<Assimp::Importer> _impoter;
 		TextureMap _textureMap;
-		ShaderMap _shaerMap;
+		ShaderMap _shaderMap;
 		GeometryMap _geometryMap;
 	};
 

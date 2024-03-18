@@ -25,7 +25,6 @@ namespace SoulGraphics
 		void EndRender() override;
 		void Finalize() override;
 
-
 		void AddMeshObject(MeshObjectInfomation info) override;
 
 		// Caemra
@@ -34,6 +33,8 @@ namespace SoulGraphics
 		//DXDevice
 		ID3D11Device* GetDevice() override;
 		ID3D11DeviceContext* GetDeviceContext() override;
+
+		ResourceManager* GetResourceManager()const { return _resourceManager.get(); }
 
 	private:
 		std::unique_ptr<Scene> _scene;

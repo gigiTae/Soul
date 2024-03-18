@@ -30,6 +30,7 @@
 #include <typeindex>
 #include <tuple>
 
+#include "InitializeInfomation.h"
 #include "Helper.h"
 
 #endif //SOUL_GRAPHICS_PCH_H

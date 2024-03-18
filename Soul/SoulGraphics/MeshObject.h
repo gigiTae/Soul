@@ -3,11 +3,16 @@
 
 namespace SoulGraphics
 {
+	class Shader;
+	class Texture;
 
-	class MeshObject :	public IObject
+	class MeshObject : public IObject
 	{
 	public:
-		MeshObject();
+		MeshObject(std::shared_ptr<GeometryBuffer> buffer,
+			std::shared_ptr<Shader> shader,
+			std::shared_ptr<Texture> texture);
+
 		~MeshObject();
 
 		void Render(Device* device,
@@ -26,6 +31,8 @@ namespace SoulGraphics
 		DirectX::SimpleMath::Matrix _projTM;
 
 		std::shared_ptr<GeometryBuffer> _geometryBuffer;
+		std::shared_ptr<Shader> _shader;
+		std::shared_ptr<Texture> _texture;
 	};
 
 

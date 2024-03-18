@@ -16,7 +16,8 @@ SoulGraphics::GraphicsEngine::GraphicsEngine()
 	, _resourceManager(std::make_unique<ResourceManager>())
 	, _scene(nullptr)
 	, box(new Box())
-{}
+{
+}
 
 SoulGraphics::GraphicsEngine::~GraphicsEngine()
 {}
@@ -35,6 +36,9 @@ void SoulGraphics::GraphicsEngine::Initialize(InitalizeInfomation info)
 	_resourceManager->Initialize(_device);
 
 	_camera->Initialize(width, height);
+
+	_scene = std::make_unique<Scene>(this);
+	_scene->Initialize();
 
 	box->Initialize(_device.get());
 	box->SetHeight(static_cast<FLOAT>(height));
@@ -55,6 +59,8 @@ void SoulGraphics::GraphicsEngine::Render()
 	box->SetWorldTM(m_World);
 	box->SetViewProjTM(_camera.get());
 	box->Render(_device.get(), _renderState.get(), _renderTarget.get());
+
+
 }
 
 void SoulGraphics::GraphicsEngine::EndRender()
@@ -74,9 +80,7 @@ void SoulGraphics::GraphicsEngine::Finalize()
 
 void SoulGraphics::GraphicsEngine::AddMeshObject(MeshObjectInfomation info)
 {
-	auto baseColor = _resourceManager->LoadTexture(info.baseColor);
-	auto normal = _resourceManager->LoadTexture(info.normalMap);
-
+	_scene->AddMeshObject(info);
 }
 
 void SoulGraphics::GraphicsEngine::UpdateCamera(DirectX::SimpleMath::Matrix tm)

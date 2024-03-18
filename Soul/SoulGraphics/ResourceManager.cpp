@@ -8,7 +8,7 @@
 SoulGraphics::ResourceManager::ResourceManager()
 	:_device(nullptr)
 	, _impoter(std::make_unique<Assimp::Importer>())
-	, _shaerMap{}
+	, _shaderMap{}
 	, _textureMap{}
 {}
 
@@ -24,7 +24,7 @@ void SoulGraphics::ResourceManager::Initialize(const std::shared_ptr<Device>& de
 void SoulGraphics::ResourceManager::Finalize()
 {
 	_textureMap.clear();
-	_shaerMap.clear();
+	_shaderMap.clear();
 }
 
 std::shared_ptr<SoulGraphics::Texture> SoulGraphics::ResourceManager::LoadTexture(const std::wstring& path)
@@ -66,6 +66,23 @@ std::shared_ptr<SoulGraphics::GeometryBuffer> SoulGraphics::ResourceManager::Loa
 	_geometryMap.insert({ path, std::make_shared<GeometryBuffer>(this) });
 
 	auto iter = _geometryMap.find(path);
+
+	iter->second->Load(scene, Vertex::Type::MeshVertex);
+
+	return iter->second;
+}
+
+std::shared_ptr<SoulGraphics::Shader> SoulGraphics::ResourceManager::LoadShader(const std::wstring& vs, const std::wstring& ps)
+{
+	if (auto iter = _shaderMap.find(vs); iter != _shaderMap.end())
+	{
+		return iter->second;
+	}
+
+	_shaderMap.insert({ vs, std::make_shared<Shader>(this) });
+	auto iter = _shaderMap.find(vs);
+
+	iter->second->LoadShader(vs, ps);
 
 	return iter->second;
 }

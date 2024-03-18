@@ -6,22 +6,32 @@ namespace SoulGraphics
 {
 	class IObject;
 	class Camera;
+	class GraphicsEngine;
+
+	class Device;
+	class RenderState;
+	class RenderTarget;
 
 	class Scene
 	{
 	public:
 		using RederingObject = std::pair<std::type_index, std::shared_ptr<IObject>>;
 
-		Scene() {}
+		Scene(GraphicsEngine* engine);
 		~Scene() {}
 
-		virtual void Initialize() {};
+		void Initialize();
+
+		void Render(Device* device, RenderState* state, RenderTarget* renderTarget);
+
+		void AddMeshObject(const MeshObjectInfomation& info);
 
 		template<typename T>
 		void AddObject(const std::shared_ptr<T>& object);
 
 	private:
 		std::vector<RederingObject> _renderingObjects;
+		GraphicsEngine* _graphicsEngine;
 	};
 
 	template<typename T>

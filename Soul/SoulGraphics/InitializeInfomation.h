@@ -17,6 +17,8 @@ namespace SoulGraphics
 		std::wstring fbx;
 		std::wstring baseColor;
 		std::wstring normalMap;
+		std::wstring pixelShader;
+		std::wstring vertexShader;
 	};
 
 }
