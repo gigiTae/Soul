@@ -25,7 +25,7 @@ DirectX::SimpleMath::Matrix SoulGraphics::MeshObject::GetWorldTM() const
 	return _worldTM;
 }
 
-void SoulGraphics::MeshObject::SetWorldTM(DirectX::SimpleMath::Matrix mat)
+void SoulGraphics::MeshObject::SetWorldTM(const DirectX::SimpleMath::Matrix& mat)
 {
 	_worldTM = mat;
 }

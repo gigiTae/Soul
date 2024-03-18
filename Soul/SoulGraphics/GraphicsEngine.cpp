@@ -23,7 +23,7 @@ SoulGraphics::GraphicsEngine::~GraphicsEngine()
 
 void SoulGraphics::GraphicsEngine::Initialize(InitalizeInfomation info)
 {
-	UINT width = info.rect.right- info.rect.left;
+	UINT width = info.rect.right - info.rect.left;
 	UINT height = info.rect.bottom - info.rect.top;
 
 	// °á°ú°ª.
@@ -37,8 +37,8 @@ void SoulGraphics::GraphicsEngine::Initialize(InitalizeInfomation info)
 	_camera->Initialize(width, height);
 
 	box->Initialize(_device.get());
-	box->SetHeight(height);
-	box->SetWidth(width);
+	box->SetHeight(static_cast<FLOAT>(height));
+	box->SetWidth(static_cast<FLOAT>(width));
 }
 
 void SoulGraphics::GraphicsEngine::Render()
@@ -70,6 +70,13 @@ void SoulGraphics::GraphicsEngine::Finalize()
 	_renderTarget->Finalize();
 	_renderState->Finalize();
 	_device->Finalize();
+}
+
+void SoulGraphics::GraphicsEngine::AddMeshObject(MeshObjectInfomation info)
+{
+	auto baseColor = _resourceManager->LoadTexture(info.baseColor);
+	auto normal = _resourceManager->LoadTexture(info.normalMap);
+
 }
 
 void SoulGraphics::GraphicsEngine::UpdateCamera(DirectX::SimpleMath::Matrix tm)

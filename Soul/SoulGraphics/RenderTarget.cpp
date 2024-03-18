@@ -54,7 +54,7 @@ void SoulGraphics::RenderTarget::Finalize()
 
 void SoulGraphics::RenderTarget::ClearRenderTargetView(Type type)
 {
-	constexpr DirectX::SimpleMath::Color color{ 0.f,0.f,0.f,1.f };
+	constexpr DirectX::SimpleMath::Color color{ 0.f,0.25f,0.f,1.f };
 
 	_device->GetDeviceContext()->ClearRenderTargetView(_renderTargetViews[(size_t)type], color);
 }

@@ -4,6 +4,7 @@
 
 SoulGraphics::RenderState::RenderState()
 	:_rasterizerStates{}
+	,_samplerStates{}
 {}
 
 SoulGraphics::RenderState::~RenderState()
@@ -11,6 +12,9 @@ SoulGraphics::RenderState::~RenderState()
 
 void SoulGraphics::RenderState::Initialize(const std::shared_ptr<Device>& device)
 {
+	// RasterizerState 
+
+
 	// ¼Ö¸®µå
 	D3D11_RASTERIZER_DESC solidDesc;
 	ZeroMemory(&solidDesc, sizeof(D3D11_RASTERIZER_DESC));
@@ -31,6 +35,20 @@ void SoulGraphics::RenderState::Initialize(const std::shared_ptr<Device>& device
 	HR_T(device->GetDevice()->CreateRasterizerState(&wireframeDesc,
 		&_rasterizerStates[static_cast<size_t>(Rasterizer::Wireframe)]));
 
+	// SamplerState
+
+	// Linear
+	D3D11_SAMPLER_DESC sampDesc = {};
+	sampDesc.Filter = D3D11_FILTER_MIN_MAG_MIP_LINEAR;
+	sampDesc.AddressU = D3D11_TEXTURE_ADDRESS_WRAP;
+	sampDesc.AddressV = D3D11_TEXTURE_ADDRESS_WRAP;
+	sampDesc.AddressW = D3D11_TEXTURE_ADDRESS_WRAP;
+	sampDesc.ComparisonFunc = D3D11_COMPARISON_NEVER;
+	sampDesc.MinLOD = 0;
+	sampDesc.MaxLOD = D3D11_FLOAT32_MAX;
+	HR_T(device->GetDevice()->CreateSamplerState(&sampDesc,
+		&_samplerStates[static_cast<size_t>(Sampler::LINEAR)]));
+
 }
 
 void SoulGraphics::RenderState::Finalize()
@@ -39,10 +57,22 @@ void SoulGraphics::RenderState::Finalize()
 	{
 		SAFE_RELEASE(rs);
 	}
+
+	for (auto ss : _samplerStates)
+	{
+		SAFE_RELEASE(ss);
+	}
+
 }
 
-ID3D11RasterizerState* SoulGraphics::RenderState::GetRasterizerState(Rasterizer state)
+
+ID3D11RasterizerState* SoulGraphics::RenderState::GetRasterizerState(Rasterizer state) const
 {
 	return _rasterizerStates[static_cast<size_t>(state)];
 }
-   
+
+
+ID3D11SamplerState** SoulGraphics::RenderState::GetSamplerState(Sampler state)
+{
+	return &_samplerStates[static_cast<size_t>(state)];
+}

@@ -149,6 +149,7 @@
     <ClInclude Include="GraphicsEngine.h" />
     <ClInclude Include="Helper.h" />
     <ClInclude Include="IGraphicsEngine.h" />
+    <ClInclude Include="InitializeInfomation.h" />
     <ClInclude Include="IObject.h" />
     <ClInclude Include="MeshObject.h" />
     <ClInclude Include="RenderState.h" />
@@ -157,7 +158,9 @@
     <ClInclude Include="ResourceManager.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="Shader.h" />
+    <ClInclude Include="SoulGraphicsHeaderh.h" />
     <ClInclude Include="SoulGraphicsPCH.h" />
+    <ClInclude Include="Texture.h" />
     <ClInclude Include="Vertex.h" />
   </ItemGroup>
   <ItemGroup>
@@ -182,6 +185,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="Texture.cpp" />
     <ClCompile Include="Vertex.cpp" />
   </ItemGroup>
   <ItemGroup>

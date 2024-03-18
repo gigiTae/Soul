@@ -21,6 +21,8 @@ SoulGraphics::Box::Box()
 	, _constantBuffer(nullptr)
 	, _samepleState(nullptr)
 	, _textureRV(nullptr)
+	,_width(0)
+	,_height(0)
 {}
 
 SoulGraphics::Box::~Box()
@@ -46,6 +48,8 @@ void SoulGraphics::Box::Render(Device* device, RenderState* state, RenderTarget*
 	deviceContext->VSSetConstantBuffers(0, 1, &_constantBuffer);
 	deviceContext->PSSetShaderResources(0, 1, &_textureRV);
 	deviceContext->PSSetSamplers(0, 1, &_samepleState);
+
+	deviceContext->PSGetSamplers(0, 1, state->GetSamplerState(RenderState::Sampler::LINEAR));
 
 	deviceContext->DrawIndexed(_indices, 0, 0);
 }
@@ -169,7 +173,7 @@ DirectX::SimpleMath::Matrix SoulGraphics::Box::GetWorldTM() const
 	return _worldTM;
 }
 
-void SoulGraphics::Box::SetWorldTM(DirectX::SimpleMath::Matrix mat)
+void SoulGraphics::Box::SetWorldTM(const DirectX::SimpleMath::Matrix& mat)
 {
 	_worldTM = mat;
 }

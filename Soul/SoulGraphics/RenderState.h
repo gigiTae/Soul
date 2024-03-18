@@ -15,17 +15,31 @@ namespace SoulGraphics
 			End,
 		};
 
+		enum class Sampler
+		{
+			LINEAR,
+
+			End,
+		};
+
 		RenderState();
 		~RenderState();
 
+		// State Resource 생성
 		void Initialize(const std::shared_ptr<Device>& device);
-
+		
+		// State Resource 해제 
 		void Finalize();
 
-		ID3D11RasterizerState* GetRasterizerState(Rasterizer state);
+		// Get RasterizerState State 
+		ID3D11RasterizerState* GetRasterizerState(Rasterizer state)const ;
+
+		// Get SamplerState
+		ID3D11SamplerState** GetSamplerState(Sampler state);
 
 	private:
 		std::array<ID3D11RasterizerState*, static_cast<size_t>(Rasterizer::End)> _rasterizerStates;
+		std::array<ID3D11SamplerState*, static_cast<size_t>(Sampler::End)> _samplerStates;
 
 	};
 }

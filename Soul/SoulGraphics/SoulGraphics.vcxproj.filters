@@ -110,6 +110,15 @@
     <ClInclude Include="ContantBuffer.h">
       <Filter>inc\00.Default</Filter>
     </ClInclude>
+    <ClInclude Include="Texture.h">
+      <Filter>inc\05.Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="SoulGraphicsHeaderh.h">
+      <Filter>inc\00.Default</Filter>
+    </ClInclude>
+    <ClInclude Include="InitializeInfomation.h">
+      <Filter>inc\00.Default</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GraphicsEngine.cpp">
@@ -161,7 +170,10 @@
       <Filter>src\01.GraphcisEngine</Filter>
     </ClCompile>
     <ClCompile Include="ContantBuffer.cpp">
-      <Filter>src</Filter>
+      <Filter>src\00.Default</Filter>
+    </ClCompile>
+    <ClCompile Include="Texture.cpp">
+      <Filter>src\05.Resource</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

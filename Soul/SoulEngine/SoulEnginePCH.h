@@ -8,6 +8,8 @@
 
 #include <memory>
 
+#include "../SoulGraphics/SoulGraphicsHeaderh.h"
+
 #include "InputEnum.h"
 
 #endif //PCH_H

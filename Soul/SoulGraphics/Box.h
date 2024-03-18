@@ -16,7 +16,7 @@ namespace SoulGraphics
 		void Initialize(Device* device);
 
 		DirectX::SimpleMath::Matrix GetWorldTM()const override;
-		void SetWorldTM(DirectX::SimpleMath::Matrix mat) override;
+		void SetWorldTM(const DirectX::SimpleMath::Matrix& mat) override;
 		void SetViewProjTM(Camera* camera) override;
 		void SetGeometryBuffer(const std::shared_ptr<GeometryBuffer>& buffer) override;
 		std::shared_ptr<GeometryBuffer> GetGeometryBuffer() override;

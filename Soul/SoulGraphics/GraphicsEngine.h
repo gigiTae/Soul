@@ -21,15 +21,17 @@ namespace SoulGraphics
 		~GraphicsEngine();
 
 		void Initialize(InitalizeInfomation info) override;
-
 		void Render() override;
-		
 		void EndRender() override;
-
 		void Finalize() override;
 
+
+		void AddMeshObject(MeshObjectInfomation info) override;
+
+		// Caemra
 		void UpdateCamera(DirectX::SimpleMath::Matrix tm) override;
 
+		//DXDevice
 		ID3D11Device* GetDevice() override;
 		ID3D11DeviceContext* GetDeviceContext() override;
 

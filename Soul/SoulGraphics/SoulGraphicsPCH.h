@@ -7,14 +7,25 @@
 	
 #include <memory>
 
+// d3d11
 #include <d3d11.h>
 #include <DirectXMath.h>
 #include <directxtk/simplemath.h>
 #include <Directxtk/DDSTextureLoader.h>
+#include <Directxtk/WICTextureLoader.h>
 
+//assimp
+#include <assimp\Importer.hpp>
+#include <assimp\scene.h>
+#include <assimp\postprocess.h>
+
+//stl 
 #include <array>
 #include <vector>
+#include <unordered_map>
+#include <filesystem>
 
+// rtti
 #include <typeinfo>
 #include <typeindex>
 #include <tuple>

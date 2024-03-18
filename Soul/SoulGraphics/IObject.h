@@ -19,7 +19,7 @@ namespace SoulGraphics
 			RenderTarget* renderTarget) abstract;
 
 		virtual DirectX::SimpleMath::Matrix GetWorldTM()const abstract;
-		virtual void SetWorldTM(DirectX::SimpleMath::Matrix mat) abstract;
+		virtual void SetWorldTM(const DirectX::SimpleMath::Matrix& mat) abstract;
 		virtual void SetViewProjTM(Camera* camera) abstract;
 
 		virtual std::shared_ptr<GeometryBuffer> GetGeometryBuffer() abstract;

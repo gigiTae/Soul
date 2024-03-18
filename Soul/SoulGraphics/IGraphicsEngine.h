@@ -6,15 +6,10 @@
 #pragma comment(lib, "d3d11.lib")
 #pragma comment(lib,"d3dcompiler.lib")
 
+#include "InitializeInfomation.h"
+
 namespace SoulGraphics
 {
-	struct InitalizeInfomation
-	{
-		HINSTANCE hInstance;
-		HWND hwnd;
-		RECT rect;
-	};
-
 	class IGraphicsEngine
 	{
 	public:
@@ -27,6 +22,8 @@ namespace SoulGraphics
 		virtual void EndRender() abstract;
 
 		virtual void Finalize() abstract;
+
+		virtual void AddMeshObject(MeshObjectInfomation info) abstract;
 
 		// Camera 
 		virtual void UpdateCamera(DirectX::SimpleMath::Matrix tm) abstract;

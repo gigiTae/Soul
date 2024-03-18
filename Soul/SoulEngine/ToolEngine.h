@@ -1,7 +1,5 @@
 #pragma once
 #include "IEngine.h"
-#include "../SoulGraphics/IGraphicsEngine.h"
-
 
 namespace Soul
 {

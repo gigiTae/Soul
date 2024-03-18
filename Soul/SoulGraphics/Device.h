@@ -16,9 +16,9 @@ namespace SoulGraphics
 		IDXGISwapChain* GetSwapChain()const { return _swapChain; }
 
 	private:
-		ID3D11Device* _device;
+		ID3D11Device*		 _device;
 		ID3D11DeviceContext* _deviceContext;
-		IDXGISwapChain* _swapChain;
+		IDXGISwapChain*		 _swapChain;
 	};
 }
 
