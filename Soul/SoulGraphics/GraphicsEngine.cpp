@@ -6,7 +6,6 @@
 #include "RenderState.h"
 #include "Camera.h"
 #include "Scene.h"
-#include "Box.h"
 
 SoulGraphics::GraphicsEngine::GraphicsEngine()
 	:_device(std::make_shared<Device>())
@@ -15,7 +14,6 @@ SoulGraphics::GraphicsEngine::GraphicsEngine()
 	, _camera(std::make_unique<Camera>())
 	, _resourceManager(std::make_unique<ResourceManager>())
 	, _scene(nullptr)
-	, box(new Box())
 {
 }
 
@@ -40,25 +38,12 @@ void SoulGraphics::GraphicsEngine::Initialize(InitalizeInfomation info)
 	_scene = std::make_unique<Scene>(this);
 	_scene->Initialize();
 
-	box->Initialize(_device.get());
-	box->SetHeight(static_cast<FLOAT>(height));
-	box->SetWidth(static_cast<FLOAT>(width));
 }
 
 void SoulGraphics::GraphicsEngine::Render()
 {
 	_renderTarget->SetRenderTargetView(RenderTarget::RenderTargetView::First);
 	_renderTarget->Clear(RenderTarget::RenderTargetView::First);
-
-	using namespace DirectX::SimpleMath;
-
-	static float r = 0.f;
-	r += 0.0001f;
-	Matrix m_World = DirectX::XMMatrixRotationX(r);
-
-	/*box->SetWorldTM(m_World);
-	box->SetViewProjTM(_camera.get());
-	box->Render(_device.get(), _renderState.get(), _renderTarget.get());*/
 
 	_scene->Render(_device.get(), _renderState.get(), _renderTarget.get());
 }

@@ -11,9 +11,6 @@ namespace SoulGraphics
 	class Camera;
 	class Scene;
 
-	// tmp
-	class Box;
-
 	class GraphicsEngine : public IGraphicsEngine
 	{
 	public: 
@@ -45,8 +42,6 @@ namespace SoulGraphics
 		std::shared_ptr<Device> _device;
 		std::shared_ptr<RenderTarget> _renderTarget;
 		std::shared_ptr<RenderState> _renderState;
-
-		Box* box;
 	};
 
 

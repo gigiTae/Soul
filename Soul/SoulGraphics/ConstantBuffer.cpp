@@ -34,7 +34,7 @@ void SoulGraphics::ConstantBuffer::Initialize()
 	HR_T(device->CreateBuffer(&bd, nullptr, &_constantBuffers[static_cast<size_t>(Type::Light)]));
 }
 
-void SoulGraphics::ConstantBuffer::SetMatrixCB(const SM::Matrix& world, const SM::Matrix& view, const SM::Matrix& proj) const
+void SoulGraphics::ConstantBuffer::BindMatrixCB(const SM::Matrix& world, const SM::Matrix& view, const SM::Matrix& proj) const
 {
 	auto deviceContext = GetResourceManager()->GetDevice()->GetDeviceContext();
 
@@ -42,12 +42,14 @@ void SoulGraphics::ConstantBuffer::SetMatrixCB(const SM::Matrix& world, const SM
 	cb.world = DirectX::XMMatrixTranspose(world);
 	cb.view = DirectX::XMMatrixTranspose(view);
 	cb.projection = DirectX::XMMatrixTranspose(proj);
+	cb.worldInverseTranspose = world.Invert();
 
 	deviceContext->UpdateSubresource(_constantBuffers[static_cast<size_t>(Type::Matrix)],
 		0, nullptr, &cb, 0, 0);
 
 	deviceContext->VSSetConstantBuffers(0, 1, &_constantBuffers[static_cast<size_t>(Type::Matrix)]);
 }
+
 
 void SoulGraphics::ConstantBuffer::Finalize()
 {

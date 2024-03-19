@@ -51,9 +51,6 @@
     <Filter Include="src\06.Scene">
       <UniqueIdentifier>{93ca1f08-5e84-494f-acf9-838a4d4c8517}</UniqueIdentifier>
     </Filter>
-    <Filter Include=".hlsl">
-      <UniqueIdentifier>{7434c16b-eb88-4977-a873-76a2c716379e}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SoulGraphicsPCH.h">
@@ -187,18 +184,5 @@
     <ClCompile Include="Material.cpp">
       <Filter>src</Filter>
     </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <FxCompile Include="BasicVS.hlsl">
-      <Filter>.hlsl</Filter>
-    </FxCompile>
-    <FxCompile Include="BasicPS.hlsl">
-      <Filter>.hlsl</Filter>
-    </FxCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Shared.fxh">
-      <Filter>.hlsl</Filter>
-    </None>
   </ItemGroup>
 </Project>

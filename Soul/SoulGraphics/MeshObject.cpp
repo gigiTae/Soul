@@ -29,7 +29,7 @@ void SoulGraphics::MeshObject::Render(Device* device, RenderState* state, Render
 	auto deviceContext = device->GetDeviceContext();
 
 	// Matrix 상수버퍼 설정
-	_constantBuffer->SetMatrixCB(_worldTM, _viewTM, _projTM);
+	_constantBuffer->BindMatrixCB(_worldTM, _viewTM, _projTM);
 	_shader->BindShader();
 	_texture->BindTexture(0);
 	state->BindRasterizerState(RenderState::Rasterizer::Solid);

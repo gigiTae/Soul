@@ -17,8 +17,8 @@ void SoulGraphics::Scene::Initialize()
 	info.baseColor = L"Resource/character.png";
 	info.normalMap = L"Resource/character_normal.png";
 	info.fbx = L"Resource/Character.fbx";
-	info.pixelShader = L"BasicPS.hlsl";
-	info.vertexShader = L"BasicVS.hlsl";
+	info.pixelShader = L"MeshPS.hlsl";
+	info.vertexShader = L"MeshVS.hlsl";
 
 	AddMeshObject(info);
 }
@@ -27,12 +27,6 @@ void SoulGraphics::Scene::Render(Device* device, RenderState* state, RenderTarge
 {
 	for (auto& obj : _renderingObjects)
 	{
-		/*using namespace DirectX::SimpleMath;
-		 
-		static float r = 0.f;
-		r += 0.0001f;
-		Matrix m_World = DirectX::XMMatrixRotationX(r);*/
-
 		obj.second->SetWorldTM(SM::Matrix::Identity);
 		obj.second->SetViewProjTM(_graphicsEngine->GetCamera());
 		obj.second->Render(device, state, renderTarget);

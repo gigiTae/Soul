@@ -21,7 +21,7 @@ namespace SoulGraphics
 		// 상수 버퍼 생성 
 		void Initialize();
 
-		void SetMatrixCB(const SM::Matrix& world, const SM::Matrix& view, const SM::Matrix& proj)const;
+		void BindMatrixCB(const SM::Matrix& world, const SM::Matrix& view, const SM::Matrix& proj)const;
 
 		// 상수 버퍼 해제
 		void Finalize();

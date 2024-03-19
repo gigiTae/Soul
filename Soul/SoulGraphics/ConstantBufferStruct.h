@@ -7,6 +7,7 @@ namespace  SoulGraphics::CB
 		DirectX::SimpleMath::Matrix world;
 		DirectX::SimpleMath::Matrix view;
 		DirectX::SimpleMath::Matrix projection;
+		DirectX::SimpleMath::Matrix worldInverseTranspose;
 	};
 
 	static_assert((sizeof(Matrix) % 16) == 0,
@@ -14,9 +15,8 @@ namespace  SoulGraphics::CB
 
 	struct Light
 	{
-		DirectX::SimpleMath::Vector4 lightDirection;
-		DirectX::SimpleMath::Vector2 lightColor;
-		DirectX::SimpleMath::Vector2 pad;
+		DirectX::SimpleMath::Vector4 lightDirection[2];
+		DirectX::SimpleMath::Vector4 lightColor[2];
 	};
 
 	static_assert((sizeof(Light) % 16) == 0,
