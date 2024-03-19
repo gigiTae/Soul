@@ -39,3 +39,10 @@ void SoulGraphics::Texture::LoadTexture(const std::filesystem::path& path)
 	}
 }
 
+void SoulGraphics::Texture::SetTexture(UINT slot)
+{
+	auto deviceContext = GetResourceManager()->GetDevice()->GetDeviceContext();
+
+	deviceContext->PSSetShaderResources(slot, 1, &_shaderResourceView);
+}
+

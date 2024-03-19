@@ -4,12 +4,14 @@
 #include "Texture.h"
 #include "Shader.h"
 #include "GeometryBuffer.h"
+#include "ConstantBuffer.h"
 
 SoulGraphics::ResourceManager::ResourceManager()
 	:_device(nullptr)
 	, _impoter(std::make_unique<Assimp::Importer>())
 	, _shaderMap{}
 	, _textureMap{}
+	,_constantBuffer{}
 {}
 
 SoulGraphics::ResourceManager::~ResourceManager()
@@ -19,6 +21,8 @@ void SoulGraphics::ResourceManager::Initialize(const std::shared_ptr<Device>& de
 {
 	_device = device;
 
+	_constantBuffer = std::make_shared<ConstantBuffer>(this);
+	_constantBuffer->Initialize();
 }
 
 void SoulGraphics::ResourceManager::Finalize()

@@ -5,6 +5,7 @@
 SoulGraphics::RenderState::RenderState()
 	:_rasterizerStates{}
 	,_samplerStates{}
+	, _device(nullptr)
 {}
 
 SoulGraphics::RenderState::~RenderState()
@@ -12,6 +13,8 @@ SoulGraphics::RenderState::~RenderState()
 
 void SoulGraphics::RenderState::Initialize(const std::shared_ptr<Device>& device)
 {
+	_device = device;
+
 	// RasterizerState 
 
 	// ¼Ö¸®µå
@@ -47,7 +50,6 @@ void SoulGraphics::RenderState::Initialize(const std::shared_ptr<Device>& device
 	sampDesc.MaxLOD = D3D11_FLOAT32_MAX;
 	HR_T(device->GetDevice()->CreateSamplerState(&sampDesc,
 		&_samplerStates[static_cast<size_t>(Sampler::LINEAR)]));
-
 }
 
 void SoulGraphics::RenderState::Finalize()
@@ -74,4 +76,14 @@ ID3D11RasterizerState* SoulGraphics::RenderState::GetRasterizerState(Rasterizer 
 ID3D11SamplerState** SoulGraphics::RenderState::GetSamplerState(Sampler state)
 {
 	return &_samplerStates[static_cast<size_t>(state)];
+}
+
+void SoulGraphics::RenderState::SetRasterizerState(Rasterizer stata) const
+{
+	_device->GetDeviceContext()->RSSetState(_rasterizerStates[static_cast<size_t>(stata)]);
+}
+
+void SoulGraphics::RenderState::SetSamplerState(UINT slot , Sampler state)
+{
+	_device->GetDeviceContext()->PSSetSamplers(slot, 1, &_samplerStates[static_cast<size_t>(state)]);
 }

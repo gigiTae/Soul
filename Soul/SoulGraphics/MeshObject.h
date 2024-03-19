@@ -5,11 +5,13 @@ namespace SoulGraphics
 {
 	class Shader;
 	class Texture;
+	class ConstantBuffer;
 
 	class MeshObject : public IObject
 	{
 	public:
-		MeshObject(std::shared_ptr<GeometryBuffer> buffer,
+		MeshObject(std::shared_ptr<GeometryBuffer> gb,
+			std::shared_ptr<ConstantBuffer> cb,
 			std::shared_ptr<Shader> shader,
 			std::shared_ptr<Texture> texture);
 
@@ -30,6 +32,7 @@ namespace SoulGraphics
 		DirectX::SimpleMath::Matrix _viewTM;
 		DirectX::SimpleMath::Matrix _projTM;
 
+		std::shared_ptr<ConstantBuffer> _constantBuffer;
 		std::shared_ptr<GeometryBuffer> _geometryBuffer;
 		std::shared_ptr<Shader> _shader;
 		std::shared_ptr<Texture> _texture;

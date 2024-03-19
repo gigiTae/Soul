@@ -56,11 +56,11 @@ void SoulGraphics::GraphicsEngine::Render()
 	r += 0.0001f;
 	Matrix m_World = DirectX::XMMatrixRotationX(r);
 
-	box->SetWorldTM(m_World);
+	/*box->SetWorldTM(m_World);
 	box->SetViewProjTM(_camera.get());
-	box->Render(_device.get(), _renderState.get(), _renderTarget.get());
+	box->Render(_device.get(), _renderState.get(), _renderTarget.get());*/
 
-
+	_scene->Render(_device.get(), _renderState.get(), _renderTarget.get());
 }
 
 void SoulGraphics::GraphicsEngine::EndRender()

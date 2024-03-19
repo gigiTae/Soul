@@ -40,3 +40,14 @@ void SoulGraphics::Shader::LoadShader(const std::wstring& vsPath, const std::wst
 	SAFE_RELEASE(pixelShaderBuffer);
 
 }
+
+void SoulGraphics::Shader::SetShader()
+{
+	assert(_inputLayout || _pixelShader || _vertexShader);
+
+	auto deviceContext = GetResourceManager()->GetDevice()->GetDeviceContext();
+
+	deviceContext->IASetInputLayout(_inputLayout);
+	deviceContext->VSSetShader(_vertexShader, nullptr, 0);
+	deviceContext->PSSetShader(_pixelShader, nullptr, 0);
+}

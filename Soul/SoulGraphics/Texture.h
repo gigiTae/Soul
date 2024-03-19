@@ -17,6 +17,8 @@ namespace SoulGraphics
 	
 		std::wstring GetResourcePath() const { return _resourcePath; }
 
+		void SetTexture(UINT slot);
+
 	private:
 		std::wstring _resourcePath;
 		ID3D11ShaderResourceView* _shaderResourceView;

@@ -107,7 +107,7 @@
     <ClInclude Include="Scene.h">
       <Filter>inc\06.Scene</Filter>
     </ClInclude>
-    <ClInclude Include="ContantBuffer.h">
+    <ClInclude Include="ConstantBufferStruct.h">
       <Filter>inc\00.Default</Filter>
     </ClInclude>
     <ClInclude Include="Texture.h">
@@ -118,6 +118,9 @@
     </ClInclude>
     <ClInclude Include="InitializeInfomation.h">
       <Filter>inc\00.Default</Filter>
+    </ClInclude>
+    <ClInclude Include="ConstantBuffer.h">
+      <Filter>inc\05.Resource</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -169,10 +172,13 @@
     <ClCompile Include="SoulGraphicsPCH.cpp">
       <Filter>src\01.GraphcisEngine</Filter>
     </ClCompile>
-    <ClCompile Include="ContantBuffer.cpp">
+    <ClCompile Include="ConstantBufferStruct.cpp">
       <Filter>src\00.Default</Filter>
     </ClCompile>
     <ClCompile Include="Texture.cpp">
+      <Filter>src\05.Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="ConstantBuffer.cpp">
       <Filter>src\05.Resource</Filter>
     </ClCompile>
   </ItemGroup>

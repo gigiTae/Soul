@@ -4,7 +4,7 @@
 #include "Vertex.h"
 #include "RenderState.h"
 #include "Device.h"
-#include "ContantBuffer.h"
+#include "ConstantBufferStruct.h"
 
 SoulGraphics::Box::Box()
 	:_worldTM(DirectX::SimpleMath::Matrix::Identity)
@@ -32,24 +32,24 @@ void SoulGraphics::Box::Render(Device* device, RenderState* state, RenderTarget*
 {
 	auto deviceContext = device->GetDeviceContext();
 	// 상수버퍼 
-	ContantBuffer::Matrix cb;
+	CB::Matrix cb;
 	cb.world = DirectX::XMMatrixTranspose(_worldTM);
 	cb.view = DirectX::XMMatrixTranspose(_viewTM);
 	cb.projection = DirectX::XMMatrixTranspose(_projTM);
 	deviceContext->UpdateSubresource(_constantBuffer, 0, nullptr, &cb, 0, 0);
 
 	deviceContext->RSSetState(state->GetRasterizerState(RenderState::Rasterizer::Solid));
+	deviceContext->PSSetSamplers(0, 1, &_samepleState);
+	
 	deviceContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 	deviceContext->IASetVertexBuffers(0, 1, &_vertexBuffer, &_vertexBufferStride, &_vertexBufferOffset);
 	deviceContext->IASetInputLayout(_inputLayout);
-	deviceContext->IASetIndexBuffer(_indexBuffer, DXGI_FORMAT_R16_UINT, 0);	// INDEX값의 범위
+	deviceContext->IASetIndexBuffer(_indexBuffer, DXGI_FORMAT_R32_UINT, 0);	// INDEX값의 범위
 	deviceContext->VSSetShader(_vertexShader, nullptr, 0);
 	deviceContext->PSSetShader(_pixelShader, nullptr, 0);
 	deviceContext->VSSetConstantBuffers(0, 1, &_constantBuffer);
-	deviceContext->PSSetShaderResources(0, 1, &_textureRV);
-	deviceContext->PSSetSamplers(0, 1, &_samepleState);
 
-	deviceContext->PSGetSamplers(0, 1, state->GetSamplerState(RenderState::Sampler::LINEAR));
+	deviceContext->PSSetShaderResources(0, 1, &_textureRV);
 
 	deviceContext->DrawIndexed(_indices, 0, 0);
 }
@@ -143,12 +143,13 @@ void SoulGraphics::Box::Initialize(Device* device)
 	HR_T(device->GetDevice()->CreatePixelShader(
 		pixelShaderBuffer->GetBufferPointer(),
 		pixelShaderBuffer->GetBufferSize(), NULL, &_pixelShader));
+	
 	SAFE_RELEASE(pixelShaderBuffer);
 
 	// 6. Render() 에서 파이프라인에 바인딩할 상수 버퍼 생성
 	// Create the constant buffer
 	bd.Usage = D3D11_USAGE_DEFAULT;
-	bd.ByteWidth = sizeof(ContantBuffer::Matrix);
+	bd.ByteWidth = sizeof(CB::Matrix);
 	bd.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
 	bd.CPUAccessFlags = 0;
 	HR_T(device->GetDevice()->CreateBuffer(&bd, nullptr, &_constantBuffer));

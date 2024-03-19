@@ -4,14 +4,15 @@
 #include "Device.h"
 #include "RenderState.h"
 #include "RenderTarget.h"
-#include "ContantBuffer.h"
 #include "Shader.h"
+#include "Texture.h"
 #include "GeometryBuffer.h"
+#include "ConstantBufferStruct.h"
+#include "ConstantBuffer.h"
 
-SoulGraphics::MeshObject::MeshObject(std::shared_ptr<GeometryBuffer> buffer,
-	std::shared_ptr<Shader> shader,
-	std::shared_ptr<Texture> texture)
-	:_geometryBuffer(buffer)
+SoulGraphics::MeshObject::MeshObject(std::shared_ptr<GeometryBuffer> gb, std::shared_ptr<ConstantBuffer> cb, std::shared_ptr<Shader> shader, std::shared_ptr<Texture> texture)
+	:_geometryBuffer(gb)
+	, _constantBuffer(cb)
 	, _shader(shader)
 	, _texture(texture)
 	, _worldTM{}
@@ -27,13 +28,12 @@ void SoulGraphics::MeshObject::Render(Device* device, RenderState* state, Render
 {
 	auto deviceContext = device->GetDeviceContext();
 
-	ContantBuffer::Matrix cb;
-	cb.world = DirectX::XMMatrixTranspose(_worldTM);
-	cb.view = DirectX::XMMatrixTranspose(_viewTM);
-	cb.projection = DirectX::XMMatrixTranspose(_projTM);
-	//deviceContext->UpdateSubresource(_constantBuffer, 0, nullptr, &cb, 0, 0);
-
-	deviceContext->IASetInputLayout(_shader->GetInputLayout());
+	// Matrix 상수버퍼 설정
+	_constantBuffer->SetMatrixCB(_worldTM, _viewTM, _projTM);
+	_shader->SetShader();
+	_texture->SetTexture(0);
+	state->SetRasterizerState(RenderState::Rasterizer::Solid);
+	state->SetSamplerState(0, RenderState::Sampler::LINEAR);
 
 	for (UINT i = 0; i < _geometryBuffer->GetMeshSize(); ++i)
 	{
@@ -42,8 +42,10 @@ void SoulGraphics::MeshObject::Render(Device* device, RenderState* state, Render
 		_geometryBuffer->GetVertexSize(i);
 		_geometryBuffer->GetIndexSize(i);
 
-		//deviceContext->IASetIndexBuffer(_geometryBuffer->GetIndexBuffer(i));
-		//deviceContext->DrawIndexed(_geometryBuffer->GetIndexSize(i), 0, 0);
+		// 정점, 인덱스 버퍼 생성
+		_geometryBuffer->SetVertexAndIndexBuffer(i);
+
+		deviceContext->DrawIndexed(_geometryBuffer->GetIndexSize(i), 0, 0);
 	}
 
 }

@@ -1,6 +1,6 @@
 #pragma once
 
-namespace  SoulGraphics::ContantBuffer
+namespace  SoulGraphics::CB
 {
 	struct Matrix
 	{
@@ -22,3 +22,4 @@ namespace  SoulGraphics::ContantBuffer
 	static_assert((sizeof(Light) % 16) == 0,
 		"Constant Buffer size must be 16-byte aligned");
 }
+

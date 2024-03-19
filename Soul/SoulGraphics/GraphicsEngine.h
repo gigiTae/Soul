@@ -35,6 +35,7 @@ namespace SoulGraphics
 		ID3D11DeviceContext* GetDeviceContext() override;
 
 		ResourceManager* GetResourceManager()const { return _resourceManager.get(); }
+		Camera* GetCamera()const { return _camera.get(); }
 
 	private:
 		std::unique_ptr<Scene> _scene;

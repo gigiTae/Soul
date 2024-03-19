@@ -21,6 +21,8 @@ namespace SoulGraphics
 		UINT GetIndexSize(size_t index) { return _indexSizes[index]; }
 		UINT GetMeshSize()const { return _meshSize; }
 
+		void SetVertexAndIndexBuffer(size_t index);
+
 	private:
 		void ProcessNode(aiNode* node, const aiScene* scene);
 
@@ -33,6 +35,9 @@ namespace SoulGraphics
 		std::vector<ID3D11Buffer*> _indexBuffers;
 		
 		UINT _meshSize;
+		UINT _vertexBufferStride;
+		UINT _vertexBufferOffset;
+
 		Vertex::Type _vertexType;
 	};
 }

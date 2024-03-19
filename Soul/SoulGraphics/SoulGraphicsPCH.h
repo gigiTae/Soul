@@ -33,4 +33,6 @@
 #include "InitializeInfomation.h"
 #include "Helper.h"
 
+namespace SM = DirectX::SimpleMath;
+
 #endif //SOUL_GRAPHICS_PCH_H

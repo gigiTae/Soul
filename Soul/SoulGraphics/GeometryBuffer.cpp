@@ -11,6 +11,8 @@ SoulGraphics::GeometryBuffer::GeometryBuffer(ResourceManager* resMgr)
 	, _indexSizes{}
 	, _vertexBuffers{}
 	, _indexBuffers{}
+	,_vertexBufferStride{}
+	,_vertexBufferOffset(0)
 {
 
 }
@@ -27,6 +29,14 @@ void SoulGraphics::GeometryBuffer::Load(const aiScene* scene, Vertex::Type type)
 	ProcessNode(scene->mRootNode, scene);
 }
 
+
+void SoulGraphics::GeometryBuffer::SetVertexAndIndexBuffer(size_t index)
+{
+	auto deviceContext = GetResourceManager()->GetDevice()->GetDeviceContext();
+
+	deviceContext->IASetIndexBuffer(_indexBuffers[index], DXGI_FORMAT_R32_UINT, 0);
+	deviceContext->IASetVertexBuffers(0, 1, &_vertexBuffers[index], &_vertexBufferStride, &_vertexBufferOffset);
+}
 
 void SoulGraphics::GeometryBuffer::ProcessNode(aiNode* node, const aiScene* scene)
 {
@@ -123,6 +133,7 @@ void SoulGraphics::GeometryBuffer::ProcessMesh(aiMesh* mesh, const aiScene* scen
 
 		HR_T(device->CreateBuffer(&ibd, &initData, &indexBuffer));
 
+		_vertexBufferStride = sizeof(Vertex::MeshVertex);
 		_vertexSizes.push_back(vertices.size());
 		_indexSizes.push_back(indices.size());
 		_vertexBuffers.push_back(vertexBuffer);
