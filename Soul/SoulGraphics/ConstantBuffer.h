@@ -1,6 +1,7 @@
 #pragma once
 #include "Resource.h"
 
+#include "ConstantBufferStruct.h"
 
 namespace SoulGraphics
 {
@@ -22,6 +23,7 @@ namespace SoulGraphics
 		void Initialize();
 
 		void BindMatrixCB(const SM::Matrix& world, const SM::Matrix& view, const SM::Matrix& proj)const;
+		void BindLightCB(const CB::Light& light)const;
 
 		// 상수 버퍼 해제
 		void Finalize();

@@ -9,12 +9,13 @@
 #include "GeometryBuffer.h"
 #include "ConstantBufferStruct.h"
 #include "ConstantBuffer.h"
+#include "Material.h"
 
-SoulGraphics::MeshObject::MeshObject(std::shared_ptr<GeometryBuffer> gb, std::shared_ptr<ConstantBuffer> cb, std::shared_ptr<Shader> shader, std::shared_ptr<Texture> texture)
+SoulGraphics::MeshObject::MeshObject(std::shared_ptr<GeometryBuffer> gb, std::shared_ptr<ConstantBuffer> cb, std::shared_ptr<Shader> shader, std::shared_ptr<Material> material)
 	:_geometryBuffer(gb)
 	, _constantBuffer(cb)
 	, _shader(shader)
-	, _texture(texture)
+	,_material(material)
 	, _worldTM{}
 	, _viewTM{}
 	, _projTM{}
@@ -31,7 +32,9 @@ void SoulGraphics::MeshObject::Render(Device* device, RenderState* state, Render
 	// Matrix 상수버퍼 설정
 	_constantBuffer->BindMatrixCB(_worldTM, _viewTM, _projTM);
 	_shader->BindShader();
-	_texture->BindTexture(0);
+	_material->BindTexture(0, Material::Type::BaseColor);
+	_material->BindTexture(1, Material::Type::Normal);
+
 	state->BindRasterizerState(RenderState::Rasterizer::Solid);
 	state->BindSamplerState(0, RenderState::Sampler::LINEAR);
 

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "IObject.h"
+#include "ConstantBufferStruct.h"
 
 namespace SoulGraphics
 {
@@ -30,8 +31,14 @@ namespace SoulGraphics
 		void AddObject(const std::shared_ptr<T>& object);
 
 	private:
+		void UpdateLight();
+
+	private:
 		std::vector<RederingObject> _renderingObjects;
 		GraphicsEngine* _graphicsEngine;
+		
+		//tmp
+		CB::Light _lightInfo;
 	};
 
 	template<typename T>

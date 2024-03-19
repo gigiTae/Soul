@@ -15,7 +15,7 @@ namespace SoulGraphics
 			End,
 		};
 
-		Material();
+		Material(std::shared_ptr<Texture> baseColor, std::shared_ptr<Texture> normal);
 		~Material();
 
 		void BindTexture(UINT slot, Type type);

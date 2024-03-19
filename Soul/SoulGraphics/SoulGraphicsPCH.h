@@ -19,6 +19,8 @@
 #include <assimp\scene.h>
 #include <assimp\postprocess.h>
 
+#include <cmath>
+
 //stl 
 #include <array>
 #include <vector>

@@ -4,8 +4,8 @@
 namespace SoulGraphics
 {
 	class Shader;
-	class Texture;
 	class ConstantBuffer;
+	class Material;
 
 	class MeshObject : public IObject
 	{
@@ -13,7 +13,7 @@ namespace SoulGraphics
 		MeshObject(std::shared_ptr<GeometryBuffer> gb,
 			std::shared_ptr<ConstantBuffer> cb,
 			std::shared_ptr<Shader> shader,
-			std::shared_ptr<Texture> texture);
+			std::shared_ptr<Material> material);
 
 		~MeshObject();
 
@@ -35,7 +35,7 @@ namespace SoulGraphics
 		std::shared_ptr<ConstantBuffer> _constantBuffer;
 		std::shared_ptr<GeometryBuffer> _geometryBuffer;
 		std::shared_ptr<Shader> _shader;
-		std::shared_ptr<Texture> _texture;
+		std::shared_ptr<Material> _material;
 	};
 
 

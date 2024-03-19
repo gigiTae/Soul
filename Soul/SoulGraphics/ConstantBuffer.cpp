@@ -51,6 +51,16 @@ void SoulGraphics::ConstantBuffer::BindMatrixCB(const SM::Matrix& world, const S
 }
 
 
+void SoulGraphics::ConstantBuffer::BindLightCB(const CB::Light& light) const
+{
+	auto deviceContext = GetResourceManager()->GetDevice()->GetDeviceContext();
+
+	deviceContext->UpdateSubresource(_constantBuffers[static_cast<size_t>(Type::Light)],
+		0, nullptr, &light, 0, 0);
+
+	deviceContext->PSSetConstantBuffers(1, 1, &_constantBuffers[static_cast<size_t>(Type::Light)]);
+}
+
 void SoulGraphics::ConstantBuffer::Finalize()
 {
 	for (auto buffer : _constantBuffers)

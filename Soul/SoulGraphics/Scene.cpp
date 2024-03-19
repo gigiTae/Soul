@@ -3,6 +3,9 @@
 #include "GraphicsEngine.h"
 #include "ResourceManager.h"
 #include "MeshObject.h"
+#include "Camera.h"
+#include "ConstantBuffer.h"
+#include "Material.h"
 
 SoulGraphics::Scene::Scene(GraphicsEngine* engine)
 	:_graphicsEngine(engine)
@@ -25,6 +28,8 @@ void SoulGraphics::Scene::Initialize()
 
 void SoulGraphics::Scene::Render(Device* device, RenderState* state, RenderTarget* renderTarget)
 {
+	UpdateLight();
+
 	for (auto& obj : _renderingObjects)
 	{
 		obj.second->SetWorldTM(SM::Matrix::Identity);
@@ -42,9 +47,30 @@ void SoulGraphics::Scene::AddMeshObject(const MeshObjectInfomation& info)
 	auto baseColor = resMgr->LoadTexture(info.baseColor);
 	auto normal = resMgr->LoadTexture(info.normalMap);
 	auto shader = resMgr->LoadShader(info.vertexShader, info.pixelShader);
-
-	auto meshObj = std::make_shared<MeshObject>(geometryBuffer, constantBuffer, shader, baseColor);
+	auto material = std::make_shared<Material>(baseColor, normal);
+	auto meshObj = std::make_shared<MeshObject>(geometryBuffer, constantBuffer, shader, material);
 
 	_renderingObjects.push_back({ std::type_index(typeid(MeshObject)), meshObj});
+}
 
+void SoulGraphics::Scene::UpdateLight()
+{
+	_lightInfo.lightColor[0] = SM::Vector4(0.f, 0.f, 0.f, 1.f);
+	_lightInfo.lightColor[1] = SM::Vector4(0.f, 1.f, 1.f, 1.f);
+	
+	auto cameraPos = _graphicsEngine->GetCamera()->GetPosition();
+	cameraPos.Normalize();
+
+	_lightInfo.lightDirection[0] = SM::Vector4(cameraPos);
+
+	static float d; 
+
+	d += 0.0001f;
+
+	SM::Vector4 v(sinf(d), 1.f, cosf(d), 0.f);
+	v.Normalize();
+
+	_lightInfo.lightDirection[1] = v;
+
+	_graphicsEngine->GetResourceManager()->GetConstantBuffer()->BindLightCB(_lightInfo);
 }
