@@ -78,12 +78,12 @@ ID3D11SamplerState** SoulGraphics::RenderState::GetSamplerState(Sampler state)
 	return &_samplerStates[static_cast<size_t>(state)];
 }
 
-void SoulGraphics::RenderState::SetRasterizerState(Rasterizer stata) const
+void SoulGraphics::RenderState::BindRasterizerState(Rasterizer stata) const
 {
 	_device->GetDeviceContext()->RSSetState(_rasterizerStates[static_cast<size_t>(stata)]);
 }
 
-void SoulGraphics::RenderState::SetSamplerState(UINT slot , Sampler state)
+void SoulGraphics::RenderState::BindSamplerState(UINT slot , Sampler state)
 {
 	_device->GetDeviceContext()->PSSetSamplers(slot, 1, &_samplerStates[static_cast<size_t>(state)]);
 }

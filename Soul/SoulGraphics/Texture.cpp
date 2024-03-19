@@ -39,7 +39,7 @@ void SoulGraphics::Texture::LoadTexture(const std::filesystem::path& path)
 	}
 }
 
-void SoulGraphics::Texture::SetTexture(UINT slot)
+void SoulGraphics::Texture::BindTexture(UINT slot)
 {
 	auto deviceContext = GetResourceManager()->GetDevice()->GetDeviceContext();
 

@@ -37,9 +37,9 @@ namespace SoulGraphics
 		// Get SamplerState
 		ID3D11SamplerState** GetSamplerState(Sampler state);
 
-		void SetRasterizerState(Rasterizer stata)const;
+		void BindRasterizerState(Rasterizer stata)const;
 
-		void SetSamplerState(UINT slot, Sampler state);
+		void BindSamplerState(UINT slot, Sampler state);
 
 	private:
 		std::shared_ptr<Device> _device;

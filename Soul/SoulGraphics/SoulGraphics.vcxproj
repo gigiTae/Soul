@@ -152,6 +152,7 @@
     <ClInclude Include="IGraphicsEngine.h" />
     <ClInclude Include="InitializeInfomation.h" />
     <ClInclude Include="IObject.h" />
+    <ClInclude Include="Material.h" />
     <ClInclude Include="MeshObject.h" />
     <ClInclude Include="RenderState.h" />
     <ClInclude Include="RenderTarget.h" />
@@ -174,6 +175,7 @@
     <ClCompile Include="GraphicsEngine.cpp" />
     <ClCompile Include="Helpercpp.cpp" />
     <ClCompile Include="IGraphicsEngine.cpp" />
+    <ClCompile Include="Material.cpp" />
     <ClCompile Include="MeshObject.cpp" />
     <ClCompile Include="RenderState.cpp" />
     <ClCompile Include="RenderTarget.cpp" />

@@ -21,7 +21,7 @@ namespace SoulGraphics
 		UINT GetIndexSize(size_t index) { return _indexSizes[index]; }
 		UINT GetMeshSize()const { return _meshSize; }
 
-		void SetVertexAndIndexBuffer(size_t index);
+		void BindVertexAndIndexBuffer(size_t index);
 
 	private:
 		void ProcessNode(aiNode* node, const aiScene* scene);

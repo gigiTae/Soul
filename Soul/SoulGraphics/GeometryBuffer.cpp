@@ -30,7 +30,7 @@ void SoulGraphics::GeometryBuffer::Load(const aiScene* scene, Vertex::Type type)
 }
 
 
-void SoulGraphics::GeometryBuffer::SetVertexAndIndexBuffer(size_t index)
+void SoulGraphics::GeometryBuffer::BindVertexAndIndexBuffer(size_t index)
 {
 	auto deviceContext = GetResourceManager()->GetDevice()->GetDeviceContext();
 

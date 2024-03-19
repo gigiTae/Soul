@@ -12,7 +12,7 @@ namespace SoulGraphics
 
 		void LoadShader(const std::wstring& vsPath, const std::wstring& psPath);
 
-		void SetShader();
+		void BindShader();
 
 		ID3D11VertexShader* GetVertexShader() { return _vertexShader; }
 		ID3D11PixelShader* GetPixelShader() { return _pixelShader; }

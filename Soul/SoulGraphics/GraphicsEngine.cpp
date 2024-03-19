@@ -47,8 +47,8 @@ void SoulGraphics::GraphicsEngine::Initialize(InitalizeInfomation info)
 
 void SoulGraphics::GraphicsEngine::Render()
 {
-	_renderTarget->SetRenderTargetView(RenderTarget::Type::First);
-	_renderTarget->ClearRenderTargetView(RenderTarget::Type::First);
+	_renderTarget->SetRenderTargetView(RenderTarget::RenderTargetView::First);
+	_renderTarget->Clear(RenderTarget::RenderTargetView::First);
 
 	using namespace DirectX::SimpleMath;
 

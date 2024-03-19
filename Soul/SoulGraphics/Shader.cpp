@@ -41,7 +41,7 @@ void SoulGraphics::Shader::LoadShader(const std::wstring& vsPath, const std::wst
 
 }
 
-void SoulGraphics::Shader::SetShader()
+void SoulGraphics::Shader::BindShader()
 {
 	assert(_inputLayout || _pixelShader || _vertexShader);
 

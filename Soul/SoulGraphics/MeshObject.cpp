@@ -30,20 +30,15 @@ void SoulGraphics::MeshObject::Render(Device* device, RenderState* state, Render
 
 	// Matrix 상수버퍼 설정
 	_constantBuffer->SetMatrixCB(_worldTM, _viewTM, _projTM);
-	_shader->SetShader();
-	_texture->SetTexture(0);
-	state->SetRasterizerState(RenderState::Rasterizer::Solid);
-	state->SetSamplerState(0, RenderState::Sampler::LINEAR);
+	_shader->BindShader();
+	_texture->BindTexture(0);
+	state->BindRasterizerState(RenderState::Rasterizer::Solid);
+	state->BindSamplerState(0, RenderState::Sampler::LINEAR);
 
 	for (UINT i = 0; i < _geometryBuffer->GetMeshSize(); ++i)
 	{
-		_geometryBuffer->GetIndexBuffer(i);
-		_geometryBuffer->GetVertexBuffer(i);
-		_geometryBuffer->GetVertexSize(i);
-		_geometryBuffer->GetIndexSize(i);
-
 		// 정점, 인덱스 버퍼 생성
-		_geometryBuffer->SetVertexAndIndexBuffer(i);
+		_geometryBuffer->BindVertexAndIndexBuffer(i);
 
 		deviceContext->DrawIndexed(_geometryBuffer->GetIndexSize(i), 0, 0);
 	}

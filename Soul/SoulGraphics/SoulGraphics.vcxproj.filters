@@ -122,6 +122,9 @@
     <ClInclude Include="ConstantBuffer.h">
       <Filter>inc\05.Resource</Filter>
     </ClInclude>
+    <ClInclude Include="Material.h">
+      <Filter>inc</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GraphicsEngine.cpp">
@@ -180,6 +183,9 @@
     </ClCompile>
     <ClCompile Include="ConstantBuffer.cpp">
       <Filter>src\05.Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="Material.cpp">
+      <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

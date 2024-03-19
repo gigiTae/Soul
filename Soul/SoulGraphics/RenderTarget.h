@@ -7,7 +7,7 @@ namespace SoulGraphics
 	class RenderTarget
 	{
 	public:
-		enum class Type
+		enum class RenderTargetView
 		{
 			First,
 			Second,
@@ -23,14 +23,14 @@ namespace SoulGraphics
 
 		void Finalize();
 
-		void ClearRenderTargetView(Type type);
+		void Clear(RenderTargetView type);
 
-		void SetRenderTargetView(Type type);
+		void SetRenderTargetView(RenderTargetView type);
 
 	private:
 		std::shared_ptr<Device> _device;
-
-		std::array<ID3D11RenderTargetView*, static_cast<size_t>(Type::End)> _renderTargetViews;	// ·£´õ Å¸°Ù ºä
+		std::array<ID3D11RenderTargetView*, static_cast<size_t>(RenderTargetView::End)> _renderTargetViews;	// ·£´õ Å¸°Ù ºä
+		ID3D11DepthStencilView* _depthStencilView;
 	};
 
 }
