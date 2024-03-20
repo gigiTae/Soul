@@ -5,7 +5,7 @@ namespace  SoulGraphics::CB
 	struct Matrix
 	{
 		DirectX::SimpleMath::Matrix world;
-		DirectX::SimpleMath::Matrix view;
+		DirectX::SimpleMath::Matrix view; 
 		DirectX::SimpleMath::Matrix projection;
 		DirectX::SimpleMath::Matrix worldInverseTranspose;
 	};

@@ -25,6 +25,8 @@ namespace SoulGraphics
 
 		virtual void AddMeshObject(MeshObjectInfomation info) abstract;
 
+		virtual void AddSkinnedMeshObject(MeshObjectInfomation info)abstract;
+
 		// Camera 
 		virtual void UpdateCamera(DirectX::SimpleMath::Matrix tm) abstract;
 		virtual struct ID3D11Device* GetDevice() abstract;

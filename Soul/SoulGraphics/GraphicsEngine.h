@@ -24,6 +24,8 @@ namespace SoulGraphics
 
 		void AddMeshObject(MeshObjectInfomation info) override;
 
+		void AddSkinnedMeshObject(MeshObjectInfomation info) override;
+
 		// Caemra
 		void UpdateCamera(DirectX::SimpleMath::Matrix tm) override;
 

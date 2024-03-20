@@ -141,6 +141,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="AnimationStruct.h" />
     <ClInclude Include="Box.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="ConstantBuffer.h" />
@@ -160,12 +161,14 @@
     <ClInclude Include="ResourceManager.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="Shader.h" />
+    <ClInclude Include="SkinnedMeshObject.h" />
     <ClInclude Include="SoulGraphicsHeaderh.h" />
     <ClInclude Include="SoulGraphicsPCH.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="Vertex.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AnimationStruct.cpp" />
     <ClCompile Include="Box.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="ConstantBuffer.cpp" />
@@ -183,6 +186,7 @@
     <ClCompile Include="ResourceManager.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="Shader.cpp" />
+    <ClCompile Include="SkinnedMeshObject.cpp" />
     <ClCompile Include="SoulGraphicsPCH.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

@@ -68,6 +68,11 @@ void SoulGraphics::GraphicsEngine::AddMeshObject(MeshObjectInfomation info)
 	_scene->AddMeshObject(info);
 }
 
+void SoulGraphics::GraphicsEngine::AddSkinnedMeshObject(MeshObjectInfomation info)
+{
+	_scene->AddSkinnedMeshObject(info);
+}
+
 void SoulGraphics::GraphicsEngine::UpdateCamera(DirectX::SimpleMath::Matrix tm)
 {
 	_camera->Update(tm);

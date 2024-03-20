@@ -1,5 +1,6 @@
 #pragma once
 
+#include "Vertex.h"
 
 namespace SoulGraphics
 {
@@ -24,7 +25,7 @@ namespace SoulGraphics
 		void Finalize();
 
 		std::shared_ptr<Texture> LoadTexture(const std::wstring& path);
-		std::shared_ptr<GeometryBuffer> LoadFBX(const std::wstring& path);
+		std::shared_ptr<GeometryBuffer> LoadFBX(const std::wstring& path, Vertex::Type type);
 		std::shared_ptr<Shader> LoadShader(const std::wstring& vs, const std::wstring& ps);
 		std::shared_ptr<ConstantBuffer> GetConstantBuffer()const { return _constantBuffer; }
 

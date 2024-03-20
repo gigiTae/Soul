@@ -25,7 +25,6 @@ namespace SoulGraphics
 
 	private:
 		void ProcessNode(aiNode* node, const aiScene* scene);
-
 		void ProcessMesh(aiMesh* mesh, const aiScene* scene);
 
 	private:

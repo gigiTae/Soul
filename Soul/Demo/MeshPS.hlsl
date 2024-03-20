@@ -7,7 +7,7 @@ float4 main(VS_OUTPUT input) : SV_Target
     float4 color = baseColorTex.Sample(samLinear,input.Tex);
 
     float3 normalMapSample = normalTex.Sample(samLinear, input.Tex).rgb;
-    float3 bumpedNormalW = NormalSampleToWorldSpace(normalMapSample, input.NormalW, input.TangentW);
+    float3 bumpedNormalW = NormalSampleToWorldSpace(normalMapSample,  input.NormalW, input.TangentW);
     
     //do NdotL lighting for 2 lights
     for (int i = 0; i < 2; i++)

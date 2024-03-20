@@ -47,8 +47,7 @@ std::shared_ptr<SoulGraphics::Texture> SoulGraphics::ResourceManager::LoadTextur
 	return iter->second;
 }
 
-
-std::shared_ptr<SoulGraphics::GeometryBuffer> SoulGraphics::ResourceManager::LoadFBX(const std::wstring& path)
+std::shared_ptr<SoulGraphics::GeometryBuffer> SoulGraphics::ResourceManager::LoadFBX(const std::wstring& path, Vertex::Type type)
 {
 	if (auto iter = _geometryMap.find(path); iter != _geometryMap.end())
 	{
@@ -71,7 +70,7 @@ std::shared_ptr<SoulGraphics::GeometryBuffer> SoulGraphics::ResourceManager::Loa
 
 	auto iter = _geometryMap.find(path);
 
-	iter->second->Load(scene, Vertex::Type::MeshVertex);
+	iter->second->Load(scene, type);
 
 	return iter->second;
 }

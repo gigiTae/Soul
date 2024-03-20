@@ -27,6 +27,8 @@ namespace SoulGraphics
 
 		void AddMeshObject(const MeshObjectInfomation& info);
 
+		void AddSkinnedMeshObject(const MeshObjectInfomation& info);
+
 		template<typename T>
 		void AddObject(const std::shared_ptr<T>& object);
 

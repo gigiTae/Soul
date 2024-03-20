@@ -51,6 +51,12 @@
     <Filter Include="src\06.Scene">
       <UniqueIdentifier>{93ca1f08-5e84-494f-acf9-838a4d4c8517}</UniqueIdentifier>
     </Filter>
+    <Filter Include="inc\07.Animation">
+      <UniqueIdentifier>{100e8841-6c5c-401c-8686-1b9d74b53199}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\07.Animation">
+      <UniqueIdentifier>{34dff170-8928-48cb-9351-a94455e0a3ea}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SoulGraphicsPCH.h">
@@ -120,7 +126,13 @@
       <Filter>inc\05.Resource</Filter>
     </ClInclude>
     <ClInclude Include="Material.h">
-      <Filter>inc</Filter>
+      <Filter>inc\05.Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="SkinnedMeshObject.h">
+      <Filter>inc\04.Object</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimationStruct.h">
+      <Filter>inc\07.Animation</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -182,7 +194,13 @@
       <Filter>src\05.Resource</Filter>
     </ClCompile>
     <ClCompile Include="Material.cpp">
-      <Filter>src</Filter>
+      <Filter>src\05.Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="SkinnedMeshObject.cpp">
+      <Filter>src\04.Object</Filter>
+    </ClCompile>
+    <ClCompile Include="AnimationStruct.cpp">
+      <Filter>src\07.Animation</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
