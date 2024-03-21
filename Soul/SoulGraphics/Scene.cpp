@@ -22,14 +22,15 @@ void SoulGraphics::Scene::Initialize()
 	MeshObjectInfomation info;
 	info.baseColor = L"Resource/character.png";
 	info.normalMap = L"Resource/character_normal.png";
-	info.fbx = L"Resource/Character.fbx";
-	info.pixelShader = L"MeshPS.hlsl";
-	info.vertexShader = L"MeshVS.hlsl";
+	//info.fbx = L"Resource/Character.fbx";
+	//info.pixelShader = L"MeshPS.hlsl";
+	//info.vertexShader = L"MeshVS.hlsl";
 
 	//AddMeshObject(info);
 	
 	// SkinnedMeshObject
-
+	info.pixelShader = L"SkinningMeshPS.hlsl";
+	info.vertexShader = L"SkinningMeshVS.hlsl";
 	info.fbx = L"Resource/SkinningTest.fbx";
 	AddSkinnedMeshObject(info);
 }
@@ -66,12 +67,15 @@ void SoulGraphics::Scene::AddSkinnedMeshObject(const MeshObjectInfomation& info)
 	auto resMgr = _graphicsEngine->GetResourceManager();
 
 	auto geometryBuffer = resMgr->LoadFBX(info.fbx, Vertex::Type::SkinnedVertex);
+	auto aniClip = resMgr->LoadAnimation(info.fbx);
+
 	auto constantBuffer = resMgr->GetConstantBuffer();
 	auto baseColor = resMgr->LoadTexture(info.baseColor);
 	auto normal = resMgr->LoadTexture(info.normalMap);
 	auto shader = resMgr->LoadShader(info.vertexShader, info.pixelShader);
 	auto material = std::make_shared<Material>(baseColor, normal);
-	auto meshObj = std::make_shared<SkinnedMeshObject>(geometryBuffer, constantBuffer, shader, material);
+
+	auto meshObj = std::make_shared<SkinnedMeshObject>(geometryBuffer, constantBuffer, shader, material, aniClip);
 
 	_renderingObjects.push_back({ std::type_index(typeid(SkinnedMeshObject)), meshObj });
 }

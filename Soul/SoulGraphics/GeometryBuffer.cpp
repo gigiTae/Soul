@@ -6,13 +6,13 @@
 SoulGraphics::GeometryBuffer::GeometryBuffer(ResourceManager* resMgr)
 	:Resource(resMgr)
 	, _meshSize(0)
-	, _vertexType(Vertex::Type::MeshVertex)
+	, _vertexType(Vertex::Type::SkinnedVertex)
 	, _vertexSizes{}
 	, _indexSizes{}
 	, _vertexBuffers{}
 	, _indexBuffers{}
-	,_vertexBufferStride{}
-	,_vertexBufferOffset(0)
+	, _vertexBufferStride{}
+	, _vertexBufferOffset(0)
 {
 
 }
@@ -38,8 +38,14 @@ void SoulGraphics::GeometryBuffer::BindVertexAndIndexBuffer(size_t index)
 	deviceContext->IASetVertexBuffers(0, 1, &_vertexBuffers[index], &_vertexBufferStride, &_vertexBufferOffset);
 }
 
+SM::Matrix SoulGraphics::GeometryBuffer::GetInverseBindPose(UINT boneIndex)
+{
+	return _skeletonPose.skeleton.joints[boneIndex].inverseBindPose;
+}
+
 void SoulGraphics::GeometryBuffer::ProcessNode(aiNode* node, const aiScene* scene)
 {
+
 	for (UINT i = 0; i < node->mNumMeshes; i++) {
 		aiMesh* mesh = scene->mMeshes[node->mMeshes[i]];
 		ProcessMesh(mesh, scene);
@@ -170,7 +176,7 @@ void SoulGraphics::GeometryBuffer::ProcessMesh(aiMesh* mesh, const aiScene* scen
 				v.tangent.y = mesh->mTangents[i].y;
 				v.tangent.z = mesh->mTangents[i].z;
 			}
-			
+
 			vertices.push_back(v);
 		}
 
@@ -184,6 +190,35 @@ void SoulGraphics::GeometryBuffer::ProcessMesh(aiMesh* mesh, const aiScene* scen
 			}
 		}
 
+		UINT meshBoneCount = mesh->mNumBones;
+		UINT boneIndexCounter = 0;
+		auto& skeleton = _skeletonPose.skeleton;
+		skeleton.jointCount = meshBoneCount;
+		skeleton.joints.resize(meshBoneCount);
+
+		std::map<std::string, int> boneMapping;
+		for (UINT i = 0; i < meshBoneCount; ++i)
+		{
+			aiBone* bone = mesh->mBones[i];
+			std::string boneName = bone->mName.C_Str();
+			UINT boneIndex = 0;
+			if (boneMapping.find(boneName) == boneMapping.end())
+			{
+				boneIndex = boneIndexCounter;
+				boneIndexCounter++;
+				skeleton.joints[boneIndex].name = boneName;
+				skeleton.joints[boneIndex].inverseBindPose = SM::Matrix(&bone->mOffsetMatrix.a1).Transpose();
+				boneMapping[boneName] = boneIndex;
+			}
+			else boneIndex = boneMapping[boneName];
+
+			for (UINT j = 0; j < bone->mNumWeights; ++j)
+			{
+				UINT vertexID = bone->mWeights[j].mVertexId;
+				float weight = bone->mWeights[j].mWeight;
+				vertices[vertexID].AddBoneDate(boneIndex, weight);
+			}
+		}
 
 		D3D11_BUFFER_DESC vbd;
 		vbd.Usage = D3D11_USAGE_IMMUTABLE;
@@ -211,13 +246,13 @@ void SoulGraphics::GeometryBuffer::ProcessMesh(aiMesh* mesh, const aiScene* scen
 
 		HR_T(device->CreateBuffer(&ibd, &initData, &indexBuffer));
 
-		_vertexBufferStride = sizeof(Vertex::MeshVertex);
+		_vertexBufferStride = sizeof(Vertex::SkinnedVertex);
 		_vertexSizes.push_back(vertices.size());
 		_indexSizes.push_back(indices.size());
 		_vertexBuffers.push_back(vertexBuffer);
 		_indexBuffers.push_back(indexBuffer);
 	}
-		break;
+	break;
 	default:
 		break;
 	}

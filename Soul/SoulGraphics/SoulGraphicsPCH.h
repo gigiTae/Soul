@@ -25,16 +25,20 @@
 #include <array>
 #include <vector>
 #include <unordered_map>
+#include <map>
 #include <filesystem>
+#include <string>
 
 // rtti
 #include <typeinfo>
 #include <typeindex>
 #include <tuple>
 
+namespace SM = DirectX::SimpleMath;
+
 #include "InitializeInfomation.h"
 #include "Helper.h"
+#include "AnimationStruct.h"
 
-namespace SM = DirectX::SimpleMath;
 
 #endif //SOUL_GRAPHICS_PCH_H

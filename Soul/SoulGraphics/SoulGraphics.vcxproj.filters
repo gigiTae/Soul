@@ -131,6 +131,9 @@
     <ClInclude Include="SkinnedMeshObject.h">
       <Filter>inc\04.Object</Filter>
     </ClInclude>
+    <ClInclude Include="AnimaitonClip.h">
+      <Filter>inc\07.Animation</Filter>
+    </ClInclude>
     <ClInclude Include="AnimationStruct.h">
       <Filter>inc\07.Animation</Filter>
     </ClInclude>
@@ -200,6 +203,9 @@
       <Filter>src\04.Object</Filter>
     </ClCompile>
     <ClCompile Include="AnimationStruct.cpp">
+      <Filter>src\07.Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="AnimaitonClip.cpp">
       <Filter>src\07.Animation</Filter>
     </ClCompile>
   </ItemGroup>

@@ -40,13 +40,14 @@ namespace SoulGraphics::Vertex
 
 	struct SkinnedVertex
 	{
-		DirectX::XMFLOAT3 pos;
-		DirectX::XMFLOAT3 normal;
-		DirectX::XMFLOAT2 tex;
-		DirectX::XMFLOAT3 tangent;
-
-		DirectX::XMFLOAT3 weight;
+		SM::Vector3 pos;
+		SM::Vector3 normal;
+		SM::Vector2 tex;
+		SM::Vector3 tangent;
+		SM::Vector3 boneWeight;
 		UINT32 boneIndices[4];
+
+		void AddBoneDate(UINT boneIndex, float weight);
 	};
 
 	class InputLayoutDesc

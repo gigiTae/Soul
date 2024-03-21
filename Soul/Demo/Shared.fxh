@@ -20,6 +20,11 @@ cbuffer LightBuffer : register(b1)
     float4 lightColor[2];
 }
 
+cbuffer BoneBuffer : register(b2)
+{
+    matrix bone[128];
+}
+
 //--------------------------------------------------------------------------------------
 struct VS_INPUT
 {
@@ -37,6 +42,17 @@ struct VS_OUTPUT
     float3 TangentW : TANGENT;
     float2 Tex : TEXCOORD0;
 };
+
+struct SKINNING_VS_INPUT
+{
+    float3 PosL : POSITION;
+    float3 NormalL : NORMAL;
+    float2 Tex : TEXCOORD0;
+    float3 Tangent : TANGENT;
+    float3 Weight : WEIGHT;
+    uint4 BoneIndices : BONEINDICES;
+};
+
 
 float3 NormalSampleToWorldSpace(float3 normalMapSample,
                                 float3 unitNormalW,

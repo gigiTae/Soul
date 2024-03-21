@@ -1,12 +1,12 @@
 #pragma once
 #include "IObject.h"
 
-
 namespace SoulGraphics
 {
 	class Shader;
 	class ConstantBuffer;
 	class Material;
+	class AnimaitonClip;
 
 	class SkinnedMeshObject : public IObject
 	{
@@ -14,7 +14,8 @@ namespace SoulGraphics
 		SkinnedMeshObject(std::shared_ptr<GeometryBuffer> gb,
 			std::shared_ptr<ConstantBuffer> cb,
 			std::shared_ptr<Shader> shader,
-			std::shared_ptr<Material> material);
+			std::shared_ptr<Material> material,
+			std::shared_ptr<AnimaitonClip> aniClip);
 		~SkinnedMeshObject();
 
 		void Render(Device* device,
@@ -24,8 +25,11 @@ namespace SoulGraphics
 		DirectX::SimpleMath::Matrix GetWorldTM()const override;
 		void SetWorldTM(const DirectX::SimpleMath::Matrix& mat) override;
 		void SetViewProjTM(Camera* camera) override;
-		void SetGeometryBuffer(const std::shared_ptr<GeometryBuffer>& buffer) override;
+		void SetGeometryBuffer(const std::shared_ptr<GeometryBuffer>& buffer)  override;
 		std::shared_ptr<GeometryBuffer> GetGeometryBuffer() override;
+
+	private:
+		void SetAnimationClip();
 
 	private:
 		SM::Matrix _worldTM;
@@ -36,5 +40,7 @@ namespace SoulGraphics
 		std::shared_ptr<GeometryBuffer> _geometryBuffer;
 		std::shared_ptr<Shader> _shader;
 		std::shared_ptr<Material> _material;
+
+		std::shared_ptr<AnimaitonClip> _animationClip;
 	};
 }

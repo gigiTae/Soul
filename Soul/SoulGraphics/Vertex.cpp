@@ -31,3 +31,33 @@ const D3D11_INPUT_ELEMENT_DESC SoulGraphics::Vertex::InputLayoutDesc::skinnedVer
 	{"BONEINDICES", 0, DXGI_FORMAT_R32G32B32A32_UINT, 0, 56, D3D11_INPUT_PER_VERTEX_DATA, 0}
 };
 
+
+void SoulGraphics::Vertex::SkinnedVertex::AddBoneDate(UINT boneIndex, float weight)
+{
+	
+	if (boneWeight.x == 0.0f)
+	{	
+		boneWeight.x = weight;
+		boneIndices[0] = boneIndex;
+		return;
+	}
+	else if (boneWeight.y == 0.0f)
+	{
+		boneWeight.y = weight;
+		boneIndices[1] = boneIndex;
+		return;
+	}
+	else if (boneWeight.z == 0.0f)
+	{
+		boneWeight.z = weight;
+		boneIndices[2] = boneIndex;
+		return;
+	}
+	else
+	{
+		float w = 1.f - boneWeight.x - boneWeight.y - boneWeight.z;
+
+		boneIndices[3] = boneIndex;
+	}
+
+}

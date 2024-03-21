@@ -23,6 +23,10 @@ namespace SoulGraphics
 
 		void BindVertexAndIndexBuffer(size_t index);
 
+		SM::Matrix GetInverseBindPose(UINT boneIndex);
+
+		UINT GetBoneSize()const { return _skeletonPose.skeleton.jointCount; }
+
 	private:
 		void ProcessNode(aiNode* node, const aiScene* scene);
 		void ProcessMesh(aiMesh* mesh, const aiScene* scene);
@@ -36,6 +40,8 @@ namespace SoulGraphics
 		UINT _meshSize;
 		UINT _vertexBufferStride;
 		UINT _vertexBufferOffset;
+
+		SkeletonPose _skeletonPose;
 
 		Vertex::Type _vertexType;
 	};

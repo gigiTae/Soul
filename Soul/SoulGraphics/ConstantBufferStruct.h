@@ -21,5 +21,13 @@ namespace  SoulGraphics::CB
 
 	static_assert((sizeof(Light) % 16) == 0,
 		"Constant Buffer size must be 16-byte aligned");
+
+	struct BoneMatrix
+	{
+		SM::Matrix bone[128];
+	};
+
+	static_assert((sizeof(BoneMatrix) % 16) == 0,
+		"Constant Buffer size must be 16-byte aligned");
 }
 

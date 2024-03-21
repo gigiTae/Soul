@@ -18,11 +18,11 @@ void SoulGraphics::Shader::LoadShader(const std::wstring& vsPath, const std::wst
 	auto dxDevice = GetResourceManager()->GetDevice()->GetDevice();
 
 	ID3D10Blob* vertexShaderBuffer = nullptr;	// 정점 셰이더 코드가 저장될 버퍼.
-	HR_T(CompileShaderFromFile(vsPath.c_str(), "main", "vs_4_0", &vertexShaderBuffer));
+	HR_T(CompileShaderFromFile(vsPath.c_str(), "main", "vs_5_0", &vertexShaderBuffer));
 
 	// InputLayout 생성
-	HR_T(dxDevice->CreateInputLayout(Vertex::InputLayoutDesc::meshVertex,
-		ARRAYSIZE(Vertex::InputLayoutDesc::meshVertex),
+	HR_T(dxDevice->CreateInputLayout(Vertex::InputLayoutDesc::skinnedVertex,
+		ARRAYSIZE(Vertex::InputLayoutDesc::skinnedVertex),
 		vertexShaderBuffer->GetBufferPointer(), vertexShaderBuffer->GetBufferSize(), &_inputLayout));
 
 	// VS생성

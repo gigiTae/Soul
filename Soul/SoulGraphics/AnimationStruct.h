@@ -21,13 +21,15 @@ namespace SoulGraphics
 		SM::Quaternion rotation;
 		SM::Vector3 position;
 		SM::Vector3 scale;
+		float time;
 	};
 
 	struct SkeletonPose
 	{
-		std::vector<Skeleton> skeleton;
+		Skeleton skeleton;
 		std::vector<JointPose> jointPose;
 		std::vector<SM::Matrix> globalPose;
 	};
+
 
 }

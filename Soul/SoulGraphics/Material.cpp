@@ -14,6 +14,5 @@ SoulGraphics::Material::~Material()
 
 void SoulGraphics::Material::BindTexture(UINT slot, Type type)
 {
-	_textures[static_cast<int>(type)]->
-		BindTexture(slot);
+	_textures[static_cast<int>(type)]->BindTexture(slot);
 }
