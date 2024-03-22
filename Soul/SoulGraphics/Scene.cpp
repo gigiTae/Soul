@@ -8,6 +8,7 @@
 #include "Material.h"
 #include "Vertex.h"
 #include "SkinnedMeshObject.h"
+#include "Animator.h"
 
 SoulGraphics::Scene::Scene(GraphicsEngine* engine)
 	:_graphicsEngine(engine)
@@ -27,7 +28,7 @@ void SoulGraphics::Scene::Initialize()
 	//info.vertexShader = L"MeshVS.hlsl";
 
 	//AddMeshObject(info);
-	
+
 	// SkinnedMeshObject
 	info.pixelShader = L"SkinningMeshPS.hlsl";
 	info.vertexShader = L"SkinningMeshVS.hlsl";
@@ -55,11 +56,11 @@ void SoulGraphics::Scene::AddMeshObject(const MeshObjectInfomation& info)
 	auto constantBuffer = resMgr->GetConstantBuffer();
 	auto baseColor = resMgr->LoadTexture(info.baseColor);
 	auto normal = resMgr->LoadTexture(info.normalMap);
-	auto shader = resMgr->LoadShader(info.vertexShader, info.pixelShader);
+	auto shader = resMgr->LoadShader(info.vertexShader, info.pixelShader, Vertex::InputLayoutDesc::MeshVertex, Vertex::InputLayoutDesc::MeshVertexArraySize);
 	auto material = std::make_shared<Material>(baseColor, normal);
 	auto meshObj = std::make_shared<MeshObject>(geometryBuffer, constantBuffer, shader, material);
 
-	_renderingObjects.push_back({ std::type_index(typeid(MeshObject)), meshObj});
+	_renderingObjects.push_back({ std::type_index(typeid(MeshObject)), meshObj });
 }
 
 void SoulGraphics::Scene::AddSkinnedMeshObject(const MeshObjectInfomation& info)
@@ -67,15 +68,15 @@ void SoulGraphics::Scene::AddSkinnedMeshObject(const MeshObjectInfomation& info)
 	auto resMgr = _graphicsEngine->GetResourceManager();
 
 	auto geometryBuffer = resMgr->LoadFBX(info.fbx, Vertex::Type::SkinnedVertex);
-	auto aniClip = resMgr->LoadAnimation(info.fbx);
+	auto animator = std::make_shared<Animator>();
 
 	auto constantBuffer = resMgr->GetConstantBuffer();
 	auto baseColor = resMgr->LoadTexture(info.baseColor);
 	auto normal = resMgr->LoadTexture(info.normalMap);
-	auto shader = resMgr->LoadShader(info.vertexShader, info.pixelShader);
+	auto shader = resMgr->LoadShader(info.vertexShader, info.pixelShader, Vertex::InputLayoutDesc::SkinnedVertex, Vertex::InputLayoutDesc::SkinnedVertexArraySize);
 	auto material = std::make_shared<Material>(baseColor, normal);
 
-	auto meshObj = std::make_shared<SkinnedMeshObject>(geometryBuffer, constantBuffer, shader, material, aniClip);
+	auto meshObj = std::make_shared<SkinnedMeshObject>(geometryBuffer, constantBuffer, shader, material, animator);
 
 	_renderingObjects.push_back({ std::type_index(typeid(SkinnedMeshObject)), meshObj });
 }
@@ -84,13 +85,13 @@ void SoulGraphics::Scene::UpdateLight()
 {
 	_lightInfo.lightColor[0] = SM::Vector4(0.f, 0.f, 0.f, 1.f);
 	_lightInfo.lightColor[1] = SM::Vector4(0.f, 1.f, 1.f, 1.f);
-	
+
 	auto cameraPos = _graphicsEngine->GetCamera()->GetPosition();
 	cameraPos.Normalize();
 
 	_lightInfo.lightDirection[0] = SM::Vector4(cameraPos);
 
-	static float d; 
+	static float d;
 
 	d += 0.0001f;
 

@@ -10,18 +10,18 @@
 #include "ConstantBufferStruct.h"
 #include "ConstantBuffer.h"
 #include "Material.h"
-#include "AnimaitonClip.h"
+#include "Animator.h"
 
 SoulGraphics::SkinnedMeshObject::SkinnedMeshObject(std::shared_ptr<GeometryBuffer> gb
 	, std::shared_ptr<ConstantBuffer> cb
 	, std::shared_ptr<Shader> shader
 	, std::shared_ptr<Material> material
-	, std::shared_ptr<AnimaitonClip> aniClip)
+	, std::shared_ptr<Animator> animator)
 	:_geometryBuffer(gb)
 	, _constantBuffer(cb)
 	, _shader(shader)
 	, _material(material)
-	, _animationClip(aniClip)
+	, _animationClip(animator)
 	, _worldTM{}
 	, _viewTM{}
 	, _projTM{}
@@ -33,9 +33,6 @@ SoulGraphics::SkinnedMeshObject::~SkinnedMeshObject()
 void SoulGraphics::SkinnedMeshObject::Render(Device* device, RenderState* state, RenderTarget* renderTarget)
 {
 	auto deviceContext = device->GetDXDeviceContext();
-
-	// 애니메이션 설정q
-	SetAnimationClip();
 
 	// Matrix 상수버퍼 설정
 	_constantBuffer->BindMatrixCB(_worldTM, _viewTM, _projTM);
@@ -82,24 +79,24 @@ std::shared_ptr<SoulGraphics::GeometryBuffer> SoulGraphics::SkinnedMeshObject::G
 	return _geometryBuffer;
 }
 
-void SoulGraphics::SkinnedMeshObject::SetAnimationClip()
-{
-	auto& boneMatix = _constantBuffer->GetBoneMatrix();
-	UINT boneSize = _geometryBuffer->GetBoneSize();
-
-	for (UINT i = 0; i < boneSize; ++i)
-	{
-		auto pose = _animationClip->GetCurrentPose(i);
-
-		auto pos = SM::Matrix::CreateTranslation(pose.position);
-		auto rot = SM::Matrix::CreateFromQuaternion(pose.rotation);
-		auto scale = SM::Matrix::CreateScale(pose.scale);
-
-		SM::Matrix boneWorldMatrix = scale * rot * pos;
-
-		boneWorldMatrix = SM::Matrix::Identity;
-		boneMatix.bone[i] = (_geometryBuffer->GetInverseBindPose(i) * boneWorldMatrix).Transpose();
-	}
-
-	_constantBuffer->BindBoneMatrixCB();
-}
+//void SoulGraphics::SkinnedMeshObject::SetAnimationClip()
+//{
+//	auto& boneMatix = _constantBuffer->GetBoneMatrix();
+//	UINT boneSize = _geometryBuffer->GetBoneSize();
+//
+//	for (UINT i = 0; i < boneSize; ++i)
+//	{
+//		auto pose = _animationClip->GetCurrentPose(i);
+//
+//		auto pos = SM::Matrix::CreateTranslation(pose.position);
+//		auto rot = SM::Matrix::CreateFromQuaternion(pose.rotation);
+//		auto scale = SM::Matrix::CreateScale(pose.scale);
+//
+//		SM::Matrix boneWorldMatrix = scale * rot * pos;
+//
+//		boneWorldMatrix = SM::Matrix::Identity;
+//		boneMatix.bone[i] = (_geometryBuffer->GetInverseBindPose(i) * boneWorldMatrix).Transpose();
+//	}
+//
+//	_constantBuffer->BindBoneMatrixCB();
+//}

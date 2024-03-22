@@ -131,14 +131,17 @@
     <ClInclude Include="SkinnedMeshObject.h">
       <Filter>inc\04.Object</Filter>
     </ClInclude>
+    <ClInclude Include="ResourceLoader.h">
+      <Filter>inc\05.Resource</Filter>
+    </ClInclude>
     <ClInclude Include="AnimaitonClip.h">
       <Filter>inc\07.Animation</Filter>
     </ClInclude>
     <ClInclude Include="AnimationStruct.h">
       <Filter>inc\07.Animation</Filter>
     </ClInclude>
-    <ClInclude Include="ResourceLoader.h">
-      <Filter>inc\05.Resource</Filter>
+    <ClInclude Include="Animator.h">
+      <Filter>inc\07.Animation</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -212,6 +215,9 @@
       <Filter>src\07.Animation</Filter>
     </ClCompile>
     <ClCompile Include="ResourceLoader.cpp">
+      <Filter>src\05.Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="Animator.cpp">
       <Filter>src\07.Animation</Filter>
     </ClCompile>
   </ItemGroup>

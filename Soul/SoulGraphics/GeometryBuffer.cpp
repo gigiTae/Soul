@@ -3,32 +3,21 @@
 #include "ResourceManager.h"
 #include "Device.h"
 
-SoulGraphics::GeometryBuffer::GeometryBuffer(ResourceManager* resMgr)
+
+SoulGraphics::GeometryBuffer::GeometryBuffer(ResourceManager* resMgr, Vertex::Type type)
 	:Resource(resMgr)
 	, _meshSize(0)
-	, _vertexType(Vertex::Type::SkinnedVertex)
+	, _vertexType(type)
 	, _vertexSizes{}
 	, _indexSizes{}
 	, _vertexBuffers{}
 	, _indexBuffers{}
 	, _vertexBufferStride{}
 	, _vertexBufferOffset(0)
-{
-
-}
+{}
 
 SoulGraphics::GeometryBuffer::~GeometryBuffer()
 {}
-
-void SoulGraphics::GeometryBuffer::Load(const aiScene* scene, Vertex::Type type)
-{
-	_vertexType = type;
-
-	_meshSize = scene->mNumMeshes;
-
-	ProcessNode(scene->mRootNode, scene);
-}
-
 
 void SoulGraphics::GeometryBuffer::BindVertexAndIndexBuffer(size_t index)
 {
@@ -38,224 +27,4 @@ void SoulGraphics::GeometryBuffer::BindVertexAndIndexBuffer(size_t index)
 	deviceContext->IASetVertexBuffers(0, 1, &_vertexBuffers[index], &_vertexBufferStride, &_vertexBufferOffset);
 }
 
-SM::Matrix SoulGraphics::GeometryBuffer::GetInverseBindPose(UINT boneIndex)
-{
-	return _skeletonPose.skeleton.joints[boneIndex].inverseBindPose;
-}
-
-void SoulGraphics::GeometryBuffer::ProcessNode(aiNode* node, const aiScene* scene)
-{
-	for (UINT i = 0; i < node->mNumMeshes; i++) {
-		aiMesh* mesh = scene->mMeshes[node->mMeshes[i]];
-		ProcessMesh(mesh, scene);
-	}
-
-	for (UINT i = 0; i < node->mNumChildren; i++) {
-		ProcessNode(node->mChildren[i], scene);
-	}
-}
-
-void SoulGraphics::GeometryBuffer::ProcessMesh(aiMesh* mesh, const aiScene* scene)
-{
-	auto device = GetResourceManager()->GetDevice()->GetDXDevice();
-	std::vector<UINT> indices;
-
-	switch (_vertexType)
-	{
-	case SoulGraphics::Vertex::Type::PosColor:
-		break;
-	case SoulGraphics::Vertex::Type::PosTex:
-		break;
-	case SoulGraphics::Vertex::Type::PosNormal:
-		break;
-	case SoulGraphics::Vertex::Type::MeshVertex:
-	{
-		std::vector<Vertex::MeshVertex> vertices;
-
-		for (UINT i = 0; i < mesh->mNumVertices; i++)
-		{
-			Vertex::MeshVertex v{};
-			v.pos.x = mesh->mVertices[i].x;
-			v.pos.y = mesh->mVertices[i].y;
-			v.pos.z = mesh->mVertices[i].z;
-
-			if (mesh->HasNormals())
-			{
-				v.normal.x = mesh->mNormals[i].x;
-				v.normal.y = mesh->mNormals[i].y;
-				v.normal.z = mesh->mNormals[i].z;
-			}
-
-			if (mesh->mTextureCoords[0])
-			{
-				v.tex.x = mesh->mTextureCoords[0][i].x;
-				v.tex.y = mesh->mTextureCoords[0][i].y;
-			}
-
-			if (mesh->HasTangentsAndBitangents())
-			{
-				v.tangent.x = mesh->mTangents[i].x;
-				v.tangent.y = mesh->mTangents[i].y;
-				v.tangent.z = mesh->mTangents[i].z;
-			}
-
-			vertices.push_back(v);
-		}
-
-		for (UINT i = 0; i < mesh->mNumFaces; i++)
-		{
-			aiFace face = mesh->mFaces[i];
-
-			for (UINT j = 0; j < face.mNumIndices; j++)
-			{
-				indices.push_back(face.mIndices[j]);
-			}
-		}
-
-		D3D11_BUFFER_DESC vbd;
-		vbd.Usage = D3D11_USAGE_IMMUTABLE;
-		vbd.ByteWidth = static_cast<UINT>(sizeof(Vertex::MeshVertex) * vertices.size());
-		vbd.BindFlags = D3D11_BIND_VERTEX_BUFFER;
-		vbd.CPUAccessFlags = 0;
-		vbd.MiscFlags = 0;
-
-		D3D11_SUBRESOURCE_DATA initData;
-		initData.pSysMem = &vertices[0];
-
-		ID3D11Buffer* vertexBuffer = nullptr;
-		ID3D11Buffer* indexBuffer = nullptr;
-
-		HR_T(device->CreateBuffer(&vbd, &initData, &vertexBuffer));
-
-		D3D11_BUFFER_DESC ibd;
-		ibd.Usage = D3D11_USAGE_IMMUTABLE;
-		ibd.ByteWidth = static_cast<UINT>(sizeof(UINT) * indices.size());
-		ibd.BindFlags = D3D11_BIND_INDEX_BUFFER;
-		ibd.CPUAccessFlags = 0;
-		ibd.MiscFlags = 0;
-
-		initData.pSysMem = &indices[0];
-
-		HR_T(device->CreateBuffer(&ibd, &initData, &indexBuffer));
-
-		_vertexBufferStride = sizeof(Vertex::MeshVertex);
-		_vertexSizes.push_back(vertices.size());
-		_indexSizes.push_back(indices.size());
-		_vertexBuffers.push_back(vertexBuffer);
-		_indexBuffers.push_back(indexBuffer);
-	}
-	break;
-	case SoulGraphics::Vertex::Type::SkinnedVertex:
-	{
-		std::vector<Vertex::SkinnedVertex> vertices;
-
-		for (UINT i = 0; i < mesh->mNumVertices; i++)
-		{
-			Vertex::SkinnedVertex v{};
-			v.pos.x = mesh->mVertices[i].x;
-			v.pos.y = mesh->mVertices[i].y;
-			v.pos.z = mesh->mVertices[i].z;
-
-			if (mesh->HasNormals())
-			{
-				v.normal.x = mesh->mNormals[i].x;
-				v.normal.y = mesh->mNormals[i].y;
-				v.normal.z = mesh->mNormals[i].z;
-			}
-
-			if (mesh->mTextureCoords[0])
-			{
-				v.tex.x = mesh->mTextureCoords[0][i].x;
-				v.tex.y = mesh->mTextureCoords[0][i].y;
-			}
-
-			if (mesh->HasTangentsAndBitangents())
-			{
-				v.tangent.x = mesh->mTangents[i].x;
-				v.tangent.y = mesh->mTangents[i].y;
-				v.tangent.z = mesh->mTangents[i].z;
-			}
-
-			vertices.push_back(v);
-		}
-
-		for (UINT i = 0; i < mesh->mNumFaces; i++)
-		{
-			aiFace face = mesh->mFaces[i];
-
-			for (UINT j = 0; j < face.mNumIndices; j++)
-			{
-				indices.push_back(face.mIndices[j]);
-			}
-		}
-
-		UINT meshBoneCount = mesh->mNumBones;
-		UINT boneIndexCounter = 0;
-		auto& skeleton = _skeletonPose.skeleton;
-		skeleton.jointCount = meshBoneCount;
-		skeleton.joints.resize(meshBoneCount);
-
-		std::map<std::string, int> boneMapping;
-		for (UINT i = 0; i < meshBoneCount; ++i)
-		{
-			aiBone* bone = mesh->mBones[i];
-			std::string boneName = bone->mName.C_Str();
-			UINT boneIndex = 0;
-			if (boneMapping.find(boneName) == boneMapping.end())
-			{
-				boneIndex = boneIndexCounter;
-				boneIndexCounter++;
-				skeleton.joints[boneIndex].name = boneName;
-				skeleton.joints[boneIndex].inverseBindPose = SM::Matrix(&bone->mOffsetMatrix.a1).Transpose();
-				boneMapping[boneName] = boneIndex;
-			}
-			else boneIndex = boneMapping[boneName];
-
-			for (UINT j = 0; j < bone->mNumWeights; ++j)
-			{
-				UINT vertexID = bone->mWeights[j].mVertexId;
-				float weight = bone->mWeights[j].mWeight;
-				vertices[vertexID].AddBoneDate(boneIndex, weight);
-			}
-		}
-
-		D3D11_BUFFER_DESC vbd;
-		vbd.Usage = D3D11_USAGE_IMMUTABLE;
-		vbd.ByteWidth = static_cast<UINT>(sizeof(Vertex::SkinnedVertex) * vertices.size());
-		vbd.BindFlags = D3D11_BIND_VERTEX_BUFFER;
-		vbd.CPUAccessFlags = 0;
-		vbd.MiscFlags = 0;
-
-		D3D11_SUBRESOURCE_DATA initData;
-		initData.pSysMem = &vertices[0];
-
-		ID3D11Buffer* vertexBuffer = nullptr;
-		ID3D11Buffer* indexBuffer = nullptr;
-
-		HR_T(device->CreateBuffer(&vbd, &initData, &vertexBuffer));
-
-		D3D11_BUFFER_DESC ibd;
-		ibd.Usage = D3D11_USAGE_IMMUTABLE;
-		ibd.ByteWidth = static_cast<UINT>(sizeof(UINT) * indices.size());
-		ibd.BindFlags = D3D11_BIND_INDEX_BUFFER;
-		ibd.CPUAccessFlags = 0;
-		ibd.MiscFlags = 0;
-
-		initData.pSysMem = &indices[0];
-
-		HR_T(device->CreateBuffer(&ibd, &initData, &indexBuffer));
-
-		_vertexBufferStride = sizeof(Vertex::SkinnedVertex);
-		_vertexSizes.push_back(vertices.size());
-		_indexSizes.push_back(indices.size());
-		_vertexBuffers.push_back(vertexBuffer);
-		_indexBuffers.push_back(indexBuffer);
-	}
-	break;
-	default:
-		break;
-	}
-
-
-}
 

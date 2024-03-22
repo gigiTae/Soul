@@ -1,19 +1,19 @@
 #include "SoulGraphicsPCH.h"
 #include "Vertex.h"
 
-const D3D11_INPUT_ELEMENT_DESC SoulGraphics::Vertex::InputLayoutDesc::posColor[2] =
+const D3D11_INPUT_ELEMENT_DESC SoulGraphics::Vertex::InputLayoutDesc::PosColor[2] =
 {
 	{"POSITION",	0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0},
 	{"COLOR",		0, DXGI_FORMAT_R32G32B32A32_FLOAT, 0, 12, D3D11_INPUT_PER_VERTEX_DATA, 0}
 };
 
-const D3D11_INPUT_ELEMENT_DESC SoulGraphics::Vertex::InputLayoutDesc::posTex[2] =
+const D3D11_INPUT_ELEMENT_DESC SoulGraphics::Vertex::InputLayoutDesc::PosTex[2] =
 {
 	{ "POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0 },
 	{ "TEXCOORD", 0, DXGI_FORMAT_R32G32_FLOAT, 0, 12, D3D11_INPUT_PER_VERTEX_DATA, 0 },
 };
 
-const D3D11_INPUT_ELEMENT_DESC SoulGraphics::Vertex::InputLayoutDesc::meshVertex[4] =
+const D3D11_INPUT_ELEMENT_DESC SoulGraphics::Vertex::InputLayoutDesc::MeshVertex[4] =
 {
 	{"POSITION",	0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0},
 	{"NORMAL",		0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 12, D3D11_INPUT_PER_VERTEX_DATA, 0},
@@ -21,7 +21,7 @@ const D3D11_INPUT_ELEMENT_DESC SoulGraphics::Vertex::InputLayoutDesc::meshVertex
 	{"TANGENT",		0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 32, D3D11_INPUT_PER_VERTEX_DATA, 0 }
 };
 
-const D3D11_INPUT_ELEMENT_DESC SoulGraphics::Vertex::InputLayoutDesc::skinnedVertex[6] =
+const D3D11_INPUT_ELEMENT_DESC SoulGraphics::Vertex::InputLayoutDesc::SkinnedVertex[6] =
 {
 	{"POSITION",	0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0},
 	{"NORMAL",		0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 12, D3D11_INPUT_PER_VERTEX_DATA, 0},

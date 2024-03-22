@@ -143,6 +143,7 @@
   <ItemGroup>
     <ClInclude Include="AnimaitonClip.h" />
     <ClInclude Include="AnimationStruct.h" />
+    <ClInclude Include="Animator.h" />
     <ClInclude Include="Box.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="ConstantBuffer.h" />
@@ -172,6 +173,7 @@
   <ItemGroup>
     <ClCompile Include="AnimaitonClip.cpp" />
     <ClCompile Include="AnimationStruct.cpp" />
+    <ClCompile Include="Animator.cpp" />
     <ClCompile Include="Box.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="ConstantBuffer.cpp" />

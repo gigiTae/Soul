@@ -109,7 +109,7 @@ void SoulGraphics::Box::Initialize(Device* device)
  	ID3D10Blob* vertexShaderBuffer = nullptr;	// 정점 셰이더 코드가 저장될 버퍼.
 	HR_T(CompileShaderFromFile(L"BasicVS.hlsl", "main", "vs_4_0", &vertexShaderBuffer));
 
-	HR_T(device->GetDXDevice()->CreateInputLayout(Vertex::InputLayoutDesc::posTex, ARRAYSIZE(Vertex::InputLayoutDesc::posTex),
+	HR_T(device->GetDXDevice()->CreateInputLayout(Vertex::InputLayoutDesc::PosTex, ARRAYSIZE(Vertex::InputLayoutDesc::PosTex),
 		vertexShaderBuffer->GetBufferPointer(), vertexShaderBuffer->GetBufferSize(), &_inputLayout));
 
 	HR_T(device->GetDXDevice()->CreateVertexShader(vertexShaderBuffer->GetBufferPointer(),

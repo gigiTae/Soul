@@ -53,9 +53,14 @@ namespace SoulGraphics::Vertex
 	class InputLayoutDesc
 	{
 	public:
-		static const D3D11_INPUT_ELEMENT_DESC posColor[2];
-		static const D3D11_INPUT_ELEMENT_DESC posTex[2];
-		static const D3D11_INPUT_ELEMENT_DESC meshVertex[4];
-		static const D3D11_INPUT_ELEMENT_DESC skinnedVertex[6];
+		static constexpr UINT PosColorArraySize = 2;
+		static constexpr UINT PosTexArraySize = 2;
+		static constexpr UINT MeshVertexArraySize = 4;
+		static constexpr UINT SkinnedVertexArraySize = 6;
+
+		static const D3D11_INPUT_ELEMENT_DESC PosColor[PosColorArraySize];
+		static const D3D11_INPUT_ELEMENT_DESC PosTex[PosTexArraySize];
+		static const D3D11_INPUT_ELEMENT_DESC MeshVertex[MeshVertexArraySize];
+		static const D3D11_INPUT_ELEMENT_DESC SkinnedVertex[SkinnedVertexArraySize];
 	};
 }

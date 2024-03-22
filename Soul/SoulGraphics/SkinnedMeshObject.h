@@ -6,7 +6,7 @@ namespace SoulGraphics
 	class Shader;
 	class ConstantBuffer;
 	class Material;
-	class AnimaitonClip;
+	class Animator;
 
 	class SkinnedMeshObject : public IObject
 	{
@@ -15,7 +15,7 @@ namespace SoulGraphics
 			std::shared_ptr<ConstantBuffer> cb,
 			std::shared_ptr<Shader> shader,
 			std::shared_ptr<Material> material,
-			std::shared_ptr<AnimaitonClip> aniClip);
+			std::shared_ptr<Animator> animator);
 		~SkinnedMeshObject();
 
 		void Render(Device* device,
@@ -29,9 +29,6 @@ namespace SoulGraphics
 		std::shared_ptr<GeometryBuffer> GetGeometryBuffer() override;
 
 	private:
-		void SetAnimationClip();
-
-	private:
 		SM::Matrix _worldTM;
 		SM::Matrix _viewTM;
 		SM::Matrix _projTM;
@@ -40,7 +37,6 @@ namespace SoulGraphics
 		std::shared_ptr<GeometryBuffer> _geometryBuffer;
 		std::shared_ptr<Shader> _shader;
 		std::shared_ptr<Material> _material;
-
-		std::shared_ptr<AnimaitonClip> _animationClip;
+		std::shared_ptr<Animator> _animationClip;
 	};
 }

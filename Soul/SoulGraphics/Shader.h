@@ -7,10 +7,8 @@ namespace SoulGraphics
 	class Shader : public Resource
 	{
 	public:
-		Shader(ResourceManager* resMger);
+		Shader(ResourceManager* resMger, ID3D11VertexShader* vs, ID3D11PixelShader* ps, ID3D11InputLayout* inputlayout);
 		~Shader();
-
-		void LoadShader(const std::wstring& vsPath, const std::wstring& psPath);
 
 		void BindShader();
 

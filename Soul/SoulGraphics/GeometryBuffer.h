@@ -1,18 +1,21 @@
 #pragma once
 #include "Resource.h"
 #include "Vertex.h"
+#include "Device.h"
+#include "ResourceManager.h"
 
 namespace SoulGraphics
 {
+	class ResourceLoader;
+
 	class GeometryBuffer : public Resource
 	{
 	public:
+		friend class ResourceLoader;
 
 	public:
-		GeometryBuffer(ResourceManager* resMgr);
+		GeometryBuffer(ResourceManager* resMgr, Vertex::Type type);
 		~GeometryBuffer();
-
-		void Load(const aiScene* scene, Vertex::Type type);
 
 		ID3D11Buffer* GetVertexBuffer(size_t index) { return _vertexBuffers[index]; }
 		ID3D11Buffer* GetIndexBuffer(size_t index) { return _indexBuffers[index]; }
@@ -23,13 +26,8 @@ namespace SoulGraphics
 
 		void BindVertexAndIndexBuffer(size_t index);
 
-		SM::Matrix GetInverseBindPose(UINT boneIndex);
-
-		UINT GetBoneSize()const { return _skeletonPose.skeleton.jointCount; }
-
-	private:
-		void ProcessNode(aiNode* node, const aiScene* scene);
-		void ProcessMesh(aiMesh* mesh, const aiScene* scene);
+		template <typename VertexType>
+		void CreateVertexAndIndex(const std::vector<VertexType>& vertices, const std::vector<UINT> indices);
 
 	private:
 		std::vector<UINT> _vertexSizes;
@@ -41,8 +39,45 @@ namespace SoulGraphics
 		UINT _vertexBufferStride;
 		UINT _vertexBufferOffset;
 
-		SkeletonPose _skeletonPose;
-
 		Vertex::Type _vertexType;
 	};
+
+	template <typename VertexType>
+	void SoulGraphics::GeometryBuffer::CreateVertexAndIndex(const std::vector<VertexType>& vertices, const std::vector<UINT> indices)
+	{
+		auto dxDevice = GetResourceManager()->GetDevice()->GetDXDevice();
+
+		D3D11_BUFFER_DESC vbd;
+		vbd.Usage = D3D11_USAGE_IMMUTABLE;
+		vbd.ByteWidth = static_cast<UINT>(sizeof(VertexType) * vertices.size());
+		vbd.BindFlags = D3D11_BIND_VERTEX_BUFFER;
+		vbd.CPUAccessFlags = 0;
+		vbd.MiscFlags = 0;
+
+		D3D11_SUBRESOURCE_DATA initData;
+		initData.pSysMem = &vertices[0];
+
+		ID3D11Buffer* vertexBuffer = nullptr;
+		ID3D11Buffer* indexBuffer = nullptr;
+
+		HR_T(dxDevice->CreateBuffer(&vbd, &initData, &vertexBuffer));
+
+		D3D11_BUFFER_DESC ibd;
+		ibd.Usage = D3D11_USAGE_IMMUTABLE;
+		ibd.ByteWidth = static_cast<UINT>(sizeof(UINT) * indices.size());
+		ibd.BindFlags = D3D11_BIND_INDEX_BUFFER;
+		ibd.CPUAccessFlags = 0;
+		ibd.MiscFlags = 0;
+
+		initData.pSysMem = &indices[0];
+
+		HR_T(dxDevice->CreateBuffer(&ibd, &initData, &indexBuffer));
+
+		_vertexBufferStride = sizeof(VertexType);
+		_vertexSizes.push_back(vertices.size());
+		_indexSizes.push_back(indices.size());
+		_vertexBuffers.push_back(vertexBuffer);
+		_indexBuffers.push_back(indexBuffer);
+	}
+
 }
