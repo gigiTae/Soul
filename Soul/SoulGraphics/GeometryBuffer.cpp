@@ -32,7 +32,7 @@ void SoulGraphics::GeometryBuffer::Load(const aiScene* scene, Vertex::Type type)
 
 void SoulGraphics::GeometryBuffer::BindVertexAndIndexBuffer(size_t index)
 {
-	auto deviceContext = GetResourceManager()->GetDevice()->GetDeviceContext();
+	auto deviceContext = GetResourceManager()->GetDevice()->GetDXDeviceContext();
 
 	deviceContext->IASetIndexBuffer(_indexBuffers[index], DXGI_FORMAT_R32_UINT, 0);
 	deviceContext->IASetVertexBuffers(0, 1, &_vertexBuffers[index], &_vertexBufferStride, &_vertexBufferOffset);
@@ -45,7 +45,6 @@ SM::Matrix SoulGraphics::GeometryBuffer::GetInverseBindPose(UINT boneIndex)
 
 void SoulGraphics::GeometryBuffer::ProcessNode(aiNode* node, const aiScene* scene)
 {
-
 	for (UINT i = 0; i < node->mNumMeshes; i++) {
 		aiMesh* mesh = scene->mMeshes[node->mMeshes[i]];
 		ProcessMesh(mesh, scene);
@@ -58,7 +57,7 @@ void SoulGraphics::GeometryBuffer::ProcessNode(aiNode* node, const aiScene* scen
 
 void SoulGraphics::GeometryBuffer::ProcessMesh(aiMesh* mesh, const aiScene* scene)
 {
-	auto device = GetResourceManager()->GetDevice()->GetDevice();
+	auto device = GetResourceManager()->GetDevice()->GetDXDevice();
 	std::vector<UINT> indices;
 
 	switch (_vertexType)

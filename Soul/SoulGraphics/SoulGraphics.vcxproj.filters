@@ -137,6 +137,9 @@
     <ClInclude Include="AnimationStruct.h">
       <Filter>inc\07.Animation</Filter>
     </ClInclude>
+    <ClInclude Include="ResourceLoader.h">
+      <Filter>inc\05.Resource</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GraphicsEngine.cpp">
@@ -206,6 +209,9 @@
       <Filter>src\07.Animation</Filter>
     </ClCompile>
     <ClCompile Include="AnimaitonClip.cpp">
+      <Filter>src\07.Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="ResourceLoader.cpp">
       <Filter>src\07.Animation</Filter>
     </ClCompile>
   </ItemGroup>

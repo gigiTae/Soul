@@ -15,7 +15,7 @@ SoulGraphics::Shader::~Shader()
 
 void SoulGraphics::Shader::LoadShader(const std::wstring& vsPath, const std::wstring& psPath)
 {
-	auto dxDevice = GetResourceManager()->GetDevice()->GetDevice();
+	auto dxDevice = GetResourceManager()->GetDevice()->GetDXDevice();
 
 	ID3D10Blob* vertexShaderBuffer = nullptr;	// 정점 셰이더 코드가 저장될 버퍼.
 	HR_T(CompileShaderFromFile(vsPath.c_str(), "main", "vs_5_0", &vertexShaderBuffer));
@@ -45,7 +45,7 @@ void SoulGraphics::Shader::BindShader()
 {
 	assert(_inputLayout || _pixelShader || _vertexShader);
 
-	auto deviceContext = GetResourceManager()->GetDevice()->GetDeviceContext();
+	auto deviceContext = GetResourceManager()->GetDevice()->GetDXDeviceContext();
 
 	deviceContext->IASetInputLayout(_inputLayout);
 	deviceContext->VSSetShader(_vertexShader, nullptr, 0);

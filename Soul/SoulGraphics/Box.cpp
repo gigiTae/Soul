@@ -30,7 +30,7 @@ SoulGraphics::Box::~Box()
 
 void SoulGraphics::Box::Render(Device* device, RenderState* state, RenderTarget* renderTarget)
 {
-	auto deviceContext = device->GetDeviceContext();
+	auto deviceContext = device->GetDXDeviceContext();
 	// 상수버퍼 
 	CB::Matrix cb;
 	cb.world = DirectX::XMMatrixTranspose(_worldTM);
@@ -101,7 +101,7 @@ void SoulGraphics::Box::Initialize(Device* device)
 	bd.CPUAccessFlags = 0;
 	D3D11_SUBRESOURCE_DATA vbData = {};
 	vbData.pSysMem = vertices; // 배열 데이터 할당.
-	HR_T(device->GetDevice()->CreateBuffer(&bd, &vbData, &_vertexBuffer));
+	HR_T(device->GetDXDevice()->CreateBuffer(&bd, &vbData, &_vertexBuffer));
 
 	_vertexBufferStride = sizeof(Vertex::PosTex);
 	_vertexBufferOffset = 0;
@@ -109,10 +109,10 @@ void SoulGraphics::Box::Initialize(Device* device)
  	ID3D10Blob* vertexShaderBuffer = nullptr;	// 정점 셰이더 코드가 저장될 버퍼.
 	HR_T(CompileShaderFromFile(L"BasicVS.hlsl", "main", "vs_4_0", &vertexShaderBuffer));
 
-	HR_T(device->GetDevice()->CreateInputLayout(Vertex::InputLayoutDesc::posTex, ARRAYSIZE(Vertex::InputLayoutDesc::posTex),
+	HR_T(device->GetDXDevice()->CreateInputLayout(Vertex::InputLayoutDesc::posTex, ARRAYSIZE(Vertex::InputLayoutDesc::posTex),
 		vertexShaderBuffer->GetBufferPointer(), vertexShaderBuffer->GetBufferSize(), &_inputLayout));
 
-	HR_T(device->GetDevice()->CreateVertexShader(vertexShaderBuffer->GetBufferPointer(),
+	HR_T(device->GetDXDevice()->CreateVertexShader(vertexShaderBuffer->GetBufferPointer(),
 		vertexShaderBuffer->GetBufferSize(), NULL, &_vertexShader));
 	
 	SAFE_RELEASE(vertexShaderBuffer);
@@ -136,11 +136,11 @@ void SoulGraphics::Box::Initialize(Device* device)
 
 	D3D11_SUBRESOURCE_DATA ibData = {};
 	ibData.pSysMem = indices;
-	HR_T(device->GetDevice()->CreateBuffer(&bd, &ibData, &_indexBuffer));
+	HR_T(device->GetDXDevice()->CreateBuffer(&bd, &ibData, &_indexBuffer));
 
 	ID3D10Blob* pixelShaderBuffer = nullptr;	// 픽셀 셰이더 코드가 저장될 버퍼.
 	HR_T(CompileShaderFromFile(L"BasicPS.hlsl", "main", "ps_5_0", &pixelShaderBuffer));
-	HR_T(device->GetDevice()->CreatePixelShader(
+	HR_T(device->GetDXDevice()->CreatePixelShader(
 		pixelShaderBuffer->GetBufferPointer(),
 		pixelShaderBuffer->GetBufferSize(), NULL, &_pixelShader));
 	
@@ -152,10 +152,10 @@ void SoulGraphics::Box::Initialize(Device* device)
 	bd.ByteWidth = sizeof(CB::Matrix);
 	bd.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
 	bd.CPUAccessFlags = 0;
-	HR_T(device->GetDevice()->CreateBuffer(&bd, nullptr, &_constantBuffer));
+	HR_T(device->GetDXDevice()->CreateBuffer(&bd, nullptr, &_constantBuffer));
 
 	// 텍스쳐 로드 
-	HR_T(DirectX::CreateDDSTextureFromFile(device->GetDevice(), L"seafloor.dds", nullptr, &_textureRV));
+	HR_T(DirectX::CreateDDSTextureFromFile(device->GetDXDevice(), L"seafloor.dds", nullptr, &_textureRV));
 	 
 	D3D11_SAMPLER_DESC sampDesc = {};
 	sampDesc.Filter = D3D11_FILTER_MIN_MAG_MIP_LINEAR;
@@ -165,7 +165,7 @@ void SoulGraphics::Box::Initialize(Device* device)
 	sampDesc.ComparisonFunc = D3D11_COMPARISON_NEVER;
 	sampDesc.MinLOD = 0;
 	sampDesc.MaxLOD = D3D11_FLOAT32_MAX;
-	HR_T(device->GetDevice()->CreateSamplerState(&sampDesc, &_samepleState));
+	HR_T(device->GetDXDevice()->CreateSamplerState(&sampDesc, &_samepleState));
 
 }
 

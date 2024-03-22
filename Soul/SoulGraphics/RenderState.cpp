@@ -24,7 +24,7 @@ void SoulGraphics::RenderState::Initialize(const std::shared_ptr<Device>& device
 	solidDesc.CullMode = D3D11_CULL_BACK;
 	solidDesc.FrontCounterClockwise = false;
 	solidDesc.DepthClipEnable = true;
-	HR_T(device->GetDevice()->CreateRasterizerState(&solidDesc,
+	HR_T(device->GetDXDevice()->CreateRasterizerState(&solidDesc,
 		&_rasterizerStates[static_cast<size_t>(Rasterizer::Solid)]));
 
 	// ¿ÍÀÌ¾î
@@ -34,7 +34,7 @@ void SoulGraphics::RenderState::Initialize(const std::shared_ptr<Device>& device
 	wireframeDesc.CullMode = D3D11_CULL_NONE;
 	wireframeDesc.FrontCounterClockwise = false;
 	wireframeDesc.DepthClipEnable = true;
-	HR_T(device->GetDevice()->CreateRasterizerState(&wireframeDesc,
+	HR_T(device->GetDXDevice()->CreateRasterizerState(&wireframeDesc,
 		&_rasterizerStates[static_cast<size_t>(Rasterizer::Wireframe)]));
 
 	// SamplerState
@@ -48,7 +48,7 @@ void SoulGraphics::RenderState::Initialize(const std::shared_ptr<Device>& device
 	sampDesc.ComparisonFunc = D3D11_COMPARISON_NEVER;
 	sampDesc.MinLOD = 0;
 	sampDesc.MaxLOD = D3D11_FLOAT32_MAX;
-	HR_T(device->GetDevice()->CreateSamplerState(&sampDesc,
+	HR_T(device->GetDXDevice()->CreateSamplerState(&sampDesc,
 		&_samplerStates[static_cast<size_t>(Sampler::LINEAR)]));
 }
 
@@ -80,10 +80,10 @@ ID3D11SamplerState** SoulGraphics::RenderState::GetSamplerState(Sampler state)
 
 void SoulGraphics::RenderState::BindRasterizerState(Rasterizer stata) const
 {
-	_device->GetDeviceContext()->RSSetState(_rasterizerStates[static_cast<size_t>(stata)]);
+	_device->GetDXDeviceContext()->RSSetState(_rasterizerStates[static_cast<size_t>(stata)]);
 }
 
 void SoulGraphics::RenderState::BindSamplerState(UINT slot , Sampler state)
 {
-	_device->GetDeviceContext()->PSSetSamplers(slot, 1, &_samplerStates[static_cast<size_t>(state)]);
+	_device->GetDXDeviceContext()->PSSetSamplers(slot, 1, &_samplerStates[static_cast<size_t>(state)]);
 }

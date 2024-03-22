@@ -8,10 +8,8 @@ namespace SoulGraphics
 	class Texture : public Resource
 	{
 	public:
-		Texture(ResourceManager* resMgr);
+		Texture(ResourceManager* resMgr, ID3D11ShaderResourceView* view);
 		~Texture();
-
-		void LoadTexture(const std::filesystem::path& path);
 
 		ID3D11ShaderResourceView* GetShaderResourceView()const { return _shaderResourceView; }
 	

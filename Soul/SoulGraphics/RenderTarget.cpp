@@ -18,8 +18,8 @@ void SoulGraphics::RenderTarget::Initialize(const std::shared_ptr<Device>& devic
 	ID3D11Texture2D* backBufferTexture = nullptr;
 
 	auto swapChain = device->GetSwapChain();
-	auto dxDevice = device->GetDevice();
-	auto dxDeviceContext = device->GetDeviceContext();
+	auto dxDevice = device->GetDXDevice();
+	auto dxDeviceContext = device->GetDXDeviceContext();
 
 	HR_T(swapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), (void**)&backBufferTexture));
 	HR_T(dxDevice->CreateRenderTargetView(backBufferTexture, NULL,
@@ -82,12 +82,12 @@ void SoulGraphics::RenderTarget::Clear(RenderTargetView type)
 {
 	constexpr SM::Color color{ 0.f,0.25f,0.f,1.f };
 
-	_device->GetDeviceContext()->ClearRenderTargetView(_renderTargetViews[(size_t)type], color);
-	_device->GetDeviceContext()->ClearDepthStencilView(_depthStencilView, D3D11_CLEAR_DEPTH, 1.f, 0.f);
+	_device->GetDXDeviceContext()->ClearRenderTargetView(_renderTargetViews[(size_t)type], color);
+	_device->GetDXDeviceContext()->ClearDepthStencilView(_depthStencilView, D3D11_CLEAR_DEPTH, 1.f, 0.f);
 }
 
 void SoulGraphics::RenderTarget::SetRenderTargetView(RenderTargetView type)
 {
-	_device->GetDeviceContext()->OMSetRenderTargets(1, &_renderTargetViews[static_cast<int>(type)], _depthStencilView);
+	_device->GetDXDeviceContext()->OMSetRenderTargets(1, &_renderTargetViews[static_cast<int>(type)], _depthStencilView);
 }
 

@@ -80,11 +80,11 @@ void SoulGraphics::GraphicsEngine::UpdateCamera(DirectX::SimpleMath::Matrix tm)
 
 ID3D11Device* SoulGraphics::GraphicsEngine::GetDevice()
 {
-	return _device->GetDevice();
+	return _device->GetDXDevice();
 }
 
 ID3D11DeviceContext* SoulGraphics::GraphicsEngine::GetDeviceContext()
 {
-	return _device->GetDeviceContext();
+	return _device->GetDXDeviceContext();
 }
 

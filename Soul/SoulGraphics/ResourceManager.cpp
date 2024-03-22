@@ -101,7 +101,8 @@ std::shared_ptr<SoulGraphics::AnimaitonClip> SoulGraphics::ResourceManager::Load
 
 	auto iter = _animationClipMap.find(path);
 
-	iter->second->Load(scene->mAnimations[0]);
+	//iter->second->Load(scene);
+	iter->second->LoadAnimation(scene->mAnimations[0]);
 
 	return iter->second;
 }

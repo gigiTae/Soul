@@ -10,7 +10,13 @@ SoulGraphics::AnimaitonClip::~AnimaitonClip()
 
 }
 
-void SoulGraphics::AnimaitonClip::Load(const aiAnimation* animation)
+void SoulGraphics::AnimaitonClip::Load(const aiScene* scene)
+{
+	ProcessNode(scene->mRootNode, scene);
+}
+
+
+void SoulGraphics::AnimaitonClip::LoadAnimation(const aiAnimation* animation)
 {
 	UINT channel = animation->mNumChannels;
 
@@ -21,6 +27,8 @@ void SoulGraphics::AnimaitonClip::Load(const aiAnimation* animation)
 		const aiNodeAnim* nodeAnim = animation->mChannels[i];
 
 		auto numClip = nodeAnim->mNumPositionKeys;
+
+		auto n = nodeAnim->mNodeName;
 
 		assert(!(nodeAnim->mNumPositionKeys == nodeAnim->mNumRotationKeys == nodeAnim->mNumScalingKeys));
 
@@ -39,5 +47,16 @@ void SoulGraphics::AnimaitonClip::Load(const aiAnimation* animation)
 			jointPose.rotation = { rot.x, rot.y, rot.z, rot.w };
 			jointPose.scale = { scale.x, scale.y, scale.z };
 		}
+	}
+}
+
+void SoulGraphics::AnimaitonClip::ProcessNode(const aiNode* node, const aiScene* scene)
+{
+	for (UINT i = 0; i < node->mNumMeshes; i++) {
+		aiMesh* mesh = scene->mMeshes[node->mMeshes[i]];
+	}
+
+	for (UINT i = 0; i < node->mNumChildren; i++) {
+		ProcessNode(node->mChildren[i], scene);
 	}
 }

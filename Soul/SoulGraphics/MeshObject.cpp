@@ -27,7 +27,7 @@ SoulGraphics::MeshObject::~MeshObject()
 
 void SoulGraphics::MeshObject::Render(Device* device, RenderState* state, RenderTarget* renderTarget)
 {
-	auto deviceContext = device->GetDeviceContext();
+	auto deviceContext = device->GetDXDeviceContext();
 
 	// Matrix 상수버퍼 설정
 	_constantBuffer->BindMatrixCB(_worldTM, _viewTM, _projTM);

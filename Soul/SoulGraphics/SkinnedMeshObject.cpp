@@ -32,7 +32,7 @@ SoulGraphics::SkinnedMeshObject::~SkinnedMeshObject()
 
 void SoulGraphics::SkinnedMeshObject::Render(Device* device, RenderState* state, RenderTarget* renderTarget)
 {
-	auto deviceContext = device->GetDeviceContext();
+	auto deviceContext = device->GetDXDeviceContext();
 
 	// 애니메이션 설정q
 	SetAnimationClip();
@@ -50,7 +50,7 @@ void SoulGraphics::SkinnedMeshObject::Render(Device* device, RenderState* state,
 	{
 		// 정점, 인덱스 버퍼 생성
 		_geometryBuffer->BindVertexAndIndexBuffer(i);
-
+		 
 		deviceContext->DrawIndexed(_geometryBuffer->GetIndexSize(i), 0, 0);
 	}
 }
@@ -96,6 +96,8 @@ void SoulGraphics::SkinnedMeshObject::SetAnimationClip()
 		auto scale = SM::Matrix::CreateScale(pose.scale);
 
 		SM::Matrix boneWorldMatrix = scale * rot * pos;
+
+		boneWorldMatrix = SM::Matrix::Identity;
 		boneMatix.bone[i] = (_geometryBuffer->GetInverseBindPose(i) * boneWorldMatrix).Transpose();
 	}
 

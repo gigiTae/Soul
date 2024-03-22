@@ -15,7 +15,7 @@ SoulGraphics::ConstantBuffer::~ConstantBuffer()
 void SoulGraphics::ConstantBuffer::Initialize()
 {
 	auto resMgr = GetResourceManager();
-	auto device = resMgr->GetDevice()->GetDevice();
+	auto device = resMgr->GetDevice()->GetDXDevice();
 
 	// Matrix Buffer
 	D3D11_BUFFER_DESC bd = {};
@@ -44,7 +44,7 @@ void SoulGraphics::ConstantBuffer::Initialize()
 
 void SoulGraphics::ConstantBuffer::BindMatrixCB(const SM::Matrix& world, const SM::Matrix& view, const SM::Matrix& proj) const
 {
-	auto deviceContext = GetResourceManager()->GetDevice()->GetDeviceContext();
+	auto deviceContext = GetResourceManager()->GetDevice()->GetDXDeviceContext();
 
 	CB::Matrix cb;
 	cb.world = DirectX::XMMatrixTranspose(world);
@@ -60,7 +60,7 @@ void SoulGraphics::ConstantBuffer::BindMatrixCB(const SM::Matrix& world, const S
 
 void SoulGraphics::ConstantBuffer::BindLightCB(const CB::Light& light) const
 {
-	auto deviceContext = GetResourceManager()->GetDevice()->GetDeviceContext();
+	auto deviceContext = GetResourceManager()->GetDevice()->GetDXDeviceContext();
 
 	deviceContext->UpdateSubresource(_constantBuffers[static_cast<size_t>(Type::Light)],
 		0, nullptr, &light, 0, 0);
@@ -70,7 +70,7 @@ void SoulGraphics::ConstantBuffer::BindLightCB(const CB::Light& light) const
 
 void SoulGraphics::ConstantBuffer::BindBoneMatrixCB() const
 {
-	auto deviceContext = GetResourceManager()->GetDevice()->GetDeviceContext();
+	auto deviceContext = GetResourceManager()->GetDevice()->GetDXDeviceContext();
 
 	deviceContext->UpdateSubresource(_constantBuffers[static_cast<size_t>(Type::BoneMatrix)],
 		0, nullptr, &_boneMatrix, 0, 0);
