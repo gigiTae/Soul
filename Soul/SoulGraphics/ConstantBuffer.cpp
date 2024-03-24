@@ -68,12 +68,12 @@ void SoulGraphics::ConstantBuffer::BindLightCB(const CB::Light& light) const
 	deviceContext->PSSetConstantBuffers(1, 1, &_constantBuffers[static_cast<size_t>(Type::Light)]);
 }
 
-void SoulGraphics::ConstantBuffer::BindBoneMatrixCB() const
+void SoulGraphics::ConstantBuffer::BindBoneMatrixCB(const CB::BoneMatrix& bone) const
 {
 	auto deviceContext = GetResourceManager()->GetDevice()->GetDXDeviceContext();
 
 	deviceContext->UpdateSubresource(_constantBuffers[static_cast<size_t>(Type::BoneMatrix)],
-		0, nullptr, &_boneMatrix, 0, 0);
+		0, nullptr, &bone, 0, 0);
 
 	deviceContext->VSSetConstantBuffers(2, 1, &_constantBuffers[static_cast<size_t>(Type::BoneMatrix)]);
 }

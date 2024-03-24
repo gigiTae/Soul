@@ -15,7 +15,7 @@ namespace SoulGraphics
 			std::shared_ptr<ConstantBuffer> cb,
 			std::shared_ptr<Shader> shader,
 			std::shared_ptr<Material> material,
-			std::shared_ptr<Animator> animator);
+			std::unique_ptr<Animator> animator);
 		~SkinnedMeshObject();
 
 		void Render(Device* device,
@@ -37,6 +37,6 @@ namespace SoulGraphics
 		std::shared_ptr<GeometryBuffer> _geometryBuffer;
 		std::shared_ptr<Shader> _shader;
 		std::shared_ptr<Material> _material;
-		std::shared_ptr<Animator> _animationClip;
+		std::unique_ptr<Animator> _animationClip;
 	};
 }

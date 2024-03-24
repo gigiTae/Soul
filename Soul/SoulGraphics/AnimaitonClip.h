@@ -8,12 +8,11 @@ namespace SoulGraphics
 		AnimaitonClip();
 		~AnimaitonClip();
 
-
 	private:
+		std::vector<BoneAnimation> _boneAnimations;
+	
 		std::string _name;
 		float _duration;
 		float _ticksPerSecond;
-
-		std::vector<BoneAnimation> _boneAnimations;
 	};
 }

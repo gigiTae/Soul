@@ -16,12 +16,12 @@ SoulGraphics::SkinnedMeshObject::SkinnedMeshObject(std::shared_ptr<GeometryBuffe
 	, std::shared_ptr<ConstantBuffer> cb
 	, std::shared_ptr<Shader> shader
 	, std::shared_ptr<Material> material
-	, std::shared_ptr<Animator> animator)
+	, std::unique_ptr<Animator> animator)
 	:_geometryBuffer(gb)
 	, _constantBuffer(cb)
 	, _shader(shader)
 	, _material(material)
-	, _animationClip(animator)
+	, _animationClip(std::move(animator))
 	, _worldTM{}
 	, _viewTM{}
 	, _projTM{}

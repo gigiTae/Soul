@@ -45,6 +45,7 @@ namespace SoulGraphics
 	template <typename VertexType>
 	void SoulGraphics::GeometryBuffer::CreateVertexAndIndex(const std::vector<VertexType>& vertices, const std::vector<UINT> indices)
 	{
+		++_meshSize;
 		auto dxDevice = GetResourceManager()->GetDevice()->GetDXDevice();
 
 		D3D11_BUFFER_DESC vbd;
@@ -73,6 +74,7 @@ namespace SoulGraphics
 
 		HR_T(dxDevice->CreateBuffer(&ibd, &initData, &indexBuffer));
 
+		_vertexBufferOffset = 0;
 		_vertexBufferStride = sizeof(VertexType);
 		_vertexSizes.push_back(vertices.size());
 		_indexSizes.push_back(indices.size());

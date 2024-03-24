@@ -11,7 +11,10 @@
 #include "ConstantBuffer.h"
 #include "Material.h"
 
-SoulGraphics::MeshObject::MeshObject(std::shared_ptr<GeometryBuffer> gb, std::shared_ptr<ConstantBuffer> cb, std::shared_ptr<Shader> shader, std::shared_ptr<Material> material)
+SoulGraphics::MeshObject::MeshObject(std::shared_ptr<GeometryBuffer> gb
+	, std::shared_ptr<ConstantBuffer> cb
+	, std::shared_ptr<Shader> shader
+	, std::shared_ptr<Material> material)
 	:_geometryBuffer(gb)
 	, _constantBuffer(cb)
 	, _shader(shader)

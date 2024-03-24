@@ -23,17 +23,17 @@ void SoulGraphics::Scene::Initialize()
 	MeshObjectInfomation info;
 	info.baseColor = L"Resource/character.png";
 	info.normalMap = L"Resource/character_normal.png";
-	//info.fbx = L"Resource/Character.fbx";
-	//info.pixelShader = L"MeshPS.hlsl";
-	//info.vertexShader = L"MeshVS.hlsl";
+	info.fbx = L"Resource/Character.fbx";
+	info.pixelShader = L"MeshPS.hlsl";
+	info.vertexShader = L"MeshVS.hlsl";
 
-	//AddMeshObject(info);
+	AddMeshObject(info);
 
 	// SkinnedMeshObject
 	info.pixelShader = L"SkinningMeshPS.hlsl";
 	info.vertexShader = L"SkinningMeshVS.hlsl";
 	info.fbx = L"Resource/SkinningTest.fbx";
-	AddSkinnedMeshObject(info);
+	//AddSkinnedMeshObject(info);
 }
 
 void SoulGraphics::Scene::Render(Device* device, RenderState* state, RenderTarget* renderTarget)
@@ -52,12 +52,18 @@ void SoulGraphics::Scene::AddMeshObject(const MeshObjectInfomation& info)
 {
 	auto resMgr = _graphicsEngine->GetResourceManager();
 
-	auto geometryBuffer = resMgr->LoadFBX(info.fbx, Vertex::Type::MeshVertex);
+	auto geometryBuffer = resMgr->LoadGeometryBuffer(info.fbx, Vertex::Type::MeshVertex);
 	auto constantBuffer = resMgr->GetConstantBuffer();
+	auto shader = resMgr->LoadShader(info.vertexShader
+		, info.pixelShader
+		, Vertex::InputLayoutDesc::MeshVertex
+		, Vertex::InputLayoutDesc::MeshVertexArraySize);
+
+	// Texture, Material 积己
 	auto baseColor = resMgr->LoadTexture(info.baseColor);
 	auto normal = resMgr->LoadTexture(info.normalMap);
-	auto shader = resMgr->LoadShader(info.vertexShader, info.pixelShader, Vertex::InputLayoutDesc::MeshVertex, Vertex::InputLayoutDesc::MeshVertexArraySize);
 	auto material = std::make_shared<Material>(baseColor, normal);
+
 	auto meshObj = std::make_shared<MeshObject>(geometryBuffer, constantBuffer, shader, material);
 
 	_renderingObjects.push_back({ std::type_index(typeid(MeshObject)), meshObj });
@@ -67,16 +73,26 @@ void SoulGraphics::Scene::AddSkinnedMeshObject(const MeshObjectInfomation& info)
 {
 	auto resMgr = _graphicsEngine->GetResourceManager();
 
-	auto geometryBuffer = resMgr->LoadFBX(info.fbx, Vertex::Type::SkinnedVertex);
-	auto animator = std::make_shared<Animator>();
+	// FBX肺靛
+	auto animator = std::make_unique<Animator>();
+	auto geometryBuffer = resMgr->LoadGeometryBufferAndAnimator(info.fbx, animator.get());
 
 	auto constantBuffer = resMgr->GetConstantBuffer();
+	auto shader = resMgr->LoadShader(info.vertexShader
+		, info.pixelShader
+		, Vertex::InputLayoutDesc::SkinnedVertex
+		, Vertex::InputLayoutDesc::SkinnedVertexArraySize);
+	
+	// Texture, Material 积己
 	auto baseColor = resMgr->LoadTexture(info.baseColor);
 	auto normal = resMgr->LoadTexture(info.normalMap);
-	auto shader = resMgr->LoadShader(info.vertexShader, info.pixelShader, Vertex::InputLayoutDesc::SkinnedVertex, Vertex::InputLayoutDesc::SkinnedVertexArraySize);
 	auto material = std::make_shared<Material>(baseColor, normal);
 
-	auto meshObj = std::make_shared<SkinnedMeshObject>(geometryBuffer, constantBuffer, shader, material, animator);
+	auto meshObj = std::make_shared<SkinnedMeshObject>(geometryBuffer
+		, constantBuffer
+		, shader
+		, material
+		, std::move(animator));
 
 	_renderingObjects.push_back({ std::type_index(typeid(SkinnedMeshObject)), meshObj });
 }
