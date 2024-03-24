@@ -30,7 +30,7 @@ namespace SoulGraphics
 		std::shared_ptr<GeometryBuffer> LoadGeometryBuffer(const aiScene* scene, Vertex::Type type);
 		std::shared_ptr<GeometryBuffer> LoadGeometryBufferAndAnimator(const aiScene* scene, Animator* animator);
 
-		std::shared_ptr<AnimaitonClip> LoadAnimationClip(const aiScene* scene);
+		std::shared_ptr<AnimaitonClip> LoadAnimationClip(const aiAnimation* animation ,const aiScene* scene);
 
 	private:
 		// GeometryBuffer 
@@ -38,7 +38,7 @@ namespace SoulGraphics
 		void ProcessMesh(GeometryBuffer* buffer, const aiMesh* mesh, const aiScene* scene);
 
 		// Animator와 같이 처리 
-		void ProcessNode(GeometryBuffer* buffer, const aiNode* node, const aiScene* scene, Animator* animator);
+		void ProcessNode(GeometryBuffer* buffer, const aiNode* node, const aiScene* scene, Animator* animator, Node* parent);
 		void ProcessMesh(GeometryBuffer* buffer, const aiMesh* mesh, const aiScene* scene, Animator* animator);
 
 	private:

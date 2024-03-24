@@ -97,16 +97,54 @@ std::shared_ptr<SoulGraphics::GeometryBuffer> SoulGraphics::ResourceLoader::Load
 {
 	auto geometryBuffer = std::make_shared<GeometryBuffer>(_resourceManager, Vertex::Type::SkinnedVertex);
 
-	ProcessNode(geometryBuffer.get(), scene->mRootNode, scene, animator);
+	ProcessNode(geometryBuffer.get(), scene->mRootNode, scene, animator, nullptr);
 
 	return geometryBuffer;
 }
 
-std::shared_ptr<SoulGraphics::AnimaitonClip> SoulGraphics::ResourceLoader::LoadAnimationClip(const aiScene* scene)
+std::shared_ptr<SoulGraphics::AnimaitonClip> SoulGraphics::ResourceLoader::LoadAnimationClip(const aiAnimation* animation, const aiScene* scene)
 {
+	auto clip = std::make_shared<AnimaitonClip>();
 
+	clip->_name = animation->mName.C_Str();
+	clip->_duration = static_cast<float>(animation->mDuration);
+	clip->_ticksPerSecond = static_cast<float>(animation->mTicksPerSecond);
 
-	return nullptr;
+	UINT numChannels = animation->mNumChannels;
+	auto& boneAnimations = clip->_boneAnimations;
+
+	boneAnimations.resize(numChannels);
+
+	for (UINT i = 0; i < numChannels; ++i)
+	{
+		auto& boneAnimation = boneAnimations[i];
+		const auto* aniNode = animation->mChannels[i];
+
+		boneAnimation.boneName = aniNode->mNodeName.C_Str();
+
+		UINT numKeys = aniNode->mNumPositionKeys;
+
+		boneAnimation.bonePoses.resize(numKeys);
+
+		for (UINT j = 0; j < numKeys; j++)
+		{
+			const auto& pos = aniNode->mPositionKeys[j].mValue;
+			const auto& rot = aniNode->mRotationKeys[j].mValue;
+			const auto& scale = aniNode->mScalingKeys[j].mValue;
+
+			boneAnimation.bonePoses[j].position = SM::Vector3{ pos.x,pos.y,pos.z };
+			boneAnimation.bonePoses[j].rotation = SM::Quaternion{ rot.x,rot.y,rot.z,rot.w };
+			boneAnimation.bonePoses[j].scale = SM::Vector3{ scale.x,scale.y,scale.z };
+
+			auto transM = SM::Matrix::CreateTranslation(boneAnimation.bonePoses[j].position);
+			auto rotM = SM::Matrix::CreateFromQuaternion(boneAnimation.bonePoses[j].rotation);
+			auto scaleM = SM::Matrix::CreateScale(boneAnimation.bonePoses[j].scale);
+			
+			boneAnimation.bonePoses[j].transformation = scaleM * rotM * transM;
+		}
+	}
+
+	return clip;
 }
 
 
@@ -175,8 +213,10 @@ void SoulGraphics::ResourceLoader::ProcessMesh(GeometryBuffer* buffer
 
 	UINT meshBoneCount = mesh->mNumBones;
 	UINT boneIndexCounter = 0;
+	animator->_skelton.bones.resize(meshBoneCount);
 
-	std::map<std::string, int> boneMapping;
+	std::map<std::string, UINT>& boneMapping = animator->_boneMapping;
+
 	for (UINT i = 0; i < meshBoneCount; ++i)
 	{
 		aiBone* bone = mesh->mBones[i];
@@ -186,6 +226,8 @@ void SoulGraphics::ResourceLoader::ProcessMesh(GeometryBuffer* buffer
 		{
 			boneIndex = boneIndexCounter;
 			boneIndexCounter++;
+			animator->_skelton.bones[boneIndex].inverseBindPose = SM::Matrix(&bone->mOffsetMatrix.a1).Transpose();
+			animator->_skelton.bones[boneIndex].name = boneName;
 			boneMapping[boneName] = boneIndex;
 		}
 		else boneIndex = boneMapping[boneName];
@@ -257,17 +299,34 @@ void SoulGraphics::ResourceLoader::ProcessMesh(GeometryBuffer* buffer
 void SoulGraphics::ResourceLoader::ProcessNode(GeometryBuffer* buffer
 	, const aiNode* node
 	, const aiScene* scene
-	, Animator* animator)
+	, Animator* animator
+	, Node* parent
+)
 {
+	animator->_nodeMap.insert({ node->mName.C_Str(), {} });
 
+	Node* childNode = &animator->_nodeMap[node->mName.C_Str()];
+	childNode->parent = parent;
+	childNode->localMatrix = SM::Matrix(&node->mTransformation.a1).Transpose();
+	childNode->name = node->mName.C_Str();
+
+	if (parent != nullptr)
+	{
+		parent->children.push_back(childNode);
+	}
+	else
+	{
+		assert(!animator->_root);
+		animator->_root = childNode;
+	}
 
 	for (UINT i = 0; i < node->mNumMeshes; i++) {
 		aiMesh* mesh = scene->mMeshes[node->mMeshes[i]];
-		ProcessMesh(buffer, mesh, scene);
+		ProcessMesh(buffer, mesh, scene, animator);
 	}
 
 	for (UINT i = 0; i < node->mNumChildren; i++) {
-		ProcessNode(buffer, node->mChildren[i], scene);
+		ProcessNode(buffer, node->mChildren[i], scene, animator, childNode);
 	}
 
 }

@@ -22,6 +22,7 @@
 #include <cmath>
 
 //stl 
+#include <queue>
 #include <array>
 #include <vector>
 #include <unordered_map>

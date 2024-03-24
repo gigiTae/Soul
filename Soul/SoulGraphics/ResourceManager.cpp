@@ -15,7 +15,7 @@ SoulGraphics::ResourceManager::ResourceManager()
 	, _shaderMap{}
 	, _textureMap{}
 	, _constantBuffer{}
-	,_impoter(nullptr)
+	, _impoter(nullptr)
 {}
 
 SoulGraphics::ResourceManager::~ResourceManager()
@@ -37,7 +37,6 @@ void SoulGraphics::ResourceManager::Finalize()
 	_textureMap.clear();
 	_shaderMap.clear();
 	_geometryMap.clear();
-	_animationClipMap.clear();
 }
 
 std::shared_ptr<SoulGraphics::Texture> SoulGraphics::ResourceManager::LoadTexture(const std::wstring& path)
@@ -100,24 +99,17 @@ std::shared_ptr<SoulGraphics::GeometryBuffer> SoulGraphics::ResourceManager::Loa
 
 	assert(scene);
 
-	std::map<std::string, int> boneMapping;
+	auto buffer = _loader->LoadGeometryBufferAndAnimator(scene, animator);
 
-	auto buffer = _loader->LoadGeometryBufferAndAnimator(scene,animator);
+	UINT numAnimations = scene->mNumAnimations;
 
-	return buffer;
-}
-
-std::shared_ptr<SoulGraphics::AnimaitonClip> SoulGraphics::ResourceManager::LoadAnimationClip(const std::wstring& path)
-{
-	if (auto iter = _animationClipMap.find(path); iter != _animationClipMap.end())
+	for (UINT i = 0; i < numAnimations; i++)
 	{
-		return iter->second;
+		auto animationClip = _loader->LoadAnimationClip(scene->mAnimations[i], scene);
+		animator->AddAnimationClip(animationClip);
 	}
 
-	std::filesystem::path fbxPath = path;
-	assert(std::filesystem::exists(fbxPath));
-
-	return nullptr;
+	return buffer;
 }
 
 std::shared_ptr<SoulGraphics::Shader> SoulGraphics::ResourceManager::LoadShader(const std::wstring& vs

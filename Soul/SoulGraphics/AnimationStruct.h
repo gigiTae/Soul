@@ -7,13 +7,11 @@ namespace SoulGraphics
 	{
 		SM::Matrix inverseBindPose;
 		std::string name;
-		size_t parent;
 	};
 
 	struct Skeleton
 	{
-		size_t jointCount;
-		std::vector<Bone> joints;
+		std::vector<Bone> bones;
 	};
 
 	struct BonePose
@@ -21,36 +19,23 @@ namespace SoulGraphics
 		SM::Quaternion rotation;
 		SM::Vector3 position;
 		SM::Vector3 scale;
-		SM::Matrix local;
+		SM::Matrix transformation = SM::Matrix::Identity;
 	};
 
 	struct BoneAnimation
 	{
-		size_t boneIndex;
 		std::string boneName;
 		std::vector<BonePose> bonePoses;
 	};
 
-	struct SkeletonPose
-	{
-		Skeleton skeleton;
-		std::vector<BonePose> jointPose;
-		std::vector<SM::Matrix> globalPose;
-	};
-
 	struct Node
 	{
-		size_t parent;
-		std::vector<size_t> children;
-
-		std::string name;
+		Node* parent = nullptr;
+		std::string_view name;
+		std::vector<Node*> children;
 		
-		SM::Matrix localMatrix;
-		SM::Matrix worldMatrix;
-		
-		SM::Vector3 position;
-		SM::Quaternion rotation;
-		SM::Vector3 scale;
+		SM::Matrix localMatrix = SM::Matrix::Identity;
+		SM::Matrix worldMatrix = SM::Matrix::Identity;
 	};
 
 

@@ -27,13 +27,13 @@ void SoulGraphics::Scene::Initialize()
 	info.pixelShader = L"MeshPS.hlsl";
 	info.vertexShader = L"MeshVS.hlsl";
 
-	AddMeshObject(info);
+	//AddMeshObject(info);
 
 	// SkinnedMeshObject
 	info.pixelShader = L"SkinningMeshPS.hlsl";
 	info.vertexShader = L"SkinningMeshVS.hlsl";
 	info.fbx = L"Resource/SkinningTest.fbx";
-	//AddSkinnedMeshObject(info);
+	AddSkinnedMeshObject(info);
 }
 
 void SoulGraphics::Scene::Render(Device* device, RenderState* state, RenderTarget* renderTarget)

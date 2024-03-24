@@ -37,6 +37,6 @@ namespace SoulGraphics
 		std::shared_ptr<GeometryBuffer> _geometryBuffer;
 		std::shared_ptr<Shader> _shader;
 		std::shared_ptr<Material> _material;
-		std::unique_ptr<Animator> _animationClip;
+		std::unique_ptr<Animator> _animator;
 	};
 }

@@ -21,7 +21,7 @@ SoulGraphics::SkinnedMeshObject::SkinnedMeshObject(std::shared_ptr<GeometryBuffe
 	, _constantBuffer(cb)
 	, _shader(shader)
 	, _material(material)
-	, _animationClip(std::move(animator))
+	, _animator(std::move(animator))
 	, _worldTM{}
 	, _viewTM{}
 	, _projTM{}
@@ -32,10 +32,13 @@ SoulGraphics::SkinnedMeshObject::~SkinnedMeshObject()
 
 void SoulGraphics::SkinnedMeshObject::Render(Device* device, RenderState* state, RenderTarget* renderTarget)
 {
+	_animator->Update(0.01f);
+
 	auto deviceContext = device->GetDXDeviceContext();
 
 	// Matrix 상수버퍼 설정
 	_constantBuffer->BindMatrixCB(_worldTM, _viewTM, _projTM);
+	_constantBuffer->BindBoneMatrixCB(_animator->GetBoneMatrix());
 	_shader->BindShader();
 	_material->BindTexture(0, Material::Type::BaseColor);
 	_material->BindTexture(1, Material::Type::Normal);
