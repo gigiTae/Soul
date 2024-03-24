@@ -33,7 +33,6 @@ void SoulGraphics::Animator::UpdateAnimation(float dt)
 {
 	const auto& boneAnimations = _animationClips[_currentPlayingClipIndex]->GetBoneAnimations();
 
-
 	static int i = 0;
 
 	static float d = 0.f;
@@ -43,7 +42,7 @@ void SoulGraphics::Animator::UpdateAnimation(float dt)
 		d = 0.f; ++i;
 	}
 
-	if (i > 64)
+	if (i > 67)
 	{
 		i = 0;
 	}
@@ -53,7 +52,6 @@ void SoulGraphics::Animator::UpdateAnimation(float dt)
 		auto& localM =_nodeMap[boneAnimation.boneName].localMatrix;
 
 		localM = boneAnimation.bonePoses[i].transformation;
-		int jhhgf = 0;
 	}
 	
 }
@@ -89,6 +87,7 @@ void SoulGraphics::Animator::UpdateBoneMatrix()
 	{
 		auto& inverseBindPose = _skelton.bones[i].inverseBindPose;
 		auto& worldM = _nodeMap[_skelton.bones[i].name].worldMatrix;
+
 
 		_boneMatrix.bone[i] = (inverseBindPose * worldM).Transpose();
 	}

@@ -82,24 +82,3 @@ std::shared_ptr<SoulGraphics::GeometryBuffer> SoulGraphics::SkinnedMeshObject::G
 	return _geometryBuffer;
 }
 
-//void SoulGraphics::SkinnedMeshObject::SetAnimationClip()
-//{
-//	auto& boneMatix = _constantBuffer->GetBoneMatrix();
-//	UINT boneSize = _geometryBuffer->GetBoneSize();
-//
-//	for (UINT i = 0; i < boneSize; ++i)
-//	{
-//		auto pose = _animationClip->GetCurrentPose(i);
-//
-//		auto pos = SM::Matrix::CreateTranslation(pose.position);
-//		auto rot = SM::Matrix::CreateFromQuaternion(pose.rotation);
-//		auto scale = SM::Matrix::CreateScale(pose.scale);
-//
-//		SM::Matrix boneWorldMatrix = scale * rot * pos;
-//
-//		boneWorldMatrix = SM::Matrix::Identity;
-//		boneMatix.bone[i] = (_geometryBuffer->GetInverseBindPose(i) * boneWorldMatrix).Transpose();
-//	}
-//
-//	_constantBuffer->BindBoneMatrixCB();
-//}

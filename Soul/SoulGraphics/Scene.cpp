@@ -42,7 +42,12 @@ void SoulGraphics::Scene::Render(Device* device, RenderState* state, RenderTarge
 
 	for (auto& obj : _renderingObjects)
 	{
-		obj.second->SetWorldTM(SM::Matrix::Identity);
+		static float r = 0.f;
+		r += 0.001f;
+
+		obj.second->SetWorldTM(SM::Matrix::CreateRotationY(r));
+
+		//		obj.second->SetWorldTM(SM::Matrix::Identity);
 		obj.second->SetViewProjTM(_graphicsEngine->GetCamera());
 		obj.second->Render(device, state, renderTarget);
 	}
@@ -82,7 +87,7 @@ void SoulGraphics::Scene::AddSkinnedMeshObject(const MeshObjectInfomation& info)
 		, info.pixelShader
 		, Vertex::InputLayoutDesc::SkinnedVertex
 		, Vertex::InputLayoutDesc::SkinnedVertexArraySize);
-	
+
 	// Texture, Material »ý¼º
 	auto baseColor = resMgr->LoadTexture(info.baseColor);
 	auto normal = resMgr->LoadTexture(info.normalMap);

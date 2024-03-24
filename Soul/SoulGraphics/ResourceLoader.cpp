@@ -132,7 +132,7 @@ std::shared_ptr<SoulGraphics::AnimaitonClip> SoulGraphics::ResourceLoader::LoadA
 			const auto& rot = aniNode->mRotationKeys[j].mValue;
 			const auto& scale = aniNode->mScalingKeys[j].mValue;
 
-			boneAnimation.bonePoses[j].position = SM::Vector3{ pos.x,pos.y,pos.z };
+			boneAnimation.bonePoses[j].position = SM::Vector3{ pos.x, pos.y, pos.z };
 			boneAnimation.bonePoses[j].rotation = SM::Quaternion{ rot.x,rot.y,rot.z,rot.w };
 			boneAnimation.bonePoses[j].scale = SM::Vector3{ scale.x,scale.y,scale.z };
 
@@ -140,7 +140,7 @@ std::shared_ptr<SoulGraphics::AnimaitonClip> SoulGraphics::ResourceLoader::LoadA
 			auto rotM = SM::Matrix::CreateFromQuaternion(boneAnimation.bonePoses[j].rotation);
 			auto scaleM = SM::Matrix::CreateScale(boneAnimation.bonePoses[j].scale);
 			
-			boneAnimation.bonePoses[j].transformation = scaleM * rotM * transM;
+			boneAnimation.bonePoses[j].transformation = scaleM * rotM *transM;
 		}
 	}
 
@@ -307,7 +307,8 @@ void SoulGraphics::ResourceLoader::ProcessNode(GeometryBuffer* buffer
 
 	Node* childNode = &animator->_nodeMap[node->mName.C_Str()];
 	childNode->parent = parent;
-	childNode->localMatrix = SM::Matrix(&node->mTransformation.a1).Transpose();
+	childNode->worldMatrix = SM::Matrix(&node->mTransformation.a1).Transpose();
+	
 	childNode->name = node->mName.C_Str();
 
 	if (parent != nullptr)
