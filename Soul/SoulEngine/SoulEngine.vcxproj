@@ -147,6 +147,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="ECS.h" />
     <ClInclude Include="ExportSoul.h" />
     <ClInclude Include="IEngine.h" />
     <ClInclude Include="InputEnum.h" />

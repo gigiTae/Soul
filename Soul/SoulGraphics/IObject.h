@@ -14,6 +14,8 @@ namespace SoulGraphics
 	public:
 		virtual ~IObject(){}
 
+		virtual void Update(float dt) abstract;
+
 		virtual void Render(Device* device,
 			RenderState* state,
 			RenderTarget* renderTarget) abstract;

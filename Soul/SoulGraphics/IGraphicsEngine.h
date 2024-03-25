@@ -19,6 +19,8 @@ namespace SoulGraphics
 
 		virtual void Render() abstract;
 
+		virtual void Update(float dt) abstract;
+
 		virtual void EndRender() abstract;
 
 		virtual void Finalize() abstract;

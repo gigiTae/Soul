@@ -18,6 +18,7 @@ namespace SoulGraphics
 		~GraphicsEngine();
 
 		void Initialize(InitalizeInfomation info) override;
+		void Update(float dt) override;
 		void Render() override;
 		void EndRender() override;
 		void Finalize() override;

@@ -14,6 +14,8 @@ namespace SoulGraphics
 
 	struct MeshObjectInfomation
 	{
+		size_t id;
+
 		std::wstring fbx;
 		std::wstring baseColor;
 		std::wstring normalMap;

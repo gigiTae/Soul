@@ -9,6 +9,8 @@ namespace SoulGraphics
 		Box();
 		~Box();
 
+		void Update(float dt) override;
+
 		void Render(Device* device,
 			RenderState* state,
 			RenderTarget* renderTarget) override;

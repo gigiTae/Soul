@@ -30,10 +30,13 @@ SoulGraphics::SkinnedMeshObject::SkinnedMeshObject(std::shared_ptr<GeometryBuffe
 SoulGraphics::SkinnedMeshObject::~SkinnedMeshObject()
 {}
 
+void SoulGraphics::SkinnedMeshObject::Update(float dt)
+{
+	_animator->Update(dt);
+}
+
 void SoulGraphics::SkinnedMeshObject::Render(Device* device, RenderState* state, RenderTarget* renderTarget)
 {
-	_animator->Update(0.01f);
-
 	auto deviceContext = device->GetDXDeviceContext();
 
 	// Matrix 상수버퍼 설정

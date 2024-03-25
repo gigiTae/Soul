@@ -18,6 +18,8 @@ namespace SoulGraphics
 			std::unique_ptr<Animator> animator);
 		~SkinnedMeshObject();
 
+		void Update(float dt) override;
+
 		void Render(Device* device,
 			RenderState* state,
 			RenderTarget* renderTarget) override;

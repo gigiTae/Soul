@@ -24,7 +24,6 @@ const SoulGraphics::CB::BoneMatrix& SoulGraphics::Animator::GetBoneMatrix() cons
 void SoulGraphics::Animator::Update(float dt)
 {
 	UpdateAnimation(dt);
-
 	UpdateMatrix();
 	UpdateBoneMatrix();
 }
@@ -78,7 +77,6 @@ void SoulGraphics::Animator::UpdateMatrix()
 
 		q.pop();
 	}
-
 }
 
 void SoulGraphics::Animator::UpdateBoneMatrix()
@@ -88,8 +86,6 @@ void SoulGraphics::Animator::UpdateBoneMatrix()
 		auto& inverseBindPose = _skelton.bones[i].inverseBindPose;
 		auto& worldM = _nodeMap[_skelton.bones[i].name].worldMatrix;
 
-
 		_boneMatrix.bone[i] = (inverseBindPose * worldM).Transpose();
 	}
-
 }

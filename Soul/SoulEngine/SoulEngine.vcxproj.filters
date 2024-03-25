@@ -11,15 +11,24 @@
     <Filter Include="inc\01.SoulEngine">
       <UniqueIdentifier>{0298a8e6-1995-4128-bf06-a2e27eabb077}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src">
+    <Filter Include="inc\02.Manager">
+      <UniqueIdentifier>{34e98b77-ed40-4a8b-98c1-3917a5c16fa4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="inc\src">
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
-    <Filter Include="src\00.Default">
+    <Filter Include="inc\src\00.Default">
       <UniqueIdentifier>{be795eef-624c-47e7-b796-3ff36ea2fffe}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\01.SoulEngine">
+    <Filter Include="inc\src\01.SoulEngine">
       <UniqueIdentifier>{1e779a55-cf5a-4235-8fbb-145f8900baec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="inc\src\02.Manager">
+      <UniqueIdentifier>{06b6dbb6-8442-4b7e-9da0-ae2ed19decd8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="inc\03.ECS">
+      <UniqueIdentifier>{ed191dfb-ba7e-4d7b-9fe1-4195934e9366}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -42,27 +51,30 @@
       <Filter>inc\00.Default</Filter>
     </ClInclude>
     <ClInclude Include="InputManager.h">
-      <Filter>inc</Filter>
+      <Filter>inc\02.Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="ECS.h">
+      <Filter>inc\03.ECS</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
-      <Filter>src\00.Default</Filter>
+      <Filter>inc\src\00.Default</Filter>
     </ClCompile>
     <ClCompile Include="SoulEnginePCH.cpp">
-      <Filter>src\00.Default</Filter>
+      <Filter>inc\src\00.Default</Filter>
     </ClCompile>
     <ClCompile Include="GameEngine.cpp">
-      <Filter>src\01.SoulEngine</Filter>
+      <Filter>inc\src\01.SoulEngine</Filter>
     </ClCompile>
     <ClCompile Include="ToolEngine.cpp">
-      <Filter>src\01.SoulEngine</Filter>
+      <Filter>inc\src\01.SoulEngine</Filter>
     </ClCompile>
     <ClCompile Include="IEngine.cpp">
-      <Filter>src\01.SoulEngine</Filter>
+      <Filter>inc\src\01.SoulEngine</Filter>
     </ClCompile>
     <ClCompile Include="InputManager.cpp">
-      <Filter>src</Filter>
+      <Filter>inc\src\02.Manager</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

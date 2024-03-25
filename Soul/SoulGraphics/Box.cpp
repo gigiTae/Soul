@@ -28,6 +28,11 @@ SoulGraphics::Box::Box()
 SoulGraphics::Box::~Box()
 {}
 
+void SoulGraphics::Box::Update(float dt)
+{
+
+}
+
 void SoulGraphics::Box::Render(Device* device, RenderState* state, RenderTarget* renderTarget)
 {
 	auto deviceContext = device->GetDXDeviceContext();

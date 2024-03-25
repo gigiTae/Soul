@@ -16,6 +16,8 @@ namespace SoulGraphics
 			std::shared_ptr<Material> material);
 
 		~MeshObject();
+		
+		void Update(float dt) override;
 
 		void Render(Device* device,
 			RenderState* state,

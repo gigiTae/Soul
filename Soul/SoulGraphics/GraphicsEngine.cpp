@@ -40,6 +40,11 @@ void SoulGraphics::GraphicsEngine::Initialize(InitalizeInfomation info)
 
 }
 
+void SoulGraphics::GraphicsEngine::Update(float dt)
+{
+
+}
+
 void SoulGraphics::GraphicsEngine::Render()
 {
 	_renderTarget->SetRenderTargetView(RenderTarget::RenderTargetView::First);

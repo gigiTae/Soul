@@ -36,6 +36,15 @@ void SoulGraphics::Scene::Initialize()
 	AddSkinnedMeshObject(info);
 }
 
+void SoulGraphics::Scene::Update(float dt)
+{
+	for (auto& obj : _renderingObjects)
+	{
+		obj.second->Update(dt);
+	}
+
+}
+
 void SoulGraphics::Scene::Render(Device* device, RenderState* state, RenderTarget* renderTarget)
 {
 	UpdateLight();

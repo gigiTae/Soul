@@ -23,6 +23,8 @@ namespace SoulGraphics
 
 		void Initialize();
 
+		void Update(float dt);
+
 		void Render(Device* device, RenderState* state, RenderTarget* renderTarget);
 
 		void AddMeshObject(const MeshObjectInfomation& info);

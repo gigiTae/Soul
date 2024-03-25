@@ -187,11 +187,8 @@
     <ClCompile Include="Scene.cpp">
       <Filter>src\06.Scene</Filter>
     </ClCompile>
-    <ClCompile Include="Helpercpp.cpp">
+    <ClCompile Include="Helper.cpp">
       <Filter>src\00.Default</Filter>
-    </ClCompile>
-    <ClCompile Include="SoulGraphicsPCH.cpp">
-      <Filter>src\01.GraphcisEngine</Filter>
     </ClCompile>
     <ClCompile Include="ConstantBufferStruct.cpp">
       <Filter>src\00.Default</Filter>
@@ -219,6 +216,9 @@
     </ClCompile>
     <ClCompile Include="Animator.cpp">
       <Filter>src\07.Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="SoulGraphicsPCH.cpp">
+      <Filter>src\00.Default</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

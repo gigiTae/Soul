@@ -181,7 +181,7 @@
     <ClCompile Include="Device.cpp" />
     <ClCompile Include="GeometryBuffer.cpp" />
     <ClCompile Include="GraphicsEngine.cpp" />
-    <ClCompile Include="Helpercpp.cpp" />
+    <ClCompile Include="Helper.cpp" />
     <ClCompile Include="IGraphicsEngine.cpp" />
     <ClCompile Include="Material.cpp" />
     <ClCompile Include="MeshObject.cpp" />

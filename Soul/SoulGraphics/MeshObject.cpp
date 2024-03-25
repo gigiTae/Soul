@@ -27,6 +27,8 @@ SoulGraphics::MeshObject::MeshObject(std::shared_ptr<GeometryBuffer> gb
 SoulGraphics::MeshObject::~MeshObject()
 {}
 
+void SoulGraphics::MeshObject::Update(float dt)
+{}
 
 void SoulGraphics::MeshObject::Render(Device* device, RenderState* state, RenderTarget* renderTarget)
 {
@@ -45,7 +47,6 @@ void SoulGraphics::MeshObject::Render(Device* device, RenderState* state, Render
 	{
 		// 정점, 인덱스 버퍼 생성
 		_geometryBuffer->BindVertexAndIndexBuffer(i);
-
 		deviceContext->DrawIndexed(_geometryBuffer->GetIndexSize(i), 0, 0);
 	}
 

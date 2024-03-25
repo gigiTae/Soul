@@ -48,14 +48,14 @@ namespace SoulGraphics
 		++_meshSize;
 		auto dxDevice = GetResourceManager()->GetDevice()->GetDXDevice();
 
-		D3D11_BUFFER_DESC vbd;
+		D3D11_BUFFER_DESC vbd{};
 		vbd.Usage = D3D11_USAGE_IMMUTABLE;
 		vbd.ByteWidth = static_cast<UINT>(sizeof(VertexType) * vertices.size());
 		vbd.BindFlags = D3D11_BIND_VERTEX_BUFFER;
 		vbd.CPUAccessFlags = 0;
 		vbd.MiscFlags = 0;
 
-		D3D11_SUBRESOURCE_DATA initData;
+		D3D11_SUBRESOURCE_DATA initData{};
 		initData.pSysMem = &vertices[0];
 
 		ID3D11Buffer* vertexBuffer = nullptr;
@@ -63,7 +63,7 @@ namespace SoulGraphics
 
 		HR_T(dxDevice->CreateBuffer(&vbd, &initData, &vertexBuffer));
 
-		D3D11_BUFFER_DESC ibd;
+		D3D11_BUFFER_DESC ibd{};
 		ibd.Usage = D3D11_USAGE_IMMUTABLE;
 		ibd.ByteWidth = static_cast<UINT>(sizeof(UINT) * indices.size());
 		ibd.BindFlags = D3D11_BIND_INDEX_BUFFER;

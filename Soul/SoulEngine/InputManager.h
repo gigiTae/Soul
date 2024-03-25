@@ -13,8 +13,6 @@ class InputManager
         KeyState state = KeyState::None;
         bool prevPush  = false;
     };
-
-public:
     
 public:
     InputManager();
